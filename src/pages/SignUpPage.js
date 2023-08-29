@@ -14,10 +14,31 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         margin: theme.spacing(1),
         width: '40ch',
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#00909E',
+            },
+            '&:hover fieldset': {
+                borderColor: '#00909E',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#00909E',
+            },
+        },
+        '& .MuiFormLabel-root': {
+            color: '#DAE1E7',
+        },
+        '& .MuiInputBase-input': {
+            color: '#DAE1E7',
+        },
     },
     button: {
         margin: theme.spacing(1),
         width: '40ch',
+        backgroundColor: '#00909E',
+        '&:hover': {
+            backgroundColor: '#00909E',
+        },
     },
 }));
 
@@ -31,8 +52,8 @@ const SignUpPage = () => {
 
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
-            <FormControl>
-                <Typography variant="h5" gutterBottom style={{ textAlign: 'center'}}>
+            <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
+                <Typography variant="h5" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
                     Sign Up
                 </Typography>
                 <TextField
@@ -72,7 +93,7 @@ const SignUpPage = () => {
                     Sign Up
                 </Button>
                 <Typography variant="body1" gutterBottom style={{ textAlign: 'center' }}>
-                    Already have an account? <a href="/sign-in">Sign in here</a>
+                    Already have an account? <a href="/sign-in" style={{ color: '#00909E' }}>Sign in here</a>
                 </Typography>
             </FormControl>
         </form>
