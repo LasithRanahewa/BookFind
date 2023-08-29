@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(1),
-        alignSelf: 'center',
         width: '40ch',
+        alignSelf: 'center',
         backgroundColor: '#18B1C8',
         '&:hover': {
             backgroundColor: '#18B1C8',
@@ -104,7 +104,7 @@ const SignInPage = () => {
                 <Button
                     className={classes.button}
                     variant="contained"
-                    color="#18B1C8"
+                    color="primary"
                     type="submit"
                 >
                     Sign In
