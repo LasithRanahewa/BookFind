@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel, colors } from '@material-ui/core';
+import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-
     form: {
         backgroundColor: '#142850',
-        color: '#DAE1E7',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -14,15 +12,41 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
     },
     textField: {
-        color: '#DAE1E7',
         margin: theme.spacing(1),
         width: '40ch',
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#00909E',
+            },
+            '&:hover fieldset': {
+                borderColor: '#00909E',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#00909E',
+            },
+        },
+        '& .MuiFormLabel-root': {
+            color: '#DAE1E7',
+        },
+        '& .MuiInputBase-input': {
+            color: '#DAE1E7',
+        },
     },
     button: {
-        color: '#DAE1E7',
         margin: theme.spacing(1),
         width: '40ch',
+        backgroundColor: '#00909E',
+        '&:hover': {
+            backgroundColor: '#00909E',
+        },
     },
+    checkbox: {
+        color: '#00909E',
+        '&$checked': {
+            color: '#00909E',
+        },
+    },
+    checked: {},
 }));
 
 const SignInPage = () => {
@@ -59,7 +83,10 @@ const SignInPage = () => {
                             checked={rememberMe}
                             onChange={handleRememberMeChange}
                             name="rememberMe"
-                            color="primary"
+                            classes={{
+                                root: classes.checkbox,
+                                checked: classes.checked,
+                            }}
                         />
                     }
                     label="Remember Me"
@@ -68,13 +95,13 @@ const SignInPage = () => {
                 <Button
                     className={classes.button}
                     variant="contained"
-                    color="primary"
+                    color="00909E"
                     type="submit"
                 >
                     Sign In
                 </Button>
                 <Typography variant="body1" gutterBottom style={{ textAlign: 'center' }}>
-                    No account? <Link href="/sign-up">Sign up here</Link>
+                    No account? <Link href="/sign-up" style={{ color: '#00909E' }}>Sign up here</Link>
                 </Typography>
             </FormControl>
         </form>

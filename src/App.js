@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Footer from "./components/Footer";
-import TrendingCard from "./components/TrendingCard";
+import TrendingBooks from "./components/TrendingBooks";
 import { Link } from "react-router-dom";
 
 const App = () => {
@@ -12,11 +12,11 @@ const App = () => {
     <div>
       <Navbar />
 
-      <div style={{ position: "relative", top: 0, left: 0, height: "100vh"}}>
+      <div style={{ position: "relative", top: 0, left: 0, height: "100vh" }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={8}>
             <div className="hero">
-              <h2 >e-Books Galore | Explore | Discover</h2>
+              <h2>e-Books Galore | Explore | Discover</h2>
               <h1 className="herotext2">
                 IT'S NOT JUST A <br />
                 BOOKSTORE.
@@ -40,23 +40,7 @@ const App = () => {
         </Grid>
       </div>
 
-      <div>
-        <h1 style={{ textAlign: "center" }}>Trending This Week</h1>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} sm={3}>
-            <TrendingCard />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TrendingCard />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TrendingCard />
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <TrendingCard />
-          </Grid>
-        </Grid>
-      </div>
+      <TrendingBooks />
 
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
