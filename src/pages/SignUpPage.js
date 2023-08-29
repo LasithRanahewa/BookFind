@@ -4,6 +4,7 @@ import { TextField, Button, FormControl, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     form: {
+        backgroundColor: '#142850',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -31,7 +32,7 @@ const SignUpPage = () => {
     return (
         <form className={classes.form} onSubmit={handleSubmit}>
             <FormControl>
-                <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
+                <Typography variant="h5" gutterBottom style={{ textAlign: 'center'}}>
                     Sign Up
                 </Typography>
                 <TextField

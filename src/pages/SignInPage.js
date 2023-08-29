@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel } from '@material-ui/core';
+import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel, colors } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+
     form: {
+        backgroundColor: '#142850',
+        color: '#DAE1E7',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -11,10 +14,12 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
     },
     textField: {
+        color: '#DAE1E7',
         margin: theme.spacing(1),
         width: '40ch',
     },
     button: {
+        color: '#DAE1E7',
         margin: theme.spacing(1),
         width: '40ch',
     },
@@ -30,8 +35,8 @@ const SignInPage = () => {
 
     return (
         <form className={classes.form}>
-            <FormControl style={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
+            <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
+                <Typography variant="h5" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
                     Sign In
                 </Typography>
                 <TextField
