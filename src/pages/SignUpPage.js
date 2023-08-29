@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
         width: '40ch',
+        alignSelf: 'center',
         backgroundColor: '#18B1C8',
         '&:hover': {
             backgroundColor: '#18B1C8',
