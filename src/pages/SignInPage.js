@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
         width: '40ch',
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#00909E',
+                borderColor: '#18B1C8',
             },
             '&:hover fieldset': {
-                borderColor: '#00909E',
+                borderColor: '#18B1C8',
             },
             '&.Mui-focused fieldset': {
-                borderColor: '#00909E',
+                borderColor: '#18B1C8',
             },
         },
         '& .MuiFormLabel-root': {
@@ -37,15 +37,15 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
         width: '40ch',
-        backgroundColor: '#00909E',
+        backgroundColor: '#18B1C8',
         '&:hover': {
-            backgroundColor: '#00909E',
+            backgroundColor: '#18B1C8',
         },
     },
     checkbox: {
-        color: '#00909E',
+        color: '#18B1C8',
         '&$checked': {
-            color: '#00909E',
+            color: '#18B1C8',
         },
     },
     checked: {},
@@ -68,7 +68,7 @@ const SignInPage = () => {
             <div>
             <form className={classes.form}>
             <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
-                <Typography variant="h5" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
+                <Typography variant="h4" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
                     Sign In
                 </Typography>
                 <TextField
@@ -103,13 +103,13 @@ const SignInPage = () => {
                 <Button
                     className={classes.button}
                     variant="contained"
-                    color="00909E"
+                    color="#18B1C8"
                     type="submit"
                 >
                     Sign In
                 </Button>
                 <Typography variant="body1" gutterBottom style={{ textAlign: 'center' }}>
-                    No account? <Link href="/sign-up" style={{ color: '#00909E' }}>Sign up here</Link>
+                    No account? <Link href="/sign-up" style={{ color: '#18B1C8' }}>Sign up here</Link>
                 </Typography>
             </FormControl>
             </form>
