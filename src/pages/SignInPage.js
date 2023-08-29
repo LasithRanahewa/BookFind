@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from "@material-ui/core";
+import login_img from "../assets/loginpage.png"
 import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +60,13 @@ const SignInPage = () => {
     };
 
     return (
-        <form className={classes.form}>
+        <Grid container spacing={2}>
+            <Grid item xs={12} md={4}>
+                <img src={login_img}></img>
+            </Grid>
+            <Grid item xs={12} md={8}>
+            <div>
+            <form className={classes.form}>
             <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
                 <Typography variant="h5" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
                     Sign In
@@ -104,7 +112,10 @@ const SignInPage = () => {
                     No account? <Link href="/sign-up" style={{ color: '#00909E' }}>Sign up here</Link>
                 </Typography>
             </FormControl>
-        </form>
+            </form>
+            </div>
+            </Grid>
+        </Grid>
     );
 };
 
