@@ -61,10 +61,10 @@ const SignInPage = () => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
-                <img src={login_img}></img>
+            <Grid container item xs={12} md={6} justifyContent='center' alignContent='center'>
+                <img src={login_img} style={{maxWidth: '50%', maxHeight: '50%' }}></img>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={6}>
             <div>
             <form className={classes.form}>
             <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
