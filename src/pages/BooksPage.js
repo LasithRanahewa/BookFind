@@ -90,6 +90,7 @@ const BooksPage = () => {
         </Button>
       </div>
 
+      <div style={{ height: "2rem" }}></div>
       <div className="booklist">
         <BookMini />
         <BookMini />

@@ -37,6 +37,11 @@ const AboutUsPage = () => {
       textAlign: "center",
       maxWidth: "800px",
     },
+    line: {
+      width: "60%",
+      backgroundColor: "#DAE1E7",
+      margin: "2rem 0",
+    },
   };
 
   return (
@@ -54,6 +59,7 @@ const AboutUsPage = () => {
           reads and explore the world of literature with ease. Start your book
           journey with BookFind today! Launched in July 2023.
         </p>
+        <hr style={styles.line} />
 
         <Footer />
       </div>

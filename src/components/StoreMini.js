@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
 const BookMini = () => {
     const classes = useStyles();
     return (
-        <Card sx={{ display: 'flex', margin: { xs: '1rem', sm: '1rem 10%' }}}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', margin: { xs: '1rem', sm: '1rem 10%' }, alignItems: 'center'}}>
             <CardMedia
                 component="img"
-                sx={{ width: 101, width: 151 }}
-                image="https://via.placeholder.com/150*100"
+                sx={{ width: 101, width: 151, pt: 3 }}
+                image="https://via.placeholder.com/150"
                 alt="Book Cover"
             />
             <CardContent sx={{ flex: '1 0 auto' }}>
