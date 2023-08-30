@@ -55,8 +55,9 @@ const AboutUsPage = () => {
           journey with BookFind today! Launched in July 2023.
         </p>
 
-        <Footer />
+        
       </div>
+      <Footer />
       {/* </div> */}
     </>
   );
