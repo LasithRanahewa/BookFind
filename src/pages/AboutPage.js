@@ -1,21 +1,35 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+// import BI from "../assets/aboutusbg.png";
 
 const AboutUsPage = () => {
   const styles = {
+    // bg: {
+    //   backgroundImage: `url(${BI})`, // Set BI as background image
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   backgroundRepeat: "no-repeat",
+    //   height: "100vh",
+    //   width: "100vw",
+    //   position: "fixed",
+    //   zIndex: -1,
+    //   backgroundColor: "Transparent",
+    //   // opacity: 0.5,
+    // },
     container: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
-      width: "80%",
+      width: "100%", // Set width to 100%
       margin: "auto",
+      color: "#DAE1E7",
     },
     heading: {
-      fontSize: "36px",
-      fontWeight: "bold",
-      marginBottom: "20px",
+      fontSize: "60px",
+      letterSpacing: "0.8px",
+      paddingTop: "4.6875rem",
     },
     paragraph: {
       fontSize: "18px",
@@ -26,7 +40,9 @@ const AboutUsPage = () => {
   };
 
   return (
-    <div>
+    // <div style={styles.bg}>
+    <>
+      {/* <div style={styles.bg}> */}
       <Navbar />
       <div style={styles.container}>
         <h1 style={styles.heading}>Who We Are</h1>
@@ -41,7 +57,8 @@ const AboutUsPage = () => {
 
         <Footer />
       </div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 

@@ -1,87 +1,126 @@
-// import React, { useState } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
-// import { Link } from "react-router-dom";
-// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { FaBars } from 'react-icons/fa';
+import { useMediaQuery } from '@material-ui/core';
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(0),
-//   },
-//   title: {
-//     flexGrow: 1,
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(0),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  nav: {
+    boxShadow: "none",
+    border: "none",
+    backgroundColor: "#142850",
+  },
+  txt: {
+    color: "#DAE1E7",
+    textDecoration: "none"
+  },
+  drawer: {
+    position: "relative",
+    width: "600px",
+    backgroundColor: "#142850",
+    height: "100vh",
+  },
+  mobileTitle: {
+    flexGrow: 1,
+    textAlign: "center",
+  },
+  mobileMenuButton: {
+    marginRight: theme.spacing(0),
+  },
+}));
 
-// const sty = createMuiTheme({
-//   palette: {
-//     primary: {
-//       main: '#142850',
-//     },
-//   },
-// });
+const Navbar = () => {
+  const classes = useStyles();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width:600px)');
 
-// const Navbar = () => {
-//   const classes = useStyles();
-//   const [isSignedIn, setIsSignedIn] = useState(false);
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
 
-//   return (
-//     <div className={classes.root}> 
-//       <ThemeProvider theme={sty}>
-//         <AppBar position="static" style={{ boxShadow: 'none', border: 'none' }}>
-//           <Toolbar>
-//             <Typography variant="h6" className={classes.title}>
-//               BookFind
-//             </Typography>
-//             <Button color="inherit" >
-//               <Link to="/" style={{ textDecoration: "none" }}>Home</Link>
-//             </Button>
-//             <Button color="inherit">
-//               <Link to="/books" style={{ textDecoration: "none" }}>Books</Link>
-//             </Button>
-//             <Button color="inherit">
-//               <Link to="/vendors" style={{ textDecoration: "none" }}>Vendors</Link>
-//             </Button>
-//             <Button color="inherit">
-//               <Link to="/about" style={{ textDecoration: "none" }}>About</Link>
-//             </Button>
-//             <Button color="inherit">
-//               {isSignedIn ? (
-//                 <Link to="/profile" style={{ textDecoration: "none" }}>Profile</Link>
-//               ) : (
-//                 <Link to="/sign-in" style={{ textDecoration: "none" }}>Login</Link>
-//               )}
-//             </Button>
-//           </Toolbar>
-//         </AppBar>
-//       </ThemeProvider>
-//     </div>
-//   );
-// };
+    setDrawerOpen(open);
+  };
 
-// export default Navbar;
+  const drawerItems = (
+    <div
+      className={classes.drawer}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem button component={Link} to="/" className={classes.txt}>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem button component={Link} to="/books" className={classes.txt}>
+          <ListItemText primary="Books" />
+        </ListItem>
+        <ListItem button component={Link} to="/vendors" className={classes.txt}>
+          <ListItemText primary="Vendors" />
+        </ListItem>
+        <ListItem button component={Link} to="/about" className={classes.txt}>
+          <ListItemText primary="About" />
+        </ListItem>
+        <ListItem button component={Link} to={isSignedIn ? "/profile" : "/sign-in"} className={classes.txt}>
+          <ListItemText primary={isSignedIn ? "Profile" : "Login"} />
+        </ListItem>
+      </List>
+    </div>
+  );
 
-import React from "react";
-import img1 from "../images/L4.png"
-import "../Styles/styles.css";
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.nav}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            BookFind
+          </Typography>
+          {isMobile ? (
+            <>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+                <FaBars />
+              </IconButton>
+              <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+                {drawerItems}
+              </Drawer>
+            </>
+          ) : (
+            <>
+            <div>
+              <Button color="inherit" component={Link} to="/" className={classes.txt}>
+                Home
+              </Button>
+              <Button color="inherit" component={Link} to="/books" className={classes.txt}>
+                Books
+              </Button>
+              <Button color="inherit" component={Link} to="/vendors" className={classes.txt}>
+                Vendors
+              </Button>
+              <Button color="inherit" component={Link} to="/about" className={classes.txt}>
+                About
+              </Button>
+              <Button color="inherit" component={Link} to={isSignedIn ? "/profile" : "/sign-in"} className={classes.txt}>
+                {isSignedIn ? "Profile" : "Login"}
+              </Button>
+              </div>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
-function Navbar(){
-    return(
-        <header>
-            <img src={img1} />
-            <nav>
-                <a href="/">HOME</a>
-                <a href="/Books">Books</a>
-                <a href="/Magazines">Magazines</a>
-                <a href="/About_us">About Us</a>
-                <a href="#">Vendors</a>
-                <a href="#">Login</a>
-            </nav>
-        </header>
-    );
-}
-
-export default Navbar
+export default Navbar;
