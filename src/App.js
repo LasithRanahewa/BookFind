@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
+import './style.css';
 
 // import { Grid } from "@material-ui/core";
 // import Box from "@mui/material/Box";

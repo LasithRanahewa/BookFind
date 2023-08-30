@@ -24,9 +24,9 @@ function Footer() {
       <Typography
         variant="h6"
         gutterBottom
-        style={{ textAlign: "center", color: "#142850", fontSize: "1rem" }}
+        style={{ textAlign: "center", color: "#142850", fontSize: "0.9rem" }}
       >
-        CONNECT
+        CONNECT WITH US
       </Typography>
 
       <Link href="https://web.facebook.com/">

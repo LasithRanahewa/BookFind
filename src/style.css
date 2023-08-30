@@ -3,6 +3,8 @@
 body {
     background-color: #142850;
     font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
 } 
 div {
     margin: 0;
