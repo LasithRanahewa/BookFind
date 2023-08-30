@@ -1,25 +1,29 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import img from '../images/Book1.jpg'
+import "../index.css";
 
 const BookRec = () => {
   return (
     <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          <p>img</p>
+        <Grid item xs={12} md={6}>
+          <div className='bookImage'>
+            <img src={img}></img>
+          </div>
         </Grid>
-        <Grid item xs={12} md={8}>
-          <div>
-            <p>
-              In the heart of a bustling city, amidst the chaos of rushing
-              pedestrians and honking cars, a small bookstore stood quietly on a
-              narrow street corner. Its weathered facade boasted faded letters
-              spelling out its name, "Whispering Pages." Inside, the air was
-              filled with the intoxicating scent of old books, each telling its
-              own story.
+        <Grid item xs={12} md={6}>
+          <div className='bookPara'>
+            <h1>THE<br></br> AWARD<br></br> WINNING<br></br> BEST<br></br> SELLER</h1>
+            <p className = "BookRecord">
+              "In the heart of a bustling city,<br></br> amidst the chaos of rushing<br></br>
+              pedestrians and honking cars, a small<br></br> bookstore<br></br> stood quietly on a
+              narrow street corner.<br></br> Its weathered facade<br></br> boasted faded letters
+              spelling out its<br></br> name,<br></br> "Whispering Pages." Inside, the air<br></br> was
+              filled with the<br></br> intoxicating scent of old books, <br></br>each telling its
+              own story."
             </p>
-            <Link to="/books">Learn more...</Link>
+            <Link className='learnMore' to="/Books">Learn more...</Link>
           </div>
         </Grid>
       </Grid>
