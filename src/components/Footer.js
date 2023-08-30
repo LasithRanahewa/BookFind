@@ -12,15 +12,15 @@ function Footer() {
         textAlign: "center",
         backgroundColor: "#DAE1E7",
         color: "#142850",
-        padding: "2%",
         height: "10vh",
         // position: "fixed",
         // position: "absolute",
         bottom: 0,
         width: "100%",
+        paddingBottom: "2rem",
+        paddingTop: "2rem",
       }}
     >
-  
       <Typography
         variant="h6"
         gutterBottom
