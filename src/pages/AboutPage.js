@@ -19,9 +19,15 @@ const AboutUsPage = () => {
     // },
     container: {
       display: "flex",
+      flexDirection: "column",
+      minHeight: "70vh", // Set minimum height to 100vh
+    },
+    content: {
+      flex: 1, // Allow content to grow and fill remaining space
+      display: "flex",
+      flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      flexDirection: "column",
       width: "100%", // Set width to 100%
       margin: "auto",
       color: "#DAE1E7",
@@ -50,18 +56,18 @@ const AboutUsPage = () => {
       {/* <div style={styles.bg}> */}
       <Navbar />
       <div style={styles.container}>
-        <h1 style={styles.heading}>Who We Are</h1>
-        <p style={styles.paragraph}>
-          Welcome to BookFind, a centralized website that transforms your book
-          search experience. With BookFind, you can effortlessly check book
-          availability across multiple stores, find the nearest options based on
-          your location, and enjoy a hassle-free search process. Discover new
-          reads and explore the world of literature with ease. Start your book
-          journey with BookFind today! Launched in July 2023.
-        </p>
-        <hr style={styles.line} />
-
-        
+        <div style={styles.content}>
+          <h1 style={styles.heading}>Who We Are</h1>
+          <p style={styles.paragraph}>
+            Welcome to BookFind, a centralized website that transforms your book
+            search experience. With BookFind, you can effortlessly check book
+            availability across multiple stores, find the nearest options based on
+            your location, and enjoy a hassle-free search process. Discover new
+            reads and explore the world of literature with ease. Start your book
+            journey with BookFind today! Launched in July 2023.
+          </p>
+          <hr style={styles.line} />
+        </div>
       </div>
       <Footer />
       {/* </div> */}
