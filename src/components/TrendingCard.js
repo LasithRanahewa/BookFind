@@ -1,8 +1,18 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  cardcont: {
+    backgroundColor: "#27496D",
+    color: "#DAE1E7",
+  },
+}));
 
 const TrendingCard = () => {
-  const rating = 4; // replace with rating value
+  const classes = useStyles();
+
+  const rating = 4; 
   const stars = [];
 
   for (let i = 0; i < rating; i++) {
@@ -17,11 +27,11 @@ const TrendingCard = () => {
         image="https://source.unsplash.com/aZ_MmSmAcjg"
         alt="Book cover"
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent className={classes.cardcont}>
+        <Typography  component="div">
           Book Title
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography  component="div">
           Author
         </Typography>
         <div>{stars}</div>
