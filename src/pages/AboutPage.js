@@ -20,7 +20,6 @@ const AboutUsPage = () => {
     container: {
       display: "flex",
       flexDirection: "column",
-      minHeight: "70vh", // Set minimum height to 100vh
     },
     content: {
       flex: 1, // Allow content to grow and fill remaining space
@@ -48,6 +47,7 @@ const AboutUsPage = () => {
       backgroundColor: "#DAE1E7",
       margin: "2rem 0",
     },
+    
   };
 
   return (
@@ -68,8 +68,11 @@ const AboutUsPage = () => {
           </p>
           <hr style={styles.line} />
         </div>
+        <div style={{position:"absolute", bottom:0, width:"100%"}}>
+        <Footer />
+        </div>
+        
       </div>
-      <Footer />
       {/* </div> */}
     </>
   );
