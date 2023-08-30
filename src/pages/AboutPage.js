@@ -61,8 +61,9 @@ const AboutUsPage = () => {
         </p>
         <hr style={styles.line} />
 
-        <Footer />
+        
       </div>
+      <Footer />
       {/* </div> */}
     </>
   );
