@@ -1,17 +1,7 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  cardcont: {
-    backgroundColor: "#27496D",
-    color: "#DAE1E7",
-  },
-}));
+import { Card, CardMedia, CardContent, Typography } from "@mui/material"
 
 const TrendingCard = () => {
-  const classes = useStyles();
-
   const rating = 4; 
   const stars = [];
 
@@ -20,14 +10,14 @@ const TrendingCard = () => {
   }
 
   return (
-    <Card style={{ width: '80%' }}>
+    <Card sx={{ backgroundColor: "#27496D", color: "#DAE1E7", width: '80%' }}>
       <CardMedia
         component="img"
         height="300"
         image="https://source.unsplash.com/aZ_MmSmAcjg"
         alt="Book cover"
       />
-      <CardContent className={classes.cardcont}>
+      <CardContent sx={{ backgroundColor: "#27496D", color: "#DAE1E7" }}>
         <Typography  component="div">
           Book Title
         </Typography>

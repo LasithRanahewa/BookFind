@@ -1,4 +1,4 @@
-import { Link, Typography } from "@material-ui/core";
+import { Link, Typography } from "@mui/material"
 
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";

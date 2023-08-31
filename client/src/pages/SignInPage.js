@@ -1,59 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material"
 import login_img from "../assets/loginpage.png"
-import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    form: {
-        backgroundColor: '#142850',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-    },
-    textField: {
-        margin: theme.spacing(1),
-        width: '40ch',
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#18B1C8',
-            },
-            '&:hover fieldset': {
-                borderColor: '#18B1C8',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#18B1C8',
-            },
-        },
-        '& .MuiFormLabel-root': {
-            color: '#DAE1E7',
-        },
-        '& .MuiInputBase-input': {
-            color: '#DAE1E7',
-        },
-    },
-    button: {
-        margin: theme.spacing(1),
-        width: '40ch',
-        alignSelf: 'center',
-        backgroundColor: '#18B1C8',
-        '&:hover': {
-            backgroundColor: '#18B1C8',
-        },
-    },
-    checkbox: {
-        color: '#18B1C8',
-        '&$checked': {
-            color: '#18B1C8',
-        },
-    },
-    checked: {},
-}));
+import { TextField, Button, FormControl, Typography, Link, Checkbox, FormControlLabel } from "@mui/material"
 
 const SignInPage = () => {
-    const classes = useStyles();
     const [rememberMe, setRememberMe] = useState(false);
 
     const handleRememberMeChange = (event) => {
@@ -67,20 +17,67 @@ const SignInPage = () => {
             </Grid>
             <Grid item xs={12} md={6}>
             <div>
-            <form className={classes.form}>
-            <FormControl style={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
-                <Typography variant="h4" gutterBottom style={{ textAlign: 'center', color: '#DAE1E7'}}>
+            <form sx={{
+                backgroundColor: '#142850',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh',
+            }}>
+            <FormControl sx={{ display: 'flex', flexDirection: 'column', color: '#DAE1E7'}}>
+                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', color: '#DAE1E7'}}>
                     Sign In
                 </Typography>
                 <TextField
-                    className={classes.textField}
+                    sx={{
+                        margin: '1rem',
+                        width: '40ch',
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                        },
+                        '& .MuiFormLabel-root': {
+                            color: '#DAE1E7',
+                        },
+                        '& .MuiInputBase-input': {
+                            color: '#DAE1E7',
+                        },
+                    }}
                     label="Email"
                     variant="outlined"
                     type="email"
                     required
                 />
                 <TextField
-                    className={classes.textField}
+                    sx={{
+                        margin: '1rem',
+                        width: '40ch',
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#18B1C8',
+                            },
+                        },
+                        '& .MuiFormLabel-root': {
+                            color: '#DAE1E7',
+                        },
+                        '& .MuiInputBase-input': {
+                            color: '#DAE1E7',
+                        },
+                    }}
                     label="Password"
                     variant="outlined"
                     type="password"
@@ -92,9 +89,11 @@ const SignInPage = () => {
                             checked={rememberMe}
                             onChange={handleRememberMeChange}
                             name="rememberMe"
-                            classes={{
-                                root: classes.checkbox,
-                                checked: classes.checked,
+                            sx={{
+                                color: '#18B1C8',
+                                '&$checked': {
+                                    color: '#18B1C8',
+                                },
                             }}
                         />
                     }
@@ -102,15 +101,23 @@ const SignInPage = () => {
                     style={{ marginLeft: '0' }}
                 />
                 <Button
-                    className={classes.button}
+                    sx={{
+                        margin: '1rem',
+                        width: '40ch',
+                        alignSelf: 'center',
+                        backgroundColor: '#18B1C8',
+                        '&:hover': {
+                            backgroundColor: '#18B1C8',
+                        },
+                    }}
                     variant="contained"
                     color="primary"
                     type="submit"
                 >
                     Sign In
                 </Button>
-                <Typography variant="body1" gutterBottom style={{ textAlign: 'center' }}>
-                    No account? <Link href="/sign-up" style={{ color: '#18B1C8' }}>Sign up here</Link>
+                <Typography variant="body1" gutterBottom sx={{ textAlign: 'center' }}>
+                    No account? <Link href="/sign-up" sx={{ color: '#18B1C8' }}>Sign up here</Link>
                 </Typography>
             </FormControl>
             </form>
