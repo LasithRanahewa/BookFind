@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './style.css';
-import App from './App';
-import BooksPage from './pages/BooksPage';
-import VendorsPage from './pages/VendorsPage';
-import AboutPage from './pages/AboutPage';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
-import ProfilePage from './pages/ProfilePage';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./style.css";
+import App from "./App";
+import BooksPage from "./pages/BooksPage";
+import VendorsPage from "./pages/VendorsPage";
+import AboutPage from "./pages/AboutPage";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
+import ProfilePage from "./pages/ProfilePage";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import AdminDash from "./pages/Admin/AdminDash";
+import VendorDash from "./pages/Vendor/VendorDash";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -42,11 +42,16 @@ const router = createBrowserRouter([
   {
     path: "sign-up",
     element: <SignUpPage />,
-  }
+  },
+  {
+    path: "admin-dashboard",
+    element: <AdminDash />,
+  },
+  {
+    path: "vendor-dashboard",
+    element: <VendorDash />,
+  },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <RouterProvider router={router} />
-);
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={router} />);
