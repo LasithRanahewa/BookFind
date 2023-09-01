@@ -77,12 +77,12 @@ const initializePassport = require("./passport-config");
 initializePassport(passport);
 
 // routes for REST API
-app.use("/api/auth", authRouter);
-app.use("/api/book", bookRouter);
-app.use("/api/bookstore", bookstoreRouter);
-app.use("/api/copy", copyRouter);
-app.use("/api/reservation", reservationRouter);
-app.use("/api/user",userRouter);
+// app.use("/api/auth", authRouter);
+// app.use("/api/book", bookRouter);
+// app.use("/api/bookstore", bookstoreRouter);
+// app.use("/api/copy", copyRouter);
+// app.use("/api/reservation", reservationRouter);
+// app.use("/api/user",userRouter);
 
 // test
 app.get('/', (req, res) => console.log(req, res));
