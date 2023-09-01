@@ -51,9 +51,6 @@ const initializePassport = (passport) => {
         });
       }
     ));
-
-    // apple strategy
-    
 };
 
 module.exports = initializePassport;
