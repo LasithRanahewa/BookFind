@@ -1,22 +1,10 @@
 import React from "react";
 import { Grid, TextField, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import HI from "../assets/heroimg.png";
+import img2 from "../images/bookshop.png";
+import '../index.css';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    position: "relative",
-    top: 0,
-    left: 0,
-    height: "100vh",
-    color: "DAE1E7",
-  },
-  h1: {
-    color: "white",
-  },
-  h2: {
-    color: "white",
-  },
   textField: {
     margin: theme.spacing(1),
     width: "40ch",
@@ -46,13 +34,11 @@ const HeroContent = () => {
     <div className={classes.container}>
       <Grid container spacing={2} flexDirection={{ xs: "column-reverse", md: "row" }}>
         <Grid item xs={12} md={8}>
-          <div>
-            <h2 className={classes.h2}>e-Books Galore | Explore | Discover</h2>
-            <h1 className={classes.h1}>
-              IT'S NOT JUST A <br />
-              BOOKSTORE.
-            </h1>
-            <h2 className={classes.h2}>It's a universe.</h2>
+          <div className="content">
+              <Grid item xs={12} md={8}><img src = {img2} /></Grid>
+              <p className="para1"> Explore | Discover | Acquire </p>
+              <h1 className="heading1">IT'S NOT JUST A<br></br>BOOKSTORE.</h1>
+              <p className="para2">It's a universe.</p>
             <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
               <TextField
                 label="Find a book"
@@ -63,9 +49,6 @@ const HeroContent = () => {
               />
             </Box>
           </div>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <img src={HI} alt="" />
         </Grid>
       </Grid>
     </div>

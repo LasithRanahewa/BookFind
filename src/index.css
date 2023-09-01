@@ -1,10 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-body {
+body{
     background-color: #142850;
-    font-family: 'Open Sans', sans-serif;
-} 
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+:root{
+    --mainColor: #142850;
+    --mainColorLight:#27496D;
+    --secondaryColor: #00909E;
+    --textColor: #DAE1E7;
+}
+
 div {
     margin: 0;
     padding: 0;
+}
+
+.bookImage, .bookPara{
+    position: relative;
+    padding: 3rem;
+    padding-top: 5rem;  
+}
+
+.bookPara{
+    padding-top: 6rem;
+    align-items: left;
+}
+
+.bookImage img{
+    border-radius: 8px;
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.bookPara p{
+    color: var(--textColor);
+    font-family: 'Open Sans Condensed';
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-align: left;
+    line-height: 2rem; 
+    letter-spacing: 0.16rem;
+}
+
+.learnMore{
+    color: var(--secondaryColor);
+    text-decoration: none;
+    padding-top: 0.5rem;
+}
+
+.bookPara h1{
+    position: absolute;
+    padding-top: -2rem;
+    opacity: 0.2;
+    right: 1rem;
+    font-size: 4.5rem;
+    color: #00909E;
+}
+
+.content{
+    position: relative;
+    left: 100px;
+    padding-top: 7rem;
+    color: var(--textColor);
+    height: 100vh;
+}
+
+.content img{
+    position: absolute;
+    left: 45rem;
+    top: 5rem;
+}
+
+.para1, .para2{
+    font-size: 20px ;
+    padding: 10px 10px;
+}
+
+.content h1{
+    font-size: 75px;
+    font-weight: 100px;
 }

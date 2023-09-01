@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 
 import HeroContent from "./components/HeroContent";
 import BookRec from "./components/BookRec";
-
 import Footer from "./components/Footer";
 import TrendingBooks from "./components/TrendingBooks";
 // import { Link } from "react-router-dom";
