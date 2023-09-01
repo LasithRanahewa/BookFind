@@ -37,15 +37,16 @@ const AboutUsPage = () => {
       paddingTop: "4.6875rem",
     },
     paragraph: {
-      fontSize: "18px",
+      fontSize: "1.2rem",
       lineHeight: "1.5",
       textAlign: "center",
       maxWidth: "800px",
     },
     line: {
       width: "60%",
-      backgroundColor: "#DAE1E7",
-      margin: "2rem 0",
+      // color: "#DAE1E7",
+      borderColor: "#DAE1E7",
+      margin: "2rem 0 4rem 0",
     },
     
   };

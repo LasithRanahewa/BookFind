@@ -1,8 +1,15 @@
+<<<<<<< HEAD:src/components/BookRec.js
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import img from '../images/Book1.jpg'
 import "../index.css";
+=======
+import React from 'react'
+import { Grid } from "@mui/material"
+import { Link } from 'react-router-dom'
+
+>>>>>>> 39c8a363b3ecc85a2bfab90ac1fd68b4bf2ef9b9:client/src/components/BookRec.js
 
 const BookRec = () => {
   return (

@@ -2,6 +2,7 @@
 
 body{
     background-color: #142850;
+<<<<<<< HEAD:src/index.css
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -12,6 +13,12 @@ body{
     --textColor: #DAE1E7;
 }
 
+=======
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+} 
+>>>>>>> 39c8a363b3ecc85a2bfab90ac1fd68b4bf2ef9b9:client/src/style.css
 div {
     margin: 0;
     padding: 0;

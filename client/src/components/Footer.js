@@ -1,4 +1,4 @@
-import { Link, Typography } from "@material-ui/core";
+import { Link, Typography } from "@mui/material"
 
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -12,21 +12,21 @@ function Footer() {
         textAlign: "center",
         backgroundColor: "#DAE1E7",
         color: "#142850",
-        padding: "2%",
         height: "10vh",
         // position: "fixed",
         // position: "absolute",
         bottom: 0,
         width: "100%",
+        paddingBottom: "2rem",
+        paddingTop: "2rem",
       }}
     >
-  
       <Typography
         variant="h6"
         gutterBottom
-        style={{ textAlign: "center", color: "#142850", fontSize: "1rem" }}
+        style={{ textAlign: "center", color: "#142850", fontSize: "0.9rem" }}
       >
-        CONNECT
+        CONNECT WITH US
       </Typography>
 
       <Link href="https://web.facebook.com/">

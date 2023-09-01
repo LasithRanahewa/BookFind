@@ -1,11 +1,10 @@
 import React from 'react'
 import { Card, CardContent, CardMedia, Grid } from '@mui/material'
-import { Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Button } from "@mui/material"
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
     btn: {
-        margin: theme.spacing(1),
+        margin: "1rem",
         width: "16ch",
         alignSelf: "center",
         backgroundColor: "#18B1C8",
@@ -13,10 +12,9 @@ const useStyles = makeStyles((theme) => ({
           backgroundColor: "#18B1C8",
         },
       },
-}));
+};
 
 const BookMini = () => {
-    const classes = useStyles();
     return (
         <Card sx={{ display: 'flex', flexDirection: 'column', margin: { xs: '1rem', sm: '1rem 10%' }, alignItems: 'center'}}>
             <CardMedia
@@ -29,7 +27,7 @@ const BookMini = () => {
                 <h1>Book Title</h1>
                 <h2>Author</h2>
                 <p>rating and published year</p>
-                <Button variant="contained" color="primary" className={classes.btn}>Find a copy</Button>
+                <Button variant="contained" color="primary" sx={styles.btn}>Find a copy</Button>
             </CardContent>
         </Card>
     )
