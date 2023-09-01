@@ -39,7 +39,7 @@ mongoose.connect(process.env.MONGO_URL)
 // use CORS to handle the request's domain
 app.use(
     cors({
-      origin: ["http://127.0.0.1:3000", process.env.ORIGIN || "http://localhost:3000"],     
+      origin: ["http://127.0.0.1:3000", process.env.ORIGIN || "http://localhost:3000"], 
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
       allowedHeaders: [
         "Content-Type",
