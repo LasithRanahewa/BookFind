@@ -37,10 +37,11 @@ var books = [
   },
 ];
 
-const VendorPage = () => {
+const VendorPage = ({ instance }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
+  
   const handleReserveClick = (book) => {
     setSelectedBook(book);
     setShowConfirmation(true);
