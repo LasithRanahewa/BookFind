@@ -126,7 +126,7 @@ const Navbar = () => {
         sx={{ boxShadow: "none", border: "none", backgroundColor: "#142850" }}
       >
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1 , color:"#DAE17"}}>
             BookFind
           </Typography>
           {isMobile ? (

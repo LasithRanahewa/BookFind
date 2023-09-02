@@ -19,13 +19,13 @@ const Home = () => {
       <Grid container minHeight={"100vh"}>
         <Grid container>
           <Grid item xs={12} sm={6}>
-            <Typography variant="h5" align="left">
-              BookFind
+            <Typography variant="h5" align="left" sx={{color:"#DAE1E7"}}>
+            e-Books Galore | Explore | Discover
               <br />
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Repellendus voluptatum sit nulla atque incidunt magni dolorum?
-              Quas voluptas sapiente consequuntur commodi, quam culpa ipsa
-              aspernatur provident, sit corrupti reiciendis dolorem.
+              IT'S NOT JUST A <br />
+              BOOKSTORE.
+              <br />
+              It's a universe.
             </Typography>
             <br />
             <TextField
