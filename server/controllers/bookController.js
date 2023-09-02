@@ -8,6 +8,7 @@ router.post("/new", async (req, res) => {
   try {
     const { name, author, publisher } = req.body;
     if (!name || !author || !publisher) {
+
       return res.status(400).json({ error: "Incomplete book data" });
     }
 

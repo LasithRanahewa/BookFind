@@ -68,9 +68,9 @@ const Navbar = () => {
           <Button
             color="inherit"
             component={Link}
-            to="/bookstores"
+            to="/vendors"
             sx={{ color: "#DAE1E7", textDecoration: "none" }}
-          >
+          >bookstores
             <Typography
               variant="button"
               sx={{ color: "#DAE1E7", textDecoration: "none" }}
@@ -180,7 +180,7 @@ const Navbar = () => {
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/bookstores"
+                  to="/vendors"
                   sx={{ color: "#DAE1E7", textDecoration: "none" }}
                 >
                   <Typography

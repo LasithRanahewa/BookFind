@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const vendor = require("../models/vendor.js");
+const Book = require("../models/book.js");
 
 // Create new vendor
 //  {
@@ -21,7 +22,7 @@ router.post("/new", async (req, res) => {
   const newVendor = new vendor({
     name,
     location,
-    email,
+    contact,
     availableBooks,
     image,
   });
@@ -57,15 +58,16 @@ router.post("/search", async (req, res) => {
 router.post("/get", async (req, res) => {
   const { id } = req.body;
 
-  try {
-    vendor.find({ id }).then((data) => {
-      res.send(data);
+  vendor
+    .findById(id)
+    .populate("availableBooks") // Populate the availableBooks field
+    .then(function (vendor) {
+      res.send(vendor);
+      console.log(vendor);
+    })
+    .catch(function (err) {
+      res.status(500).send(err);
     });
-  } catch (e) {
-    res.send({
-      data: "No vendor is available by that id",
-    });
-  }book
 });
 
 // Get all vendors
