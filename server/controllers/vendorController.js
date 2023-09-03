@@ -71,9 +71,7 @@ router.post("/get", async (req, res) => {
 });
 
 // Get all vendors
-router.all("/all", async (req, res) => {
-  const { name } = req.body;
-
+router.get("/all", async (req, res) => {
   try {
     vendor.find().then((data) => {
       res.send(data);
@@ -81,6 +79,31 @@ router.all("/all", async (req, res) => {
   } catch (e) {
     res.send({
       data: "Error fetching all vendors list",
+    });
+  }
+});
+
+// Delete a vendor by ID
+router.post("/delete", async (req, res) => {
+  try {
+    const id = req.body;
+    // Check if the vendor with the provided ID exists
+    const existingVendor = await vendor.findById(id);
+
+    if (!existingVendor) {
+      return res.status(404).send({
+        data: "Vendor not found",
+      });
+    }
+    // Delete the vendor
+    await existingVendor.remove();
+    res.send({
+      data: "Vendor deleted successfully",
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      data: "Error deleting vendor",
     });
   }
 });

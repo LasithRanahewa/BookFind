@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
@@ -12,27 +13,28 @@ import TextField from "@mui/material/TextField";
 
 function BookstoreForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [brn, setBrn] = React.useState("");
-  const [rating, setRating] = React.useState(1);
-  const [copies, setCopies] = React.useState(1);
-  const [description, setDescription] = React.useState("");
-  const [bookstorePic, setBookstorePic] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [email, setEmail] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({
-      name,
-      address,
-      phoneNumber,
-      brn,
-      rating,
-      copies,
-      description,
-      bookstorePic,
-    });
-    onClose();
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .post("/vendor/new", {
+        name,
+        location,
+        email,
+      })
+      .then((obj) => {
+        console.log("set");
+        onClose();
+      })
+      .catch(() => {
+        // Handle errors here
+      });
   };
 
   return (
@@ -48,55 +50,16 @@ function BookstoreForm({ open, onClose, onSubmit }) {
             margin="normal"
           />
           <TextField
-            label="Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            label="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Phone Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="BRN"
-            value={brn}
-            onChange={(e) => setBrn(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Rating"
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Copies"
-            type="number"
-            value={copies}
-            onChange={(e) => setCopies(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            fullWidth
-            margin="normal"
-            multiline
-            rows={4}
-          />
-          <TextField
-            label="Bookstore Pic"
-            value={bookstorePic}
-            onChange={(e) => setBookstorePic(e.target.value)}
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -133,93 +96,137 @@ const columns = [
     editable: true,
   },
   {
-    field: "address",
-    headerName: "Address",
+    field: "location",
+    headerName: "Location",
     width: 150,
     editable: true,
   },
   {
-    field: "phoneNumber",
-    headerName: "Phone Number",
+    field: "email",
+    headerName: "Email",
     width: 150,
     editable: true,
   },
-  {
-    field: "brn",
-    headerName: "BRN",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "rating",
-    headerName: "Rating",
-    width: 150,
-  },
-  {
-    field: "copies",
-    headerName: "Copies",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "description",
-    headerName: "Description",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "bookstorePic",
-    headerName: "Bookstore Pic",
-    width: 150,
-    editable: true,
-  },
+  // {
+  //   field: "brn",
+  //   headerName: "BRN",
+  //   width: 150,
+  //   editable: true,
+  // },
+  // {
+  //   field: "rating",
+  //   headerName: "Rating",
+  //   width: 150,
+  // },
+  // {
+  //   field: "copies",
+  //   headerName: "Copies",
+  //   width: 150,
+  //   editable: true,
+  // },
+  // {
+  //   field: "description",
+  //   headerName: "Description",
+  //   width: 150,
+  //   editable: true,
+  // },
+  // {
+  //   field: "bookstorePic",
+  //   headerName: "Bookstore Pic",
+  //   width: 150,
+  //   editable: true,
+  // },
 ];
 
-const rows = [
-  {
-    id: 1,
-    vendorID: 1,
-    name: "Bookstore 1",
-    address: "Address 1",
-    phoneNumber: "12345678",
-    brn: "12345678",
-    rating: 1,
-    copies: 1,
-    description: "Description 1",
-    bookstorePic: "Bookstore Pic 1",
-  },
-  {
-    id: 2,
-    vendorID: 2,
-    name: "Bookstore 2",
-    address: "Address 2",
-    phoneNumber: "12345678",
-    brn: "12345678",
-    rating: 2,
-    copies: 2,
-    description: "Description 2",
-    bookstorePic: "Bookstore Pic 2",
-  },
-  {
-    id: 3,
-    vendorID: 3,
-    name: "Bookstore 3",
-    address: "Address 3",
-    phoneNumber: "12345678",
-    brn: "12345678",
-    rating: 3,
-    copies: 3,
-    description: "Description 3",
-    bookstorePic: "Bookstore Pic 3",
-  },
-];
+// const rows = [
+//   {
+//     id: 1,
+//     vendorID: 1,
+//     name: "Bookstore 1",
+//     address: "Address 1",
+//     phoneNumber: "12345678",
+//     brn: "12345678",
+//     rating: 1,
+//     copies: 1,
+//     description: "Description 1",
+//     bookstorePic: "Bookstore Pic 1",
+//   },
+//   {
+//     id: 2,
+//     vendorID: 2,
+//     name: "Bookstore 2",
+//     address: "Address 2",
+//     phoneNumber: "12345678",
+//     brn: "12345678",
+//     rating: 2,
+//     copies: 2,
+//     description: "Description 2",
+//     bookstorePic: "Bookstore Pic 2",
+//   },
+//   {
+//     id: 3,
+//     vendorID: 3,
+//     name: "Bookstore 3",
+//     address: "Address 3",
+//     phoneNumber: "12345678",
+//     brn: "12345678",
+//     rating: 3,
+//     copies: 3,
+//     description: "Description 3",
+//     bookstorePic: "Bookstore Pic 3",
+//   },
+// ];
 
-export default function BookstoresDataGrid() {
+export default function BookstoresDataGrid({ instance }) {
   const [showForm, setShowForm] = React.useState(false);
+  const [location, setLocation] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [selectedRows, setSelectedRows] = React.useState([]); // Define selectedRows here
+  const [selectionModel, setSelectionModel] = React.useState([]);
+  const [selectedRowIds, setSelectedRowIds] = React.useState([]);
+  const [vendorList, setVendorList] = React.useState([]);
 
   // Function to toggle the state variable
   const toggleForm = () => {
     setShowForm(!showForm);
+  };
+
+  const handleDataFetch = () => {
+    var id = 1;
+    instance
+      .get("/vendor/all")
+      .then((obj) => {
+        // Rename the _id property to id using map
+        const renamedVendorList = obj.data.map((vendor) => ({
+          ...vendor,
+          id: id++,
+        }));
+        setVendorList(renamedVendorList);
+        console.log(renamedVendorList);
+      })
+      .catch(() => {
+        setVendorList([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  };
+
+  React.useEffect(() => {
+    handleDataFetch();
+  }, []);
+
+  const handleSelectionChange = (newSelection) => {
+    setSelectionModel(newSelection);
+
+    // Get the selected IDs
+    const selectedIds = newSelection.map((index) => rows[index]?.id || "");
+    setSelectedRowIds(selectedIds);
+  };
+
+  const handleDelete = (e) => {
+    console.log(selectedRowIds);
   };
 
   return (
@@ -238,13 +245,18 @@ export default function BookstoresDataGrid() {
           <Button size="small" onClick={toggleForm}>
             Add BookStore
           </Button>
-          <Button size="small" onClick={null}>
+          <Button
+            size="small"
+            onClick={(e) => {
+              handleDelete(e);
+            }}
+          >
             Delete BookStore
           </Button>
         </Stack>
         <Box>
           <DataGrid
-            rows={rows}
+            rows={vendorList}
             columns={columns}
             initialState={{
               pagination: {
@@ -254,7 +266,6 @@ export default function BookstoresDataGrid() {
               },
             }}
             pageSizeOptions={[5]}
-            checkboxSelection
             disableRowSelectionOnClick
           />
         </Box>
