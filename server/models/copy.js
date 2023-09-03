@@ -14,7 +14,7 @@ const copySchema = new mongoose.Schema({
     },
 
     quantity: {
-        type: Integer,
+        type: Number,
         required: true
     },
 

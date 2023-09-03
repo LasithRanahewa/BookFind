@@ -30,7 +30,7 @@ const bookSchema = new mongoose.Schema({
     },
 
     noOfPages: {
-        type: Integer,
+        type: Number,
         required: true
     },
 
@@ -59,12 +59,12 @@ const bookSchema = new mongoose.Schema({
     },
 
     rating: {
-        type: Double,
+        type: Number,
         required: false
     },
 
     unitPrice: {
-        type: Double,
+        type: Number,
         required: true
     },
 

@@ -14,7 +14,7 @@ const reservationSchema = new mongoose.Schema({
     },
 
     quantity: {
-        type: Integer,
+        type: Number,
         required: true
     }
 });
