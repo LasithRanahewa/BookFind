@@ -29,8 +29,8 @@ function BookstoreForm({ open, onClose, onSubmit }) {
         email,
       })
       .then((obj) => {
-        console.log("set");
         onClose();
+        setSelectedForDelete(null);
       })
       .catch(() => {
         // Handle errors here
@@ -75,7 +75,7 @@ function BookstoreForm({ open, onClose, onSubmit }) {
 
 const handleFormSubmit = (formData) => {
   // Here you can handle the form data however you need to, such as sending it to a server or updating state
-  console.log(formData);
+  // console.log(formData);
 };
 
 const columns = [
@@ -185,6 +185,7 @@ export default function BookstoresDataGrid({ instance }) {
   const [selectionModel, setSelectionModel] = React.useState([]);
   const [selectedRowIds, setSelectedRowIds] = React.useState([]);
   const [vendorList, setVendorList] = React.useState([]);
+  const [selectedForDelete, setSelectedForDelete] = React.useState([]);
 
   // Function to toggle the state variable
   const toggleForm = () => {
@@ -202,7 +203,6 @@ export default function BookstoresDataGrid({ instance }) {
           id: id++,
         }));
         setVendorList(renamedVendorList);
-        console.log(renamedVendorList);
       })
       .catch(() => {
         setVendorList([
@@ -215,18 +215,41 @@ export default function BookstoresDataGrid({ instance }) {
 
   React.useEffect(() => {
     handleDataFetch();
-  }, []);
+  }, [selectedForDelete]);
 
-  const handleSelectionChange = (newSelection) => {
-    setSelectionModel(newSelection);
+  // const handleSelectionChange = (newSelection) => {
+  //   setSelectionModel(newSelection);
 
-    // Get the selected IDs
-    const selectedIds = newSelection.map((index) => rows[index]?.id || "");
-    setSelectedRowIds(selectedIds);
+  //   // Get the selected IDs
+  //   const selectedIds = newSelection.map((index) => rows[index]?.id || "");
+  //   setSelectedRowIds(selectedIds);
+  // };
+
+  const handleDelete = (data) => {
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .post("/vendor/delete", {
+        data,
+      })
+      .then((obj) => {
+        console.log("Deleted Vendor");
+        onClose();
+        handleDataFetch();
+      })
+      .catch(() => {
+        // Handle errors here
+      });
   };
+  const handleCheckBoxSelection = (ids) => {
+    const selectedRowsData = ids.map((id) =>
+      vendorList.find((row) => row.id === id)
+    );
 
-  const handleDelete = (e) => {
-    console.log(selectedRowIds);
+    var arr = selectedRowsData;
+    setSelectedForDelete(arr);
   };
 
   return (
@@ -247,8 +270,8 @@ export default function BookstoresDataGrid({ instance }) {
           </Button>
           <Button
             size="small"
-            onClick={(e) => {
-              handleDelete(e);
+            onClick={() => {
+              handleDelete(selectedForDelete);
             }}
           >
             Delete BookStore
@@ -266,6 +289,8 @@ export default function BookstoresDataGrid({ instance }) {
               },
             }}
             pageSizeOptions={[5]}
+            checkboxSelection
+            onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />
         </Box>
