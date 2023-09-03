@@ -7,6 +7,7 @@ import { MenuItem } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 const VendorPage = ({ instance }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -177,9 +178,11 @@ const VendorPage = ({ instance }) => {
                         alt={book.name}
                       />
                       <CardContent sx={{ flex: 1 }}>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {book.name}
-                        </Typography>
+                        <Link to={`/book?book=${book._id}`}>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {book.name}
+                          </Typography>
+                        </Link>
                         <Typography variant="body2" color="text.secondary">
                           {book.author}
                         </Typography>
