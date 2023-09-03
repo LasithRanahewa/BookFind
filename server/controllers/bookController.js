@@ -73,4 +73,29 @@ router.get("/trending", async (req, res) => {
   }
 });
 
+// Delete a book by ID
+router.post("/delete", async (req, res) => {
+  try {
+    const idsToDelete = req.body.data; // Assuming you are passing an array of IDs as 'ids' in the request body
+    // Check if the Book with the provided IDs exist
+    for (const id of idsToDelete) {
+      const bookToDelete = await Book.findById(id);
+      if (!bookToDelete) {
+        return res.status(404).send({
+          data: `Book with ID ${id} not found`,
+        });
+      }
+      await bookToDelete.deleteOne();
+    }
+    res.send({
+      data: "Book deleted successfully",
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({
+      data: "Internal server error",
+    });
+  }
+});
+
 module.exports = router;
