@@ -8,22 +8,31 @@ import {
   List,
   ListItem,
   ListItemText,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
 import Button from "@mui/material/Button";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const Navbar = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const isMobile = useMediaQuery("(max-width:600px)");
+
+  const handleLogout = () => {
+    setIsSignedIn(false);
+    setAnchorEl(null);
+  };
 
   const drawerItems = (
     <div
       sx={{
         position: "relative",
-        width: "600px",
+        width: "100vw",
         backgroundColor: "#142850",
         height: "100vh",
       }}
@@ -31,7 +40,7 @@ const Navbar = () => {
       onClick={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
-      <List>
+      <List sx={{ width: "100vw"}} >
         <ListItem>
           <Button
             color="inherit"
@@ -39,12 +48,7 @@ const Navbar = () => {
             to="/"
             sx={{ color: "#DAE1E7", textDecoration: "none" }}
           >
-            <Typography
-              variant="button"
-              sx={{ color: "#DAE1E7", textDecoration: "none" }}
-            >
-              Home
-            </Typography>
+            Home
           </Button>
         </ListItem>
 
@@ -55,28 +59,18 @@ const Navbar = () => {
             to="/books"
             sx={{ color: "#DAE1E7", textDecoration: "none" }}
           >
-            <Typography
-              variant="button"
-              sx={{ color: "#DAE1E7", textDecoration: "none" }}
-            >
-              Books
-            </Typography>
+            Books
           </Button>
         </ListItem>
-        
+
         <ListItem>
           <Button
             color="inherit"
             component={Link}
             to="/vendors"
             sx={{ color: "#DAE1E7", textDecoration: "none" }}
-          >bookstores
-            <Typography
-              variant="button"
-              sx={{ color: "#DAE1E7", textDecoration: "none" }}
-            >
-              Vendors
-            </Typography>
+          >
+            Vendors
           </Button>
         </ListItem>
 
@@ -87,35 +81,48 @@ const Navbar = () => {
             to="/about"
             sx={{ color: "#DAE1E7", textDecoration: "none" }}
           >
-            <Typography
-              variant="button"
-              sx={{ color: "#DAE1E7", textDecoration: "none" }}
-            >
-              About
-            </Typography>
+            About
           </Button>
         </ListItem>
 
-        <ListItem
-          button
-          component={Link}
-          to={isSignedIn ? "/profile" : "/login"}
-          sx={{ color: "#DAE1E7", textDecoration: "none" }}
-        >
-          <ListItemText primary={isSignedIn ? "Profile" : "Login"} />
-        </ListItem>
+        {isSignedIn ? (
+          <>
+            <ListItem>
+              <Button
+                color="inherit"
+                onClick={(event) => setAnchorEl(event.currentTarget)}
+                sx={{ color: "#DAE1E7", textDecoration: "none" }}
+              >
+                Profile
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                color="inherit"
+                onClick={handleLogout}
+                sx={{ color: "#DAE1E7", textDecoration: "none" }}
+              >
+                Logout
+              </Button>
+            </ListItem>
+          </>
+        ) : (
+          <ListItem>
+            <Button
+              color="inherit"
+              component={Link}
+              to="/login"
+              sx={{ color: "#DAE1E7", textDecoration: "none" }}
+            >
+              Login
+            </Button>
+          </ListItem>
+        )}
       </List>
     </div>
   );
 
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
+  const toggleDrawer = (open) => {
     setDrawerOpen(open);
   };
 
@@ -125,8 +132,8 @@ const Navbar = () => {
         position="static"
         sx={{ boxShadow: "none", border: "none", backgroundColor: "#142850" }}
       >
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 , color:"#DAE17"}}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography variant="h6" sx={{ color: "#DAE17" }}>
             BookFind
           </Typography>
           {isMobile ? (
@@ -144,80 +151,94 @@ const Navbar = () => {
                 anchor="left"
                 open={drawerOpen}
                 onClose={() => toggleDrawer(false)}
+                sx={{ width: "100vw" }}
               >
                 {drawerItems}
               </Drawer>
             </>
           ) : (
-            <>
-              <div>
+            <div sx={{ display: "flex", alignItems: "center" }}>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/"
+                sx={{
+                  color: "#DAE1E7",
+                  textDecoration: "none",
+                  marginRight: "16px",
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/books"
+                sx={{
+                  color: "#DAE1E7",
+                  textDecoration: "none",
+                  marginRight: "16px",
+                }}
+              >
+                Books
+              </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/vendors"
+                sx={{
+                  color: "#DAE1E7",
+                  textDecoration: "none",
+                  marginRight: "16px",
+                }}
+              >
+                Vendors
+              </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/about"
+                sx={{
+                  color: "#DAE1E7",
+                  textDecoration: "none",
+                  marginRight: "16px",
+                }}
+              >
+                About
+              </Button>
+              {isSignedIn ? (
+                <Button
+                  color="inherit"
+                  onClick={(event) => setAnchorEl(event.currentTarget)}
+                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                >
+                  <AccountCircle />
+                </Button>
+              ) : (
                 <Button
                   color="inherit"
                   component={Link}
-                  to="/"
+                  to="/login"
                   sx={{ color: "#DAE1E7", textDecoration: "none" }}
                 >
-                  <Typography
-                    variant="button"
-                    sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                  >
-                    Home
-                  </Typography>
+                  Login
                 </Button>
-                <Button
-                  color="inherit"
+              )}
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem
                   component={Link}
-                  to="/books"
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                  to="/profile"
+                  onClick={() => setAnchorEl(null)}
                 >
-                  <Typography
-                    variant="button"
-                    sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                  >
-                    Books
-                  </Typography>
-                </Button>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  to="/vendors"
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                >
-                  <Typography
-                    variant="button"
-                    sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                  >
-                    Vendors
-                  </Typography>
-                </Button>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  to="/about"
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                >
-                  <Typography
-                    variant="button"
-                    sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                  >
-                    About
-                  </Typography>
-                </Button>
-                <Button
-                  color="inherit"
-                  component={Link}
-                  to={isSignedIn ? "/profile" : "/login"}
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                >
-                  <Typography
-                    variant="button"
-                    sx={{ color: "#DAE1E7", textDecoration: "none" }}
-                  >
-                    {isSignedIn ? "Profile" : "Login"}
-                  </Typography>
-                </Button>
-              </div>
-            </>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
           )}
         </Toolbar>
       </AppBar>
