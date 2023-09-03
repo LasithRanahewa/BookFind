@@ -68,19 +68,21 @@ const Home = ({ instance }) => {
       </Grid>
 
       {/* Tranding Books */}
-      <Typography variant="h4" align="center">
-        Trending Books
-      </Typography>
+      <div>
+        <Typography variant="h4" align="center">
+          Trending Books
+        </Typography>
 
-      {trendingBooksArr.map((book) => (
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} lg={3}>
-            <Link to="/book">
-              <TrendingBookCard book={book}/>
-            </Link>
-          </Grid>
+        <Grid container spacing={2} >
+          {trendingBooksArr.map((book) => (
+            <Grid item xs={12} sm={6} lg={3} >
+              <Link to="/book">
+                <TrendingBookCard book={book} />
+              </Link>
+            </Grid>
+          ))}
         </Grid>
-      ))}
+      </div>
 
       {/* Featured Book */}
       <Typography variant="h4" align="center">

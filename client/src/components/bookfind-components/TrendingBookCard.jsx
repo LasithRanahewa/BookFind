@@ -4,7 +4,7 @@ import Rating from "@mui/material/Rating";
 
 const TrendingBookCard = ({ book }) => {
   return (
-    <Card>
+    <Card sx={{ margin: "1rem" }}>
       <CardMedia
         component="img"
         height="200"
