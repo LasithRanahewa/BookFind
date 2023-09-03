@@ -1,43 +1,63 @@
+// import modules
 const mongoose = require("mongoose");
-const { Schema, Types } = mongoose;
 
-const vendorSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  location: {
-    type: String,
-    required: true,
-  },
-  // contact: {
-  //   phone: {
-  //     type: String,
-  //     required: false,
-  //   },
-  //   email: {
-  //     type: String,
-  //     required: false,
-  //   },
-  // },
-
-  email: {
-    type: String,
-    required: false,
-  },
-
-  availableBooks: [
-    {
-      type: Types.ObjectId,
-      ref: "Book",
+// define the bookstore schema
+const vendorSchema = new mongoose.Schema ({
+    email: {
+        type: String,
+        required: true
     },
-  ],
-  image: {
-    type: String,
-    required: false,
-  },
+
+    userAccount: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+
+    name: {
+        type: String,
+        required: true
+    },
+
+    location: {
+        type: String,
+        required: true
+    },
+
+    description: {
+        type: String,
+        required: true
+    },
+
+    phoneNumber: {
+        type: String,
+        required: true
+    },
+
+    rating: {
+        type: Double,
+        required: true
+    },
+
+    availableBooks: {
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Copy"
+            }
+        ],
+        required: false
+    },
+
+    brn: {
+        type: String,
+        required: true
+    },
+
+    image: {
+        type: String,
+        required: true
+    }
 });
 
-const vendor = mongoose.model("Vendor", vendorSchema);
-
-module.exports = vendor;
+// export the bookstore model
+module.exports = mongoose.model("Vendor", vendorSchema);
