@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Button, Select, TextField } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
@@ -47,7 +47,6 @@ const Books = ({ instance }) => {
         name: inputText,
       })
       .then((obj) => {
-        console.log(obj);
         setBooksArr(obj.data);
       })
       .catch(() => {
@@ -58,6 +57,10 @@ const Books = ({ instance }) => {
         ]);
       });
   };
+
+  useEffect(() => {
+    handleClose()
+  }, []);
 
   return (
     <>
@@ -89,7 +92,7 @@ const Books = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {booksArr.map((book) => (
           <Grid item xs={12} key={book.id}>
-            <Link to="/book">
+            <Link to={`/book?book=${book._id}`}>
               <Card sx={{ display: "flex" }}>
                 <CardMedia
                   component="img"
@@ -124,3 +127,5 @@ const Books = ({ instance }) => {
 };
 
 export default Books;
+
+
