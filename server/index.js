@@ -1,3 +1,4 @@
+require('dotenv').config()
 // import modules
 const express = require("express");
 const cors = require("cors");
@@ -13,6 +14,9 @@ const bookstoreRouter = require("./routes/bookstoreRouter");
 const copyRouter = require("./routes/copyRouter");
 const reservationRouter = require("./routes/reservationRouter");
 const userRouter = require("./routes/userRouter");
+const bookController = require('./controllers/bookController')
+const vendorController = require('./controllers/vendorController')
+const findACopyController = require('./controllers/findACopyController')
 
 // do not load the environment varibles on a production environment
 if(process.env.NODE_ENV !== "production") {
@@ -61,7 +65,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
-
+             
 // parse cookies
 app.use(cookieParser(process.env.SESSION_SECRET));
 
@@ -78,8 +82,8 @@ initializePassport(passport);
 
 // routes for REST API
 // app.use("/api/auth", authRouter);
-// app.use("/api/book", bookRouter);
-// app.use("/api/bookstore", bookstoreRouter);
+app.use("/api/book", bookController);
+app.use("/api/vendor", vendorController);
 // app.use("/api/copy", copyRouter);
 // app.use("/api/reservation", reservationRouter);
 // app.use("/api/user",userRouter);
@@ -88,7 +92,7 @@ initializePassport(passport);
 app.get('/', (req, res) => console.log(req, res));
 
 // server connection
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is listening to port ${PORT}`);
 });

@@ -3,6 +3,8 @@ import { Navigate, useRoutes } from "react-router-dom";
 import Home from "./pages/bookfind/Home";
 import Books from "./pages/bookfind/Books";
 import Bookstores from "./pages/bookfind/Bookstores";
+import Vendors from "./pages/bookfind/Vendors";
+
 import About from "./pages/bookfind/About";
 import Login from "./pages/bookfind/Login";
 import Signup from "./pages/bookfind/Signup";
@@ -16,60 +18,68 @@ import Page404 from "./pages/Page404";
 
 import VendorDashboard from "./pages/vendor/VendorDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import axios from "axios";
 
 function Router() {
+  const instance = axios.create({
+    withCredentials: true,
+    baseURL: "http://localhost:8080/api",
+  });
+
   const routes = useRoutes([
     {
       path: "/",
-      element: <Home />,
+      element: <Home instance={instance} />,
     },
     {
       path: "/books",
-      element: <Books />,
+      element: <Books instance={instance} />,
     },
     {
       path: "/bookstores",
-      element: <Bookstores />,
+      element: <Bookstores instance={instance} />,
+    },
+    {
+      path: "/vendors",
+      element: <Vendors instance={instance} />,
     },
     {
       path: "/about",
-      element: <About />,
+      element: <About instance={instance} />,
     },
     {
       path: "/login",
-      element: <Login />,
+      element: <Login instance={instance} />,
     },
     {
       path: "/signup",
-      element: <Signup />,
+      element: <Signup instance={instance} />,
     },
     {
       path: "/profile",
-      element: <Profile />,
+      element: <Profile instance={instance} />,
     },
     {
       path: "/vendor-dashboard",
-      element: <VendorDashboard />,
+      element: <VendorDashboard instance={instance} />,
     },
     {
       path: "/admin-dashboard",
-      element: <AdminDashboard />,
+      element: <AdminDashboard instance={instance} />,
     },
 
-
     {
-        path: "/availablebookstores",
-        element: <AvailableBookstores />,
+      path: "/availablebookstores",
+      element: <AvailableBookstores instance={instance} />,
     },
     {
-        path: "/bookstore",
-        element: <VendorPage />,
+      path: "/bookstore",
+      element: <VendorPage instance={instance} />,
     },
     {
-        path: "/book",
-        element: <BookPage />,
+      path: "/book",
+      element: <BookPage instance={instance} />,
     },
-    
 
     // 404
     {

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Button, Select, TextField } from "@mui/material";
@@ -6,40 +7,33 @@ import { MenuItem } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 
-var books = [
-  {
-    id: 1,
-    title: "Book 1",
-    author: "Author 1",
-    description: "Description 1",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 2,
-    title: "Book 2",
-    author: "Author 2",
-    description: "Description 2",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 3,
-    title: "Book 3",
-    author: "Author 3",
-    description: "Description 3",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 4,
-    title: "Book 4",
-    author: "Author 4",
-    description: "Description 4",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-];
-
-const VendorPage = () => {
+const VendorPage = ({ instance }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+
+  const [searchParams] = useSearchParams();
+
+  const [vendor, setVendorArr] = useState([]);
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    console.log("params", searchParams.get("vendor"));
+    instance
+      .post("vendor/get", {
+        id: searchParams.get("vendor"),
+      })
+      .then((obj) => {
+        setVendorArr(obj.data);
+        setBooks(obj.data.availableBooks);
+      })
+      .catch(() => {
+        setVendorsArr([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  }, []);
 
   const handleReserveClick = (book) => {
     setSelectedBook(book);
@@ -79,12 +73,12 @@ const VendorPage = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h6" gutterBottom>
-                Name: ABC Bookstore
+                {vendor.name}
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h6" gutterBottom>
-                Email: abc@gmail.com
+                {vendor.email}
               </Typography>
             </Grid>
           </Grid>
@@ -123,18 +117,18 @@ const VendorPage = () => {
                     <CardMedia
                       component="img"
                       sx={{ width: "15%", minWidth: "10rem", height: "auto" }}
-                      image={book.coverUrl}
-                      alt={book.title}
+                      image={book.image}
+                      alt={book.name}
                     />
                     <CardContent sx={{ flex: 1 }}>
                       <Typography gutterBottom variant="h5" component="div">
-                        {book.title}
+                        {book.name}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {book.author}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {book.description}
+                        {book.publisher}
                       </Typography>
                       <Button
                         variant="contained"
