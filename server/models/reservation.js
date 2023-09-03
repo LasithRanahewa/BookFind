@@ -8,12 +8,7 @@ const reservationSchema = new mongoose.Schema({
         required: true
     },
 
-    book: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-
-    bookstore: {
+    copy: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
