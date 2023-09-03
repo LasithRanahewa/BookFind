@@ -2,13 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Book = require("../models/book.js");
 
-
 // New book
 router.post("/new", async (req, res) => {
   try {
     const { name, author, publisher } = req.body;
     if (!name || !author || !publisher) {
-
       return res.status(400).json({ error: "Incomplete book data" });
     }
 
@@ -37,11 +35,16 @@ router.post("/search", async (req, res) => {
 // Get specific book
 router.post("/get", async (req, res) => {
   try {
-    const { id } = req.body; 
+    const { id } = req.body;
     const bookData = await Book.findById(id);
+
     if (!bookData) {
-      return res.status(404).json({ error: "Book not found" });
+      return res.status(500).json({ error: "Internal server error" });
     }
+
+    bookData.clicks = bookData.clicks + 1;
+    await bookData.save();
+
     res.json(bookData);
   } catch (error) {
     console.error(error);
@@ -60,5 +63,14 @@ router.get("/all", async (req, res) => {
   }
 });
 
+// Get trending books
+router.get("/trending", async (req, res) => {
+  try {
+    const mostClickedBooks = await Book.find().sort({ clicks: -1 }).limit(4);
+    res.send(mostClickedBooks);
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 module.exports = router;
