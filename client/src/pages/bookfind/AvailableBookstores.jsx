@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const bookstores = [
   {
@@ -43,20 +44,41 @@ const bookstores = [
   },
 ];
 
-const AvailableBookstores = () => {
+const AvailableBookstores = ({ instance }) => {
+  const [vendorsArr, setVendorsArr] = useState([]);
+
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    instance
+      .post("bookstore/", {
+        id: searchParams.get("book"),
+      })
+      .then((obj) => {
+        setVendorsArr(obj.data);
+      })
+      .catch(() => {
+        setVendorsArr([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  }, []);
   return (
     <>
       <Navbar />
-      <Typography variant="h4">The following bookstores have the requested book in stock.</Typography>
+      <Typography variant="h4">
+        The following bookstores have the requested book in stock.
+      </Typography>
       {/* Bookstores */}
       <Grid container spacing={2} padding={5}>
-        {bookstores.map((bookstore) => (
+        {vendorsArr.map((bookstore) => (
           <Grid item xs={12} sm={6} md={3} key={bookstore.id}>
             <Card>
               <CardMedia
                 component="img"
                 sx={{ height: "15rem" }}
-                image={bookstore.coverUrl}
+                image={bookstore.image}
                 alt={bookstore.name}
               />
               <CardContent sx={{ flex: 1 }}>
@@ -64,15 +86,15 @@ const AvailableBookstores = () => {
                   {bookstore.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {bookstore.address}
+                  {bookstore.location}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {bookstore.contact}
+                  {bookstore.email}
                 </Typography>
                 <Link to="/bookstore">
-                  <Button variant="contained" size="small"> 
-                  {/* logic */}
-                    Visit to reserve 
+                  <Button variant="contained" size="small">
+                    {/* logic */}
+                    Visit to reserve
                   </Button>
                 </Link>
               </CardContent>
