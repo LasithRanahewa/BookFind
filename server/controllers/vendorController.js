@@ -86,24 +86,24 @@ router.get("/all", async (req, res) => {
 // Delete a vendor by ID
 router.post("/delete", async (req, res) => {
   try {
-    const id = req.body;
-    // Check if the vendor with the provided ID exists
-    const existingVendor = await vendor.findById(id);
-
-    if (!existingVendor) {
-      return res.status(404).send({
-        data: "Vendor not found",
-      });
+    const idsToDelete = req.body.data; // Assuming you are passing an array of IDs as 'ids' in the request body
+    // Check if the vendor with the provided IDs exist
+    for (const id of idsToDelete) {
+      const vendorToDelete = await vendor.findById(id);
+      if (!vendorToDelete) {
+        return res.status(404).send({
+          data: `Vendor with ID ${id} not found`,
+        });
+      }
+      await vendorToDelete.deleteOne();
     }
-    // Delete the vendor
-    await existingVendor.remove();
     res.send({
-      data: "Vendor deleted successfully",
+      data: "Vendors deleted successfully",
     });
   } catch (e) {
     console.error(e);
     res.status(500).send({
-      data: "Error deleting vendor",
+      data: "Internal server error",
     });
   }
 });

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/bookfind-components/Navbar";
 import TrendingBookCard from "../../components/bookfind-components/TrendingBookCard";
 import Footer from "../../components/bookfind-components/Footer";
-
+import { Button } from "@mui/material";
 import { Grid, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -44,7 +44,7 @@ const Home = ({ instance }) => {
               It's a universe.
             </Typography>
             <br />
-            <TextField
+            {/* <TextField
               label="Find a book"
               variant="outlined"
               size="small"
@@ -55,7 +55,12 @@ const Home = ({ instance }) => {
                   </InputAdornment>
                 ),
               }}
-            />
+            /> */}
+            <Link to={`/books`}>
+              <Button variant="contained" size="small">
+                Search for Books
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={12} sm={6}>
             <img
@@ -72,15 +77,15 @@ const Home = ({ instance }) => {
         Trending Books
       </Typography>
 
-      {trendingBooksArr.map((book) => (
-        <Grid container spacing={2}>
+      <Grid container spacing={2}>
+        {trendingBooksArr.map((book) => (
           <Grid item xs={12} sm={6} lg={3}>
             <Link to="/book">
-              <TrendingBookCard book={book}/>
+              <TrendingBookCard book={book} />
             </Link>
           </Grid>
-        </Grid>
-      ))}
+        ))}
+      </Grid>
 
       {/* Featured Book */}
       <Typography variant="h4" align="center">

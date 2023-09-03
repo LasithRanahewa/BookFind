@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
 
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
@@ -39,6 +40,26 @@ function BookForm({ open, onClose, onSubmit }) {
     onClose();
   };
 
+  const handleAddBook = () => {
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .post("/book/new", {
+        name,
+        author,
+        publisher,
+      })
+      .then((obj) => {
+        console.log("Book Added");
+        handleDataFetch();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add Book</DialogTitle>
@@ -58,8 +79,8 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          <TextField
-            label="ISBN"
+          {/* <TextField
+            label="publisher"
             value={isbn}
             onChange={(e) => setISBN(e.target.value)}
             fullWidth
@@ -99,7 +120,7 @@ function BookForm({ open, onClose, onSubmit }) {
             onChange={(e) => setCategories(e.target.value)}
             fullWidth
             margin="normal"
-          />
+          /> */}
           <TextField
             label="Publisher"
             value={publisher}
@@ -107,16 +128,21 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          <TextField
+          {/* <TextField
             label="Copies"
             value={copies}
             onChange={(e) => setCopies(e.target.value)}
             fullWidth
             margin="normal"
-          />
+          /> */}
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={() => handleAddBook()}
+            >
               Add
             </Button>
           </DialogActions>
@@ -132,11 +158,11 @@ const columns = [
     headerName: "Index",
     width: 150,
   },
-  {
-    field: "bookID",
-    headerName: "ID",
-    width: 150,
-  },
+  // {
+  //   field: "bookID",
+  //   headerName: "ID",
+  //   width: 150,
+  // },
   {
     field: "name",
     headerName: "Name",
@@ -147,61 +173,61 @@ const columns = [
     headerName: "Author",
     width: 150,
   },
-  {
-    field: "isbn",
-    headerName: "ISBN",
-    width: 150,
-  },
-  {
-    field: "brn",
-    headerName: "BRN",
-    width: 150,
-  },
-  {
-    field: "rating",
-    headerName: "Rating",
-    width: 150,
-  },
-  {
-    field: "categories",
-    headerName: "Categories",
-    width: 150,
-  },
+  // {
+  //   field: "isbn",
+  //   headerName: "ISBN",
+  //   width: 150,
+  // },
+  // {
+  //   field: "brn",
+  //   headerName: "BRN",
+  //   width: 150,
+  // },
+  // {
+  //   field: "rating",
+  //   headerName: "Rating",
+  //   width: 150,
+  // },
+  // {
+  //   field: "categories",
+  //   headerName: "Categories",
+  //   width: 150,
+  // },
   {
     field: "publisher",
     headerName: "Publisher",
     width: 150,
   },
-  {
-    field: "description",
-    headerName: "Description",
-    width: 150,
-  },
-  {
-    field: "noOfPages",
-    headerName: "No Of Pages",
-    width: 150,
-  },
-  {
-    field: "publishDate",
-    headerName: "Publish Date",
-    width: 150,
-  },
-  {
-    field: "bookPic",
-    headerName: "Book Pic",
-    width: 150,
-  },
-  {
-    field: "unitPrice",
-    headerName: "Unit Price",
-    width: 150,
-  },
-  {
-    field: "copies",
-    headerName: "Copies",
-    width: 150,
-  },
+  // {
+  //   field: "description",
+  //   headerName: "Description",
+  //   width: 150,
+  // },
+  // {
+  //   field: "noOfPages",
+  //   headerName: "No Of Pages",
+  //   width: 150,
+  // },
+  // {
+  //   field: "publishDate",
+  //   headerName: "Publish Date",
+  //   width: 150,
+  // },
+  // {
+  //   field: "bookPic",
+  //   headerName: "Book Pic",
+  //   width: 150,
+  // },
+  // {
+  //   field: "unitPrice",
+  //   headerName: "Unit Price",
+  //   width: 150,
+  // },
+  // {
+  //   field: "copies",
+  //   headerName: "Copies",
+  //   width: 150,
+  // },
 ];
 
 const rows = [
@@ -265,11 +291,74 @@ const handleFormSubmit = (formData) => {
 
 export default function BooksGrid() {
   const [showForm, setShowForm] = React.useState(false);
+  const [bookList, setBookList] = React.useState([]);
+  const [selectedForDelete, setSelectedForDelete] = React.useState([]);
 
   // Function to toggle the state variable
   const toggleForm = () => {
     setShowForm(!showForm);
   };
+
+  const handleDataFetch = () => {
+    var id = 1;
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .get("/book/all")
+      .then((obj) => {
+        // console.log(obj);
+        // Rename the _id property to id using map
+        const renamedBookList = obj.data.map((book) => ({
+          ...book,
+          id: id++,
+        }));
+        // console.log("hi",renamedBookList)
+        setBookList(renamedBookList);
+      })
+      .catch(() => {
+        setBookList([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  };
+
+  const handleDelete = (data) => {
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .post("/book/delete", {
+        data,
+      })
+      .then((obj) => {
+        console.log("Deleted Vendor");
+        onClose();
+        setSelectedForDelete(null);
+        handleDataFetch();
+      })
+      .catch(() => {
+        // Handle errors here
+      });
+  };
+
+  const handleCheckBoxSelection = (ids) => {
+    const selectedRowsData = ids.map((id) =>
+      bookList.find((row) => row.id === id)
+    );
+
+    var arr = selectedRowsData;
+    setSelectedForDelete(arr);
+  };
+
+  React.useEffect(() => {
+    handleDataFetch();
+  }, [bookList, selectedForDelete]);
+
   return (
     <>
       <Box
@@ -286,13 +375,18 @@ export default function BooksGrid() {
           <Button size="small" onClick={toggleForm}>
             Add Book
           </Button>
-          <Button size="small" onClick={null}>
+          <Button
+            size="small"
+            onClick={() => {
+              handleDelete(selectedForDelete);
+            }}
+          >
             Delete Book
           </Button>
         </Stack>
         <Box>
           <DataGrid
-            rows={rows}
+            rows={bookList}
             columns={columns}
             initialState={{
               pagination: {
@@ -303,6 +397,7 @@ export default function BooksGrid() {
             }}
             pageSizeOptions={[5]}
             checkboxSelection
+            onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />
         </Box>
