@@ -11,14 +11,15 @@ import {
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
-import BookstoreInfo from "../../components/vendor-components/BookstoreInfo";
+// import BookstoreInfo from "../../components/vendor-components/BookstoreInfo";
 import ReservationsDataGrid from "../../components/admin-components/ReservationsDataGrid";
 import BooksGrid from "../../components/vendor-components/BooksGrid";
+import VendorProfile from "../../components/vendor-components/VendorProfile";
 
 const VendorDashboard = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [open, setOpen] = React.useState(!isMobile);
-  const [activeButton, setActiveButton] = React.useState("bookstores");
+  const [activeButton, setActiveButton] = React.useState("bookstore");
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -57,7 +58,7 @@ const VendorDashboard = () => {
   let rightGridComponent;
   switch (activeButton) {
     case "bookstore":
-      rightGridComponent = <BookstoreInfo />;
+      rightGridComponent = <VendorProfile />;
       break;
     case "books":
       rightGridComponent = <BooksGrid />;
