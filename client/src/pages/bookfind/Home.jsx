@@ -10,6 +10,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link as L } from "@mui/material/";
 
+import HomeImg from "../../assets/home-img.png";
+
 const Home = ({ instance }) => {
   const [trendingBooksArr, setTrendingBooksArr] = useState([]);
 
@@ -30,8 +32,9 @@ const Home = ({ instance }) => {
 
   return (
     <>
-      {/* Hero Section */}
       <Navbar />
+      {/* Hero Section */}
+
       <Grid container minHeight={"100vh"}>
         <Grid container>
           <Grid item xs={12} sm={6}>
@@ -58,11 +61,7 @@ const Home = ({ instance }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <img
-              src="https://via.placeholder.com/300x400.png?text=Image"
-              alt="Book Cover"
-              width="50%"
-            />
+            <img src={HomeImg} alt="Home Page Image" width="50%" />
           </Grid>
         </Grid>
       </Grid>
@@ -73,9 +72,9 @@ const Home = ({ instance }) => {
           Trending Books
         </Typography>
 
-        <Grid container spacing={2} >
+        <Grid container spacing={2}>
           {trendingBooksArr.map((book) => (
-            <Grid item xs={12} sm={6} lg={3} >
+            <Grid item xs={12} sm={6} lg={3}>
               <Link to="/book">
                 <TrendingBookCard book={book} />
               </Link>
