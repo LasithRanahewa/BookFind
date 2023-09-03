@@ -5,17 +5,17 @@ const mongoose = require("mongoose");
 const bookSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
 
     author: {
         type: String,
-        required: true,
+        required: true
     },
     
     publisher: {
         type: String,
-        required: true,
+        required: true
     },
     
     clicks: {
@@ -26,12 +26,12 @@ const bookSchema = new mongoose.Schema({
 
     description: {
         type: String,
-        required: true,
+        required: true
     },
 
     noOfPages: {
         type: Integer,
-        required: true,
+        required: true
     },
 
     copies: {
@@ -41,12 +41,12 @@ const bookSchema = new mongoose.Schema({
                 ref: "Copy",
             },
         ],
-        required: false,
+        required: false
     },
 
     isbn: {
         type: String,
-        required: true,
+        required: true
     },
 
     categories: {
@@ -55,27 +55,32 @@ const bookSchema = new mongoose.Schema({
                 type: String,
             }
         ],
-        required: true,
+        required: true
     },
+
+    clicks: {
+        type: Integer,
+        required: false
+    };
 
     rating: {
         type: Double,
-        required: false,
+        required: false
     },
 
     unitPrice: {
         type: Double,
-        required: true,
+        required: true
     },
 
     publishedDate: {
         type: Date,
-        required: true,
+        required: true
     },
 
     image: {
         type: String,
-        required: true,
+        required: true
     },
 });
 
