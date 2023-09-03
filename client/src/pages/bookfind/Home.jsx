@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/bookfind-components/Navbar";
 import TrendingBookCard from "../../components/bookfind-components/TrendingBookCard";
 import Footer from "../../components/bookfind-components/Footer";
 
-
 import { Grid, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import {Link as L} from "@mui/material/";
+import { Link as L } from "@mui/material/";
 
-const Home = () => {
+const Home = ({ instance }) => {
+  const [trendingBooksArr, setTrendingBooksArr] = useState([]);
+
+  useEffect(() => {
+    instance
+      .get("/book/trending")
+      .then((obj) => {
+        setTrendingBooksArr(obj.data);
+      })
+      .catch(() => {
+        setTrendingBooksArr([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
@@ -19,8 +35,8 @@ const Home = () => {
       <Grid container minHeight={"100vh"}>
         <Grid container>
           <Grid item xs={12} sm={6}>
-            <Typography variant="h5" align="left" sx={{color:"#DAE1E7"}}>
-            e-Books Galore | Explore | Discover
+            <Typography variant="h5" align="left" sx={{ color: "#DAE1E7" }}>
+              e-Books Galore | Explore | Discover
               <br />
               IT'S NOT JUST A <br />
               BOOKSTORE.
@@ -55,28 +71,16 @@ const Home = () => {
       <Typography variant="h4" align="center">
         Trending Books
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} lg={3}>
-          <Link to="/book">
-            <TrendingBookCard />
-          </Link>
+
+      {trendingBooksArr.map((book) => (
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} lg={3}>
+            <Link to="/book">
+              <TrendingBookCard book={book}/>
+            </Link>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <Link to="/book">
-            <TrendingBookCard />
-          </Link>
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <Link to="/book">
-            <TrendingBookCard />
-          </Link>
-        </Grid>
-        <Grid item xs={12} sm={6} lg={3}>
-          <Link to="/book">
-            <TrendingBookCard />
-          </Link>
-        </Grid>
-      </Grid>
+      ))}
 
       {/* Featured Book */}
       <Typography variant="h4" align="center">

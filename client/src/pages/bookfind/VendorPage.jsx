@@ -6,6 +6,8 @@ import { Button, Select, TextField } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
+import _ from "lodash";
+import { Link } from "react-router-dom";
 
 const VendorPage = ({ instance }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -14,7 +16,10 @@ const VendorPage = ({ instance }) => {
   const [searchParams] = useSearchParams();
 
   const [vendor, setVendorArr] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     console.log("params", searchParams.get("vendor"));
@@ -25,6 +30,7 @@ const VendorPage = ({ instance }) => {
       .then((obj) => {
         setVendorArr(obj.data);
         setBooks(obj.data.availableBooks);
+        // console.log(obj.data.availableBooks);
       })
       .catch(() => {
         setVendorsArr([
@@ -34,6 +40,13 @@ const VendorPage = ({ instance }) => {
         ]);
       });
   }, []);
+
+  const handleSearch = (value) => {
+    const filteredBooks = _.filter(books, (book) => {
+      return book.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+    setFilteredBooks(filteredBooks);
+  };
 
   const handleReserveClick = (book) => {
     setSelectedBook(book);
@@ -93,6 +106,10 @@ const VendorPage = ({ instance }) => {
               variant="outlined"
               size="small"
               sx={{ mr: 1 }}
+              onChange={(e) => {
+                handleSearch(e.target.value);
+                setSearchText(e.target.value);
+              }}
             />
             <Select
               label="Category"
@@ -105,42 +122,84 @@ const VendorPage = ({ instance }) => {
               <MenuItem value="fiction">Fiction</MenuItem>
               <MenuItem value="nonfiction">Nonfiction</MenuItem>
             </Select>
-            <Button variant="contained" size="small">
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => {
+                handleSearch();
+              }}
+            >
               Search
             </Button>
 
             {/* Books */}
             <Grid container spacing={2} padding={5}>
-              {books.map((book) => (
-                <Grid item xs={12} key={book.id}>
-                  <Card sx={{ display: "flex" }}>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: "15%", minWidth: "10rem", height: "auto" }}
-                      image={book.image}
-                      alt={book.name}
-                    />
-                    <CardContent sx={{ flex: 1 }}>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {book.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {book.author}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {book.publisher}
-                      </Typography>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        onClick={() => handleReserveClick(book)}
-                      >
-                        Reserve
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+              {searchText &&
+                searchText != "" &&
+                filteredBooks.map((book) => (
+                  <Grid item xs={12} key={book.id}>
+                    <Card sx={{ display: "flex" }}>
+                      <CardMedia
+                        component="img"
+                        sx={{ width: "15%", minWidth: "10rem", height: "auto" }}
+                        image={book.image}
+                        alt={book.name}
+                      />
+                      <CardContent sx={{ flex: 1 }}>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {book.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {book.author}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {book.publisher}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={() => handleReserveClick(book)}
+                        >
+                          Reserve
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+
+              {searchText == "" &&
+                books.map((book) => (
+                  <Grid item xs={12} key={book.id}>
+                    <Card sx={{ display: "flex" }}>
+                      <CardMedia
+                        component="img"
+                        sx={{ width: "15%", minWidth: "10rem", height: "auto" }}
+                        image={book.image}
+                        alt={book.name}
+                      />
+                      <CardContent sx={{ flex: 1 }}>
+                        <Link to={`/book?book=${book._id}`}>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {book.name}
+                          </Typography>
+                        </Link>
+                        <Typography variant="body2" color="text.secondary">
+                          {book.author}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {book.publisher}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={() => handleReserveClick(book)}
+                        >
+                          Reserve
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
             </Grid>
           </Grid>
         </Grid>

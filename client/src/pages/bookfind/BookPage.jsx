@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -9,7 +11,26 @@ import Button from "@mui/material/Button";
 
 import Navbar from "../../components/bookfind-components/Navbar";
 
-const BookPage = () => {
+const BookPage = ({ instance }) => {
+  const [searchParams] = useSearchParams();
+  const [bookData, setBookData] = useState({});
+
+  useEffect(() => {
+    instance
+      .post("/book/get", {
+        id: searchParams.get("book"),
+      })
+      .then((obj) => {
+        setBookData(obj.data);
+      })
+      .catch(() => {
+        setBookData([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+  }, []);
   return (
     <>
       <Navbar />
@@ -25,10 +46,10 @@ const BookPage = () => {
         <Grid item xs={12} sm={8}>
           {/* Content for the right side */}
           <Typography variant="h4" gutterBottom>
-            Book Title
+            {bookData.name}
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Author
+            {bookData.author}
           </Typography>
           <Rating name="book-rating" value={4.2} precision={0.01} readOnly />
           <Typography variant="body1" gutterBottom>
@@ -42,8 +63,8 @@ const BookPage = () => {
             Labore dolore similique animi illo alias officiis sunt ex, nesciunt,
             voluptas, pariatur beatae corrupti!
           </Typography>
-          
-          <Link to="/availablebookstores">
+
+          <Link to={`/availablebookstores?book=${bookData._id}`}>
             <Button variant="contained" color="primary">
               Find a Copy
             </Button>
