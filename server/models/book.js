@@ -17,6 +17,12 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
+    clicks: {
+      type: Number,
+      required: false,
+      default: 0
+    },
 
     description: {
         type: String,
