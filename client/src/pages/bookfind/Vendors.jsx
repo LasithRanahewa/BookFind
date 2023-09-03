@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Button, TextField } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
@@ -63,6 +63,10 @@ const Vendors = ({ instance }) => {
         ]);
       });
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
   return (
     <>

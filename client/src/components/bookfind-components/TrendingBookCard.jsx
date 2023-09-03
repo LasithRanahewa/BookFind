@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import Rating from "@mui/material/Rating";
 
-const TrendingBookCard = () => {
+const TrendingBookCard = ({ book }) => {
   return (
     <Card>
       <CardMedia
@@ -13,13 +13,13 @@ const TrendingBookCard = () => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Book Title
+          {book.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Book Author
+          {book.author}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Book Description
+          {book.publisher}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Rating name="read-only" value={4.3} precision={0.01} readOnly />
