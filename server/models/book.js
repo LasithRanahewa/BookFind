@@ -57,7 +57,7 @@ const bookSchema = new mongoose.Schema({
         ],
         required: true
     },
-
+  
     rating: {
         type: Double,
         required: false
