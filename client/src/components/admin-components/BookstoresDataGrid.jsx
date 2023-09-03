@@ -181,9 +181,10 @@ export default function BookstoresDataGrid({ instance }) {
   const [showForm, setShowForm] = React.useState(false);
   const [location, setLocation] = React.useState("");
   const [email, setEmail] = React.useState("");
-  // const [selectedRows, setSelectedRows] = React.useState([]); // Define selectedRows here
-  // const [selectionModel, setSelectionModel] = React.useState([]);
-  // const [selectedRowIds, setSelectedRowIds] = React.useState([]);
+  const [selectedRows, setSelectedRows] = React.useState([]); // Define selectedRows here
+  const [selectionModel, setSelectionModel] = React.useState([]);
+  const [selectedRowIds, setSelectedRowIds] = React.useState([]);
+  const [vendorList, setVendorList] = React.useState([]);
 
   // Function to toggle the state variable
   const toggleForm = () => {
@@ -216,17 +217,17 @@ export default function BookstoresDataGrid({ instance }) {
     handleDataFetch();
   }, []);
 
-  // const handleSelectionChange = (newSelection) => {
-  //   setSelectionModel(newSelection);
+  const handleSelectionChange = (newSelection) => {
+    setSelectionModel(newSelection);
 
-  //   // Get the selected IDs
-  //   const selectedIds = newSelection.map((index) => rows[index]?.id || "");
-  //   setSelectedRowIds(selectedIds);
-  // };
+    // Get the selected IDs
+    const selectedIds = newSelection.map((index) => rows[index]?.id || "");
+    setSelectedRowIds(selectedIds);
+  };
 
-  // const handleDelete = (e) => {
-  //   console.log(selectedRowIds);
-  // };
+  const handleDelete = (e) => {
+    console.log(selectedRowIds);
+  };
 
   return (
     <>
