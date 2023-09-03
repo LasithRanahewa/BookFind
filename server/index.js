@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 // import routes
 const authRouter = require("./routes/authRouter");
 const bookRouter = require("./routes/bookRouter");
-const bookstoreRouter = require("./routes/bookstoreRouter");
+const bookstoreRouter = require("./routes/vendorRouter");
 const copyRouter = require("./routes/copyRouter");
 const reservationRouter = require("./routes/reservationRouter");
 const userRouter = require("./routes/userRouter");
