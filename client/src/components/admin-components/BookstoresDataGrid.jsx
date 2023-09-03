@@ -31,6 +31,7 @@ function BookstoreForm({ open, onClose, onSubmit }) {
       .then((obj) => {
         onClose();
         setSelectedForDelete(null);
+        handleDataFetch();
       })
       .catch(() => {
         // Handle errors here
@@ -252,9 +253,9 @@ export default function BookstoresDataGrid({ instance }) {
 
   React.useEffect(() => {
     handleDataFetch();
-  }, [selectedForDelete]);
+  }, [vendorList,selectedForDelete]);
 
-  
+
   return (
     <>
       <Box
