@@ -61,7 +61,7 @@ const bookSchema = new mongoose.Schema({
     clicks: {
         type: Integer,
         required: false
-    };
+    },
 
     rating: {
         type: Double,
