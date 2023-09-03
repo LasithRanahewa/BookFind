@@ -107,7 +107,8 @@ const Books = ({ instance }) => {
                   <Typography variant="body2" color="text.secondary">
                     {book.publisher}
                   </Typography>
-                  <Link to="/availablebookstores">
+                  <Link to={`/availablebookstores?book=${book._id}`}>
+                    {console.log(book)}
                     <Button variant="contained" size="small">
                       Find a Copy
                     </Button>
