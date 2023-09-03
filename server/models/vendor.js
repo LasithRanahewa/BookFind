@@ -34,7 +34,7 @@ const vendorSchema = new mongoose.Schema ({
     },
 
     rating: {
-        type: Double,
+        type: Number,
         required: true
     },
 

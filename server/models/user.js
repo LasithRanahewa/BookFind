@@ -49,4 +49,4 @@ const userSchema = new mongoose.Schema({
 });
 
 // export the user model
-module.exports = mongoose.Schema.Types("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
