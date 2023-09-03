@@ -89,8 +89,10 @@ const Navbar = () => {
           <>
             <ListItem>
               <Button
+                to ="/profile"
+                component={Link}
                 color="inherit"
-                onClick={(event) => setAnchorEl(event.currentTarget)}
+                // onClick={(event) => setAnchorEl(event.currentTarget)}
                 sx={{ color: "#DAE1E7", textDecoration: "none" }}
               >
                 Profile
