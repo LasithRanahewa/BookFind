@@ -5,42 +5,32 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import Navbar from "../../components/bookfind-components/Navbar";
 import { Grid, Paper, Typography } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
+import { useDropzone } from "react-dropzone";
 
-const preferencesOptions = [
-  "Action",
-  "Adventure",
-  "Comedy",
-  "Drama",
-  "Fantasy",
-  "Horror",
-  "Mystery",
-  "Romance",
-  "Sci-Fi",
-  "Thriller",
-];
-
-const UserProfile = () => {
-  const [username, setUsername] = useState("johndoe");
+const VendorProfile = () => {
+  const [name, setName] = useState("John Doe");
   const [email, setEmail] = useState("johndoe@example.com");
   const [password, setPassword] = useState("password");
-  const [address, setAddress] = useState("");
-  const [preferences, setPreferences] = useState([]);
-  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [address, setAddress] = useState("123 Main St, Anytown USA");
+  const [phone, setPhone] = useState("555-555-5555");
+  const [brn, setBrn] = useState("123456789");
+  const [description, setDescription] = useState(
+    "We sell the best books in town!"
+  );
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
-  const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [isEditingProfilePicture, setIsEditingProfilePicture] = useState(false);
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(
     false
   );
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const [profilePicture, setProfilePicture] = useState(
+    "https://via.placeholder.com/150"
+  );
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -50,16 +40,12 @@ const UserProfile = () => {
     setPassword(event.target.value);
   };
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
   };
 
-  const handlePreferencesChange = (event, value) => {
-    setPreferences(value);
-  };
-
-  const handleEditUsernameClick = () => {
-    setIsEditingUsername(true);
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
   };
 
   const handleEditEmailClick = () => {
@@ -70,8 +56,12 @@ const UserProfile = () => {
     setIsEditingPassword(true);
   };
 
-  const handleEditAddressClick = () => {
-    setIsEditingAddress(true);
+  const handleEditPhoneClick = () => {
+    setIsEditingPhone(true);
+  };
+
+  const handleEditDescriptionClick = () => {
+    setIsEditingDescription(true);
   };
 
   const handleEditProfilePictureClick = () => {
@@ -79,10 +69,10 @@ const UserProfile = () => {
   };
 
   const handleSaveChangesClick = () => {
-    setIsEditingUsername(false);
     setIsEditingEmail(false);
     setIsEditingPassword(false);
-    setIsEditingAddress(false);
+    setIsEditingPhone(false);
+    setIsEditingDescription(false);
     setIsEditingProfilePicture(false);
     setIsConfirmationDialogOpen(true);
   };
@@ -91,50 +81,56 @@ const UserProfile = () => {
     setIsConfirmationDialogOpen(false);
   };
 
+  const onDrop = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfilePicture(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   return (
     <>
-      <Navbar />
       <Grid container spacing={2} sx={{ mt: 2 }}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Profile Picture
+              Vendor Information
             </Typography>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Profile"
-              style={{ cursor: "pointer" }}
-              onClick={handleEditProfilePictureClick}
-            />
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <Typography>Drop the files here ...</Typography>
+              ) : (
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  style={{ cursor: "pointer" }}
+                  onClick={handleEditProfilePictureClick}
+                />
+              )}
+            </div>
             {isEditingProfilePicture && (
               <div>
-                <input type="file" />
+                <input type="file" onChange={(e) => onDrop(e.target.files)} />
                 <Button onClick={handleSaveChangesClick}>Save</Button>
               </div>
             )}
             {!isEditingProfilePicture && (
               <Button onClick={handleEditProfilePictureClick}>Edit</Button>
             )}
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
-              User Information
-            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
-                  label="Username"
+                  label="Name"
                   variant="outlined"
                   fullWidth
-                  value={username}
-                  onChange={handleUsernameChange}
-                  disabled={!isEditingUsername}
+                  value={name}
+                  disabled
                 />
-                {!isEditingUsername && (
-                  <Button onClick={handleEditUsernameClick}>Edit</Button>
-                )}
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
@@ -169,44 +165,51 @@ const UserProfile = () => {
                   variant="outlined"
                   fullWidth
                   value={address}
-                  onChange={handleAddressChange}
-                  disabled={!isEditingAddress}
+                  disabled
                 />
-                {!isEditingAddress && (
-                  <Button onClick={handleEditAddressClick}>Edit</Button>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Phone Number"
+                  variant="outlined"
+                  fullWidth
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  disabled={!isEditingPhone}
+                />
+                {!isEditingPhone && (
+                  <Button onClick={handleEditPhoneClick}>Edit</Button>
                 )}
               </Grid>
               <Grid item xs={12} md={6}>
-                <Autocomplete
-                  multiple
-                  options={preferencesOptions}
-                  value={preferences}
-                  onChange={handlePreferencesChange}
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip
-                        key={index}
-                        label={option}
-                        {...getTagProps({ index })}
-                      />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Preferences"
-                      placeholder="Select preferences"
-                    />
-                  )}
+                <TextField
+                  label="BRN"
+                  variant="outlined"
+                  fullWidth
+                  value={brn}
+                  disabled
                 />
               </Grid>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  label="Description"
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  value={description}
+                  onChange={handleDescriptionChange}
+                  disabled={!isEditingDescription}
+                />
+                {!isEditingDescription && (
+                  <Button onClick={handleEditDescriptionClick}>Edit</Button>
+                )}
+              </Grid>
             </Grid>
-            {(isEditingUsername ||
-              isEditingEmail ||
+            {(isEditingEmail ||
               isEditingPassword ||
-              isEditingAddress ||
-              preferences.length > 0) && (
+              isEditingPhone ||
+              isEditingDescription) && (
               <Button onClick={handleSaveChangesClick}>Save Changes</Button>
             )}
           </Paper>
@@ -229,4 +232,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default VendorProfile;
