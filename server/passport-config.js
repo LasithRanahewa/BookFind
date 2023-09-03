@@ -2,6 +2,7 @@
 const LocalStratergy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
+const findOrCreate = require("mongoose-findorcreate");
 const User = require("./models/user");
 
 // initialize strategies
@@ -43,7 +44,7 @@ const initializePassport = (passport) => {
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/facebook/callback"      // facebook don't use this anymore ?
+        callbackURL: "http://localhost:3000/auth/facebook/bookfind"     
       },
       function(accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ facebookId: profile.id }, function (err, user) {
@@ -51,6 +52,16 @@ const initializePassport = (passport) => {
         });
       }
     ));
+
+    passport.serializeUser((user, done) => {
+        done(null, user);
+    });
+
+    passport.deserializeUser((user, done) => {
+        User.findById(user._id, (err, user) => {
+            done(err, user);
+        });
+    });
 };
 
 module.exports = initializePassport;
