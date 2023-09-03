@@ -15,7 +15,7 @@ import BookstoresDataGrid from "../../components/admin-components/BookstoresData
 import ReservationsDataGrid from "../../components/admin-components/ReservationsDataGrid";
 import UsersDataGrid from "../../components/admin-components/UsersDataGrid";
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ instance }) => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [open, setOpen] = React.useState(!isMobile);
   const [activeButton, setActiveButton] = React.useState("bookstores");
@@ -57,13 +57,13 @@ const AdminDashboard = () => {
   let rightGridComponent;
   switch (activeButton) {
     case "bookstores":
-      rightGridComponent = <BookstoresDataGrid />;
+      rightGridComponent = <BookstoresDataGrid instance={instance} />;
       break;
     case "reservations":
-      rightGridComponent = <ReservationsDataGrid />;
+      rightGridComponent = <ReservationsDataGrid instance={instance} />;
       break;
     case "users":
-      rightGridComponent = <UsersDataGrid />;
+      rightGridComponent = <UsersDataGrid instance={instance} />;
       break;
     case "logout":
       rightGridComponent = <div>Log Out</div>;
