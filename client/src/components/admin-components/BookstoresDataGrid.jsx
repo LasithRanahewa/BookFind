@@ -213,10 +213,7 @@ export default function BookstoresDataGrid({ instance }) {
       });
   };
 
-  React.useEffect(() => {
-    handleDataFetch();
-  }, [selectedForDelete]);
-
+  
   // const handleSelectionChange = (newSelection) => {
   //   setSelectionModel(newSelection);
 
@@ -237,7 +234,7 @@ export default function BookstoresDataGrid({ instance }) {
       .then((obj) => {
         console.log("Deleted Vendor");
         onClose();
-        handleDataFetch();
+        setSelectedForDelete(null);
       })
       .catch(() => {
         // Handle errors here
@@ -252,6 +249,12 @@ export default function BookstoresDataGrid({ instance }) {
     setSelectedForDelete(arr);
   };
 
+
+  React.useEffect(() => {
+    handleDataFetch();
+  }, [selectedForDelete]);
+
+  
   return (
     <>
       <Box
