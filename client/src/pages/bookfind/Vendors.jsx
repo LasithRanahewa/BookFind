@@ -106,7 +106,7 @@ const Vendors = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4" style={styles.heading}>BOOKSTORES</Typography>
+      <Typography variant="h4" style={styles.heading}>VENDORS</Typography>
       {/* <Typography variant="h4">Vendors</Typography> */}
       <Grid
         sx={{
