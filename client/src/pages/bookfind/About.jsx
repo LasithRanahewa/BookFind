@@ -24,10 +24,10 @@ const About = () => {
     heading: {
       padding: 0,
       textShadow: "0.2rem 0.2rem 1rem #176B87",
-      fontSize: "5rem",
-      fontWeight: "900",
+      fontSize: "4.5rem",
+      fontWeight: "1100",
       letterSpacing: "0.1rem",
-      paddingTop: "4.6875rem",
+      paddingTop: "3rem",
       textAlign: "center",
     },
     paragraph: {
@@ -68,9 +68,9 @@ const About = () => {
             <hr style={styles.line} />
           </div>
         </div>
-        <div style={{position:"absolute", bottom:0, width:"100%"}}>
+        {/* <div style={{position:"absolute", bottom:0, width:"100%"}}> */}
         <Footer />
-        </div>
+        {/* </div> */}
       </div>
       
 
@@ -86,7 +86,7 @@ const About = () => {
 
         <hr style={styles.line} /> */}
         
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
