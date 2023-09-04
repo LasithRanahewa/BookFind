@@ -45,6 +45,16 @@ const bookstores = [
 ];
 
 const AvailableBookstores = ({ instance }) => {
+
+  const styles={
+    heading: {
+      padding: "2rem",
+      paddingTop: "4rem",
+      color:"#DAE1E7",
+      textAlign: "center",
+    },
+  };
+
   const [vendorsArr, setVendorsArr] = useState([]);
 
   const [searchParams] = useSearchParams();
@@ -67,8 +77,8 @@ const AvailableBookstores = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4">
-        The following bookstores have the requested book in stock.
+      <Typography variant="h4" style={styles.heading}>
+        The following bookstores have the requested book in stock
       </Typography>
       {/* Bookstores */}
       <Grid container spacing={2} padding={5}>
