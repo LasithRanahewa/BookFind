@@ -38,6 +38,32 @@ import { Link } from "react-router-dom";
 //];
 
 const Books = ({ instance }) => {
+  const styles={
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+    },
+    name:{
+      fontSize: "1.6rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    author:{
+      color: "#176B87",
+    },
+    publisher:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+  };
+
+
   const [inputText, setInputText] = useState("");
   const [booksArr, setBooksArr] = useState([]);
 
@@ -103,6 +129,7 @@ const Books = ({ instance }) => {
             },
             width: "70%",
             maxWidth: "50rem",
+            margin: "2rem 0 4rem 0",
 
             // alignSelf: "center",
           }}
@@ -118,6 +145,7 @@ const Books = ({ instance }) => {
               backgroundColor: "#00909E",
             },
             padding: "0.5rem ",
+            margin: "2rem 0 4rem 0",
           }}
         >
           Search
@@ -128,7 +156,7 @@ const Books = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {booksArr.map((book) => (
           <Grid item xs={12} key={book.id}>
-            <Link to={`/book?book=${book._id}`}>
+            <Link to={`/book?book=${book._id}`} style={{textDecoration:"none"}}>
               <Card sx={{ display: "flex" }}>
                 <CardMedia
                   component="img"
@@ -136,19 +164,19 @@ const Books = ({ instance }) => {
                   image={book.coverUrl}
                   alt={book.name}
                 />
-                <CardContent sx={{ flex: 1 }}>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent sx={{ flex: 1 }} style={styles.content}>
+                  <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                     {book.name}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" style={styles.author}>
                     {book.author}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" style={styles.publisher}>
                     {book.publisher}
                   </Typography>
                   <Link to={`/availablebookstores?book=${book._id}`}>
                     {console.log(book)}
-                    <Button variant="contained" size="small">
+                    <Button variant="contained" size="small" style={styles.view}>
                       Find a Copy
                     </Button>
                   </Link>
