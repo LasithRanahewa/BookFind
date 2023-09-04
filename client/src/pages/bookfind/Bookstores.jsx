@@ -44,17 +44,90 @@ const bookstores = [
 ];
 
 const Bookstores = () => {
+
+  const styles={
+    search:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+      padding: "0.5rem ",
+      textAlign: "center",
+
+    },
+    heading:{
+      padding: "3rem",
+      color: "#DAE1E7",
+      textAlign: "center",
+      fontSize: "3rem",
+      letterSpacing: "0.12rem",
+      fontWeight: "bold",
+    },
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+    },
+    name:{
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    address:{
+      color: "#176B87",
+    },
+    contact:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+  };
+
+
+
   return (
     <>
       <Navbar />
-      <Typography variant="h4">Bookstores</Typography>
-      <TextField
+      <Typography variant="h4" style={styles.heading}>BOOKSTORES</Typography>
+      {/* <TextField
         label="Search"
         variant="outlined"
         size="small"
         sx={{ mr: 1 }}
-      />
-      <Button variant="contained" size="small">
+      /> */}
+      <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "#18B1C8",
+                borderWidth: "0.1rem",
+              },
+              "&:hover fieldset": {
+                borderColor: "#00909E",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#00909E",
+              },
+            },
+            "& .MuiFormLabel-root": {
+              color: "#00909E",
+            },
+            "& .MuiInputBase-input": {
+              color: "#00909E",
+            },
+            width: "70%",
+            maxWidth: "50rem",
+
+            // alignSelf: "center",
+          }}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+      <Button variant="contained" size="small" style={styles.search}>
         Search
       </Button>
 
@@ -69,18 +142,18 @@ const Bookstores = () => {
                 image={bookstore.coverUrl}
                 alt={bookstore.name}
               />
-              <CardContent sx={{ flex: 1 }}>
-                <Typography gutterBottom variant="h5" component="div">
+              <CardContent sx={{ flex: 1 }} style={styles.content}>
+                <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                   {bookstore.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={styles.address}>
                   {bookstore.address}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={styles.contact}>
                   {bookstore.contact}
                 </Typography>
                 <Link to="/bookstore">
-                  <Button variant="contained" size="small">
+                  <Button variant="contained" size="small" style={styles.view}>
                     View Available Books
                   </Button>
                 </Link>
