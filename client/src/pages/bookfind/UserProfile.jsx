@@ -95,8 +95,8 @@ const UserProfile = () => {
     <>
       <Navbar />
       <Grid container spacing={2} sx={{ mt: 2 }}>
-        <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 2 }}>
+        <Grid item xs={12} md={4} >
+        <Paper sx={{ p: 2}}>
             <Typography variant="h6" gutterBottom>
               Profile Picture
             </Typography>
