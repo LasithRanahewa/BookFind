@@ -36,7 +36,7 @@ const Home = ({ instance }) => {
         <Grid container>
           <Grid item xs={12} sm={6}>
             <Typography variant="h5" align="left" sx={{ color: "#DAE1E7" }}>
-              e-Books Galore | Explore | Discover
+              Explore | Discover | Acquire
               <br />
               IT'S NOT JUST A <br />
               BOOKSTORE.

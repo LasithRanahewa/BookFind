@@ -1,21 +1,3 @@
-// import React from "react";
-// import Footer from "../../components/bookfind-components/Footer";
-// import Navbar from "../../components/bookfind-components/Navbar";
-
-// const About = () => {
-//   return (
-//     <>
-//       <div style={{height:"85vh"}}>
-//         <Navbar />
-//         About
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// };
-
-// export default About;
-
 import React from "react";
 import Footer from "../../components/bookfind-components/Footer";
 import Navbar from "../../components/bookfind-components/Navbar";
@@ -41,15 +23,16 @@ const About = () => {
     },
     heading: {
       padding: 0,
-      fontSize: "80px",
-      letterSpacing: "0.8px",
+      fontSize: "5rem",
+      letterSpacing: "0.1rem",
       paddingTop: "4.6875rem",
+      textAlign: "center",
     },
     paragraph: {
       padding: 0,
       fontSize: "1.2rem",
       textAlign: "center",
-      maxWidth: "800px",
+      maxWidth: "50rem",
     },
     line: {
       width: "60%",
@@ -59,7 +42,7 @@ const About = () => {
     },
     para:{
       display: "flex",
-      alignItems: "flex-start",
+      alignItems: "center",
     },
   };
 
