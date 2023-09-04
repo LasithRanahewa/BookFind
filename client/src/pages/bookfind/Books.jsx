@@ -39,6 +39,15 @@ import { Link } from "react-router-dom";
 
 const Books = ({ instance }) => {
   const styles={
+    heading:{
+      textShadow: "0.07rem 0.07rem 0.5rem #176B87",
+      paddingTop: "3rem",
+      color: "#DAE1E7",
+      textAlign: "center",
+      fontSize: "3rem",
+      letterSpacing: "0.12rem",
+      fontWeight: "bold",
+    },
     view:{
       backgroundColor: "#00909E",
       "&:hover": {
@@ -91,6 +100,7 @@ const Books = ({ instance }) => {
   return (
     <>
       <Navbar />
+      <Typography variant="h4" style={styles.heading}>BOOKS</Typography>
       {/* <Typography variant="h4" color={"#DAE1E7"} sx={{p:"2rem"}}>
         Books
       </Typography> */}
@@ -129,8 +139,7 @@ const Books = ({ instance }) => {
             },
             width: "70%",
             maxWidth: "50rem",
-            margin: "2rem 0 4rem 0",
-
+            marginBottom: "2rem",
             // alignSelf: "center",
           }}
           onChange={(e) => setInputText(e.target.value)}
@@ -145,7 +154,7 @@ const Books = ({ instance }) => {
               backgroundColor: "#00909E",
             },
             padding: "0.5rem ",
-            margin: "2rem 0 4rem 0",
+            marginBottom: "2rem",
           }}
         >
           Search
