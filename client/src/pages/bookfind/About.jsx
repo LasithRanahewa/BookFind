@@ -23,7 +23,9 @@ const About = () => {
     },
     heading: {
       padding: 0,
+      textShadow: "0.2rem 0.2rem 1rem #176B87",
       fontSize: "5rem",
+      fontWeight: "900",
       letterSpacing: "0.1rem",
       paddingTop: "4.6875rem",
       textAlign: "center",
