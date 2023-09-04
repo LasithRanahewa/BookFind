@@ -43,6 +43,41 @@ const vendorsArr = [
 ];
 
 const Vendors = ({ instance }) => {
+  const styles={
+    heading:{
+      textShadow: "0.07rem 0.07rem 0.5rem #176B87",
+      paddingTop: "3rem",
+      color: "#DAE1E7",
+      textAlign: "center",
+      fontSize: "3rem",
+      letterSpacing: "0.12rem",
+      fontWeight: "bold",
+    },
+    name:{
+      fontSize: "1.57rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    address:{
+      color: "#176B87",
+    },
+    email:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+  };
+
+
   const [inputText, setInputText] = useState("");
   const [vendorsArr, setVendorsArr] = useState([]);
 
@@ -71,6 +106,7 @@ const Vendors = ({ instance }) => {
   return (
     <>
       <Navbar />
+      <Typography variant="h4" style={styles.heading}>BOOKSTORES</Typography>
       {/* <Typography variant="h4">Vendors</Typography> */}
       <Grid
         sx={{
@@ -107,6 +143,7 @@ const Vendors = ({ instance }) => {
             },
             width: "70%",
             maxWidth: "50rem",
+            marginBottom: "2rem",
           }}
           onChange={(e) => setInputText(e.target.value)}
         />
@@ -122,6 +159,7 @@ const Vendors = ({ instance }) => {
               backgroundColor: "#00909E",
             },
             padding: "0.5rem ",
+            marginBottom: "2rem",
           }}
         >
           Search
@@ -139,18 +177,18 @@ const Vendors = ({ instance }) => {
                 image={vendor.image}
                 alt={vendor.name}
               />
-              <CardContent sx={{ flex: 1 }}>
-                <Typography gutterBottom variant="h5" component="div">
+              <CardContent sx={{ flex: 1 }} style={styles.content}>
+                <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                   {vendor.name.toUpperCase()}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={styles.address}>
                   {vendor.location}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={styles.email}>
                   {vendor.email}
                 </Typography>
                 <Link to={`/bookstore?vendor=${vendor._id}`}>
-                  <Button variant="contained" size="small">
+                  <Button variant="contained" size="small" style={styles.view}>
                     View Available Books
                   </Button>
                 </Link>
