@@ -71,23 +71,62 @@ const Vendors = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4">Vendors</Typography>
-      <TextField
-        label="Search"
-        variant="outlined"
-        size="small"
-        sx={{ mr: 1 }}
-        onChange={(e) => setInputText(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        size="small"
-        onClick={() => {
-          handleSearch();
+      {/* <Typography variant="h4">Vendors</Typography> */}
+      <Grid
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 2,
+          width: "100%",
         }}
       >
-        Search
-      </Button>
+        <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "#18B1C8",
+                borderWidth: "0.1rem",
+              },
+              "&:hover fieldset": {
+                borderColor: "#00909E",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#00909E",
+              },
+            },
+            "& .MuiFormLabel-root": {
+              color: "#00909E",
+            },
+            "& .MuiInputBase-input": {
+              color: "#00909E",
+            },
+            width: "70%",
+            maxWidth: "50rem",
+          }}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleSearch();
+          }}
+          style={{
+            // alignSelf: "center",
+            backgroundColor: "#00909E",
+            "&:hover": {
+              backgroundColor: "#00909E",
+            },
+            padding: "0.5rem ",
+          }}
+        >
+          Search
+        </Button>
+      </Grid>
 
       {/* Bookstores */}
       <Grid container spacing={2} padding={5}>
