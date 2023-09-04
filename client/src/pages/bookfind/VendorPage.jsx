@@ -10,6 +10,34 @@ import _ from "lodash";
 import { Link } from "react-router-dom";
 
 const VendorPage = ({ instance }) => {
+
+  const styles={
+    head1:{
+      color: "#DAE1E7",
+      fontSize: "2.5rem",
+    },
+    head2:{
+      color: "#DAE1E7",
+      fontSize: "2.5rem",
+    },
+    name: {
+      paddingBottom: 0,
+      color: "#DAE1E7",
+      fontSize: "1.75rem",
+      textAlign: "left",
+    },
+    email:{
+      paddingTop: 0,
+      color: "#DAE1E7",
+      textAlign: "left",
+    },
+    image:{
+      paddingBottom: "2rem"
+    }
+  };
+
+
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
@@ -72,7 +100,7 @@ const VendorPage = ({ instance }) => {
             {/* Content for the left side */}
 
             <Grid item xs={12}>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" gutterBottom style={styles.head1}>
                 Bookstore Info
               </Typography>
             </Grid>
@@ -81,23 +109,24 @@ const VendorPage = ({ instance }) => {
                 <img
                   src="https://via.placeholder.com/200x200"
                   alt="Bookstore Pic"
+                  style={styles.image}
                 />
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style={styles.name}>
                 {vendor.name}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom style={styles.email}>
                 {vendor.email}
               </Typography>
             </Grid>
           </Grid>
           <Grid item xs={12} sm={9}>
             {/* Content for the right side */}
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h4" gutterBottom style={styles.head2}>
               Available Books
             </Typography>
 
@@ -105,7 +134,27 @@ const VendorPage = ({ instance }) => {
               label="Search"
               variant="outlined"
               size="small"
-              sx={{ mr: 1 }}
+              sx={{ mr: 1 ,
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#18B1C8",
+                    borderWidth: "0.1rem",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#00909E",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#00909E",
+                  },
+                },
+                "& .MuiFormLabel-root": {
+                  color: "#00909E",
+                },
+                "& .MuiInputBase-input": {
+                  color: "#00909E",
+                },
+                
+              }}
               onChange={(e) => {
                 handleSearch(e.target.value);
                 setSearchText(e.target.value);
@@ -115,7 +164,7 @@ const VendorPage = ({ instance }) => {
               label="Category"
               variant="outlined"
               size="small"
-              sx={{ mr: 1 }}
+              sx={{ mr: 1 , color: "#00909E", border: "0.1rem solid #18B1C8", height:"2.5rem"}}
               defaultValue="all"
             >
               <MenuItem value="all">All</MenuItem>
@@ -127,6 +176,14 @@ const VendorPage = ({ instance }) => {
               size="small"
               onClick={() => {
                 handleSearch();
+              }}
+              style={{
+                // alignSelf: "center",
+                backgroundColor: "#00909E",
+                "&:hover": {
+                  backgroundColor: "#00909E",
+                },
+                padding: "0.5rem ",
               }}
             >
               Search
