@@ -9,18 +9,23 @@ import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
-  const [author, setAddress] = React.useState("");
   const [isbn, setISBN] = React.useState("");
+  const [author, setAddress] = React.useState("");
+  const [publisher, setPublisher] = React.useState("");
+  const [clicks, setClicks] = React.useState(0);
   const [description, setDescription] = React.useState("");
   const [noOfPages, setNoOfPages] = React.useState(1);
-  const [bookPic, setBookPic] = React.useState("");
-  const [publishDate, setPublishDate] = React.useState("");
-  const [categories, setCategories] = React.useState([]);
-  const [publisher, setPublisher] = React.useState("");
+
   const [copies, setCopies] = React.useState(1);
+  const [categories, setCategories] = React.useState([]);
+  const [image, setImage] = React.useState("");
+  const [publishedDate, setPublishedDate] = React.useState("");
+  const [unitPrice, setUnitPrice] = React.useState(1);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,11 +36,12 @@ function BookForm({ open, onClose, onSubmit }) {
       publisher,
       description,
       noOfPages,
-      bookPic,
-      publishDate,
+      image,
+      publishedDate,
       categories,
       copies,
       publisher,
+      unitPrice,
     });
     onClose();
   };
@@ -79,7 +85,7 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          {/* <TextField
+          <TextField
             label="publisher"
             value={isbn}
             onChange={(e) => setISBN(e.target.value)}
@@ -102,14 +108,14 @@ function BookForm({ open, onClose, onSubmit }) {
           />
           <TextField
             label="Book Picture"
-            value={bookPic}
+            value={image}
             onChange={(e) => setBookPic(e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
             label="Publish Date"
-            value={publishDate}
+            value={publishedDate}
             onChange={(e) => setPublishDate(e.target.value)}
             fullWidth
             margin="normal"
@@ -120,7 +126,7 @@ function BookForm({ open, onClose, onSubmit }) {
             onChange={(e) => setCategories(e.target.value)}
             fullWidth
             margin="normal"
-          /> */}
+          />
           <TextField
             label="Publisher"
             value={publisher}
@@ -128,13 +134,13 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          {/* <TextField
+          <TextField
             label="Copies"
             value={copies}
             onChange={(e) => setCopies(e.target.value)}
             fullWidth
             margin="normal"
-          /> */}
+          />
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
             <Button
@@ -158,131 +164,73 @@ const columns = [
     headerName: "Index",
     width: 150,
   },
-  // {
-  //   field: "bookID",
-  //   headerName: "ID",
-  //   width: 150,
-  // },
   {
     field: "name",
     headerName: "Name",
-    width: 150,
+    width: 250,
   },
   {
     field: "author",
     headerName: "Author",
-    width: 150,
+    width: 250,
   },
-  // {
-  //   field: "isbn",
-  //   headerName: "ISBN",
-  //   width: 150,
-  // },
-  // {
-  //   field: "brn",
-  //   headerName: "BRN",
-  //   width: 150,
-  // },
-  // {
-  //   field: "rating",
-  //   headerName: "Rating",
-  //   width: 150,
-  // },
-  // {
-  //   field: "categories",
-  //   headerName: "Categories",
-  //   width: 150,
-  // },
   {
     field: "publisher",
     headerName: "Publisher",
+    width: 250,
+  },
+  {
+    field: "clicks",
+    headerName: "Clicks",
     width: 150,
   },
-  // {
-  //   field: "description",
-  //   headerName: "Description",
-  //   width: 150,
-  // },
-  // {
-  //   field: "noOfPages",
-  //   headerName: "No Of Pages",
-  //   width: 150,
-  // },
-  // {
-  //   field: "publishDate",
-  //   headerName: "Publish Date",
-  //   width: 150,
-  // },
-  // {
-  //   field: "bookPic",
-  //   headerName: "Book Pic",
-  //   width: 150,
-  // },
-  // {
-  //   field: "unitPrice",
-  //   headerName: "Unit Price",
-  //   width: 150,
-  // },
-  // {
-  //   field: "copies",
-  //   headerName: "Copies",
-  //   width: 150,
-  // },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 400,
+  },
+  {
+    field: "isbn",
+    headerName: "ISBN",
+    width: 250,
+  },
+  {
+    field: "noOfPages",
+    headerName: "No of Pages",
+    width: 250,
+  },
+  {
+    field: "image",
+    headerName: "Image",
+    width: 250,
+  },
+  {
+    field: "publishedDate",
+    headerName: "Published Date",
+    width: 250,
+  },
+  {
+    field: "categories",
+    headerName: "Categories",
+    width: 250,
+  },
+  {
+    field: "publisher",
+    headerName: "Publisher",
+    width: 250,
+  },
+  {
+    field: "copies",
+    headerName: "Copies",
+    width: 250,
+  },
+  {
+    field: "unitPrice",
+    headerName: "Unit Price",
+    width: 250,
+  },
 ];
 
-const rows = [
-  {
-    id: 1,
-    bookID: 1,
-    name: "Book 1",
-    author: "Author 1",
-    isbn: "12345678",
-    brn: "12345678",
-    rating: 1,
-    categories: "Category 1",
-    publisher: "Publisher 1",
-    description: "Description 1",
-    noOfPages: 1,
-    publishDate: "2021-10-10",
-    bookPic: "Book Pic 1",
-    unitPrice: 1,
-    copies: 1,
-  },
-  {
-    id: 2,
-    bookID: 2,
-    name: "Book 2",
-    author: "Author 2",
-    isbn: "12345678",
-    brn: "12345678",
-    rating: 2,
-    categories: "Category 2",
-    publisher: "Publisher 2",
-    description: "Description 2",
-    noOfPages: 2,
-    publishDate: "2021-10-10",
-    bookPic: "Book Pic 2",
-    unitPrice: 2,
-    copies: 2,
-  },
-  {
-    id: 3,
-    bookID: 3,
-    name: "Book 3",
-    author: "Author 3",
-    isbn: "12345678",
-    brn: "12345678",
-    rating: 3,
-    categories: "Category 3",
-    publisher: "Publisher 3",
-    description: "Description 3",
-    noOfPages: 3,
-    publishDate: "2021-10-10",
-    bookPic: "Book Pic 3",
-    unitPrice: 3,
-    copies: 3,
-  },
-];
 
 const handleFormSubmit = (formData) => {
   // Here you can handle the form data however you need to, such as sending it to a server or updating state
@@ -361,6 +309,7 @@ export default function BooksGrid() {
 
   return (
     <>
+      <Typography variant="h4">Books</Typography>
       <Box
         sx={{
           width: "100%",
