@@ -38,15 +38,12 @@ const vendorSchema = new mongoose.Schema ({
         required: true
     },
 
-    availableBooks: {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Copy"
-            }
-        ],
-        required: false
-    },
+    availableBooks: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "Book",
+        },
+      ],
 
     brn: {
         type: String,

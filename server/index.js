@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 
+
 // import routes
 const authRouter = require("./routes/authRouter");
 const bookRouter = require("./routes/bookRouter");
@@ -23,6 +24,12 @@ const bookstoreController = require("./controllers/bookstoreController");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
+// HANDELING UPLOADS
+const { parseFormData } = require("pechkin");
+const fs = require("fs");
+const path = require("path");
+const pechkinFileUpload = require("./controllers/upload.js");
 
 // setup express
 const app = express();
@@ -100,7 +107,38 @@ app.use("/api/bookstore", bookstoreController);
 // app.use("/api/user",userRouter);
 
 // test
-app.get("/", (req, res) => console.log(req, res));
+app.get("/", (req, res) => {
+  Post.find({}).then(data => {
+    res.json(data)
+  }).catch(error => {
+    res.status(408).json({error})
+  })
+});
+
+app.post("/upload", pechkinFileUpload(), async (req, res) => {
+  const files = [];
+  for await (const { stream, field, filename } of req.files) {
+    try {
+      const fileExtension = path.extname(filename);
+      const uniqueFilename = `${Date.now()}${fileExtension}`;
+      const filePath = path.join(__dirname, "uploads", uniqueFilename);
+      const writeStream = fs.createWriteStream(filePath);
+      stream.pipe(writeStream);
+      await new Promise((resolve, reject) => {
+        writeStream.on("finish", resolve);
+        writeStream.on("error", reject);
+      });
+
+      files.push({ field, filename, filePath });
+    } catch (err) {
+      console.error("Error saving file:", err);
+    } finally {
+      stream.resume();
+    }
+  }
+  console.log(files); //Try logic here as its the easiest
+  return res.json({ fields: req.body, files });
+});
 
 // server connection
 const PORT = process.env.PORT || 8080;
