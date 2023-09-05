@@ -42,6 +42,12 @@ const vendorsArr = [
   },
 ];
 
+const cardStyle = {
+  height: "430px", // Set the desired fixed height for all cards
+  width: "350px", // Set the desired fixed width for all cards (optional)
+};
+
+
 const Vendors = ({ instance }) => {
   const styles={
     heading:{
@@ -170,7 +176,7 @@ const Vendors = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {vendorsArr.map((vendor) => (
           <Grid item xs={12} sm={6} md={3} key={vendor.id}>
-            <Card>
+            <Card style={cardStyle}>
               <CardMedia
                 component="img"
                 sx={{ height: "15rem" }}
