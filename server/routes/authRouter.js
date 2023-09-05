@@ -23,7 +23,7 @@ router.post("/login", (req, res, next) => loginLocalUser(req, res, next));
 
 router.get("/auth/google", (req, res) => loginGoogleUser(req, res));
 
-router,get("/auth/google/bookfind", (req, res) => redirectGoogleUser(req, res));
+router.get("/auth/google/bookfind", (req, res) => redirectGoogleUser(req, res));
 
 router.get("/auth/facebook", (req, res) => loginFacebookUser(req, res));
 

@@ -67,7 +67,7 @@ const redirectGoogleUser = async(req, res) => {
 
 // login a facebook user
 const loginFacebookUser = async (req, res) => {
-    passport.authenticate("facebook", { scope: ["profile"] });
+    passport.authenticate("facebook", { scope: ["profile  "] });
 };
 
 // rediret a facebook user
