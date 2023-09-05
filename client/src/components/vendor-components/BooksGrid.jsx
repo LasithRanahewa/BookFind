@@ -309,7 +309,7 @@ export default function BooksGrid() {
 
   return (
     <>
-      <Typography variant="h4">Books</Typography>
+      {/* <Typography variant="h4" sx={{ textAlign: "center" }}>Books</Typography> */}
       <Box
         sx={{
           width: "100%",

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const columns = [
   {
@@ -74,30 +75,41 @@ const rows = [
 
 export default function ReservationsGrid() {
   return (
-    <Box sx={{ width: "100%" }}>
-      {" "}
-      <Stack direction="row" spacing={1}>
-        {/* <Button size="small" onClick={null}>
-          Add Reservation
-        </Button>
-        <Button size="small" onClick={null}>
-          Delete Reservation
-        </Button> */} 
-      </Stack>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
+    <>
+        {/* <Typography variant="h4" sx={{ textAlign: "center" }}>Reservations</Typography> */}
+        <Box
+        sx={{
+          width: "100%",
+          "& .super-app-theme--header": {
+            backgroundColor: "rgba(255, 7, 0, 0.55)",
           },
         }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+      >
+        {" "}
+
+        {/* <Stack direction="row" spacing={1}>
+          {/* <Button size="small" onClick={null}>
+      Add Reservation
+    </Button>
+    <Button size="small" onClick={null}>
+      Delete Reservation
+    </Button> */}
+        {/* </Stack> */}
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          // checkboxSelection
+          // disableRowSelectionOnClick
+        />
+      </Box>
+    </>
   );
 }
