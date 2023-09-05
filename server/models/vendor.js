@@ -42,15 +42,12 @@ const vendorSchema = new mongoose.Schema ({
         default: 5.0
     },
 
-    availableBooks: {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Book"
-            }
-        ],
-        required: false
-    },
+    availableBooks: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "Book",
+        },
+      ],
 
     brn: {
         type: String,
