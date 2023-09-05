@@ -8,11 +8,40 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  InputAdornment,
   Paper,
   TextField,
   Typography,
+  IconButton
 } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
+import { styled } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";
+
+
+const TextFieldWrapper = styled(TextField)({
+  // margin: "8px",
+  // width: "60%",
+
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#27496D",
+      borderWidth: "0.1rem",
+    },
+    "&:hover fieldset": {
+      borderColor: "#27496D",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#27496D",
+    },
+  },
+  "& .MuiFormLabel-root": {
+    color: "#27496D",
+  },
+  "& .MuiInputBase-input": {
+    color: "#27496D",
+  },
+});
 
 const UserProfile = () => {
   const [username, setUsername] = useState("JohnDoe");
@@ -126,9 +155,9 @@ const UserProfile = () => {
     setProfilePicture(null);
   };
 
-  const handleSaveChangesClick = () => {
-    setIsConfirmationDialogOpen(true);
-  };
+  // const handleSaveChangesClick = () => {
+  //   setIsConfirmationDialogOpen(true);
+  // };
 
   const shouldShowSaveButton =
     isEditingUsername ||
@@ -138,31 +167,44 @@ const UserProfile = () => {
     preferences.length > 0 ||
     profilePicture !== null;
 
+  const handleSaveChangesClick = () => {
+    setIsConfirmationDialogOpen(true);
+  };
+
   const handleConfirmationDialogClose = () => {
     setIsConfirmationDialogOpen(false);
   };
 
-  const handleConfirmSaveChanges = (field, value, setter) => {
-    setter(value);
+  const handleConfirmAllChanges = () => {
     setIsConfirmationDialogOpen(false);
-    switch (field) {
-      case "username":
-        setIsEditingUsername(false);
-        break;
-      case "email":
-        setIsEditingEmail(false);
-        break;
-      case "password":
-        setIsEditingPassword(false);
-        break;
-      case "address":
-        setIsEditingAddress(false);
-        break;
-      default:
-        break;
+    if (isEditingUsername) {
+      handleConfirmSaveChanges("username", username, setUsername);
     }
+    if (isEditingEmail) {
+      handleConfirmSaveChanges("email", email, setEmail);
+    }
+    if (isEditingPassword) {
+      handleConfirmSaveChanges("password", password, setPassword);
+    }
+    if (isEditingAddress) {
+      handleConfirmSaveChanges("address", address, setAddress);
+    }
+    if (preferences.length > 0) {
+      setPreferences(preferences);
+    }
+    if (profilePicture) {
+      setProfilePicture(profilePicture);
+    }
+    setIsEditingUsername(false);
+    setIsEditingEmail(false);
+    setIsEditingPassword(false);
+    setIsEditingAddress(false);
   };
 
+  const handleConfirmSaveChanges = (fieldName, fieldValue, setField) => {
+    setField(fieldValue);
+    console.log(`Changes to ${fieldName} saved successfully!`);
+  };
 
   return (
     <>
@@ -170,188 +212,180 @@ const UserProfile = () => {
 
       <Paper
         sx={{
-          p: 5, m: 5,
+          p: 5,
+          m: 5,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           {username}
-                  </Typography>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <div style={{ display: "flex", justifyContent: "center" }}>
-                        <img
-                          src={
-                            profilePicture
-                              ? URL.createObjectURL(profilePicture)
-                              : "https://via.placeholder.com/250"
-                          }
-                          alt="Profile"
-                          style={{ cursor: "default", objectFit: "cover", width: "150px", height: "150px" }}
-                        />
-                      </div>
-                      {isEditingProfilePicture && (
-                        <div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleProfilePictureChange}
-                          />
-                          {profilePicture && (
-                            <Button onClick={handleDeselectProfilePictureClick}>
-                              Deselect
-                            </Button>
-                          )}
-                        </div>
-                      )}
-                      {!isEditingProfilePicture && (
-                        <Button onClick={handleEditProfilePictureClick}>Edit</Button>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Username"
-                        variant="outlined"
-                        fullWidth
-                        value={username}
-                        onChange={handleUsernameChange}
-                        disabled={!isEditingUsername}
-                      />
-                      {!isEditingUsername && (
-                        <Button onClick={handleEditUsernameClick}>Edit</Button>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Email"
-                        variant="outlined"
-                        fullWidth
-                        value={email}
-                        onChange={handleEmailChange}
-                        disabled={!isEditingEmail}
-                      />
-                      {!isEditingEmail && (
-                        <Button onClick={handleEditEmailClick}>Edit</Button>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Password"
-                        variant="outlined"
-                        fullWidth
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        disabled={!isEditingPassword}
-                      />
-                      {!isEditingPassword && (
-                        <Button onClick={handleEditPasswordClick}>Edit</Button>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Address"
-                        variant="outlined"
-                        fullWidth
-                        value={address}
-                        onChange={handleAddressChange}
-                        disabled={!isEditingAddress}
-                      />
-                      {!isEditingAddress && (
-                        <Button onClick={handleEditAddressClick}>Edit</Button>
-                      )}
-                    </Grid>
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img
+                src={
+                  profilePicture
+                    ? URL.createObjectURL(profilePicture)
+                    : "https://via.placeholder.com/250"
+                }
+                alt="Profile"
+                style={{
+                  cursor: "default",
+                  objectFit: "cover",
+                  width: "250px",
+                  height: "250px",
+                  borderRadius: "50%",
+                  marginBottom: "1rem",
+                }}
+              />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextFieldWrapper
+              label="Username"
+              variant="outlined"
+              fullWidth
+              value={username}
+              onChange={handleUsernameChange}
+              disabled={!isEditingUsername}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    {!isEditingUsername && (
+                      <Button onClick={handleEditUsernameClick}>Edit</Button>
+                    )}
+                  </>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextFieldWrapper
+              label="Email"
+              variant="outlined"
+              fullWidth
+              value={email}
+              onChange={handleEmailChange}
+              disabled={!isEditingEmail}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    {!isEditingEmail && (
+                      <Button onClick={handleEditEmailClick}>Edit</Button>
+                    )}
+                  </>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextFieldWrapper
+              label="Password"
+              variant="outlined"
+              fullWidth
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              disabled={!isEditingPassword}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    {!isEditingPassword && (
+                      <Button onClick={handleEditPasswordClick}>Edit</Button>
+                    )}
+                  </>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextFieldWrapper
+              label="Address"
+              variant="outlined"
+              fullWidth
+              value={address}
+              onChange={handleAddressChange}
+              disabled={!isEditingAddress}
+              InputProps={{
+                endAdornment: (
+                  <>
+                    {!isEditingAddress && (
+                      <Button onClick={handleEditAddressClick}>Edit</Button>
+                    )}
+                  </>
+                ),
+              }}
+            />
+          </Grid>
 
-                    <Grid item xs={12} md={6}>
-                      <Autocomplete
-                        multiple
-                        options={preferencesOptions}
-                        value={preferences}
-                        onChange={handlePreferencesChange}
-                        renderTags={(value, getTagProps) =>
-                          value.map((option, index) => (
-                            <Chip
-                              key={index}
-                              label={option}
-                              {...getTagProps({ index })}
-                            />
-                          ))
-                        }
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="outlined"
-                            label="Preferences"
-                            placeholder="Select preferences"
-                          />
-                        )}
-                      />
-                    </Grid>
-                  </Grid>
-                  {shouldShowSaveButton && (
-                    <Button onClick={handleSaveChangesClick}>Save Changes</Button>
-                  )}
-                </Paper>
+          <Grid item xs={12} md={6}>
+            <Autocomplete
+              multiple
+              options={preferencesOptions}
+              value={preferences}
+              onChange={handlePreferencesChange}
+              renderTags={(value, getTagProps) =>
+                value.map((option, index) => (
+                  <Chip
+                    key={index}
+                    label={option}
+                    {...getTagProps({ index })}
+                  />
+                ))
+              }
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Preferences"
+                  placeholder="Select preferences"
+                />
+              )}
+            />
+          </Grid>
 
-                <Dialog
-                  open={isConfirmationDialogOpen}
-                  onClose={handleConfirmationDialogClose}
-                >
-                  <DialogTitle>Confirmation</DialogTitle>
-                  <DialogContent>
-                    <Typography>Are you sure you want to save changes?</Typography>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleConfirmationDialogClose}>Cancel</Button>
-                    {isEditingUsername && (
-                      <Button
-                        onClick={() =>
-                          handleConfirmSaveChanges("username", username, setUsername)
-                        }
-                      >
-                        Save
-                      </Button>
-                    )}
-                    {isEditingEmail && (
-                      <Button
-                        onClick={() => handleConfirmSaveChanges("email", email, setEmail)}
-                      >
-                        Save
-                      </Button>
-                    )}
-                    {isEditingPassword && (
-                      <Button
-                        onClick={() =>
-                          handleConfirmSaveChanges("password", password, setPassword)
-                        }
-                      >
-                        Save
-                      </Button>
-                    )}
-                    {isEditingAddress && (
-                      <Button
-                        onClick={() =>
-                          handleConfirmSaveChanges("address", address, setAddress)
-                        }
-                      >
-                        Save
-                      </Button>
-                    )}
-                    {preferences.length > 0 && (
-                      <Button onClick={() => setIsConfirmationDialogOpen(false)}>
-                        Save
-                      </Button>
-                    )}
-                    {profilePicture && (
-                      <Button onClick={() => setIsConfirmationDialogOpen(false)}>
-                        Save
-                      </Button>
-                    )}
-                  </DialogActions>
-                </Dialog>
-              </>
-            );
-          };
-          export default UserProfile;
+          <Grid item xs={12} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
+            {isEditingProfilePicture && (
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
+                />
+                {profilePicture && (
+                  <Button onClick={handleDeselectProfilePictureClick}>
+                    Deselect
+                  </Button>
+                )}
+              </div>
+            )}
+            {!isEditingProfilePicture && (
+              <Button onClick={handleEditProfilePictureClick}>Change Profile Picture</Button>
+            )}
+          </Grid>
+        </Grid>
+        {shouldShowSaveButton && (
+          <Button onClick={handleSaveChangesClick}>Save Changes</Button>
+        )}
+      </Paper>
+
+      <Dialog
+        open={isConfirmationDialogOpen}
+        onClose={handleConfirmationDialogClose}
+      >
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to save changes?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleConfirmationDialogClose}>Cancel</Button>
+          <Button onClick={handleConfirmAllChanges}>Save</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
+export default UserProfile;
