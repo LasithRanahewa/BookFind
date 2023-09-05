@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #142850;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 } 
 div {
     margin: 0;
@@ -31,7 +31,6 @@ div {
 
 .homeImage{
     position: relative;
-    align: center;
     top: 5rem;
     left: 9.8rem;
 }
@@ -80,15 +79,4 @@ div {
 
 .cards{
     background-color: #27496D;
-}
-
-@media (max-width:500px){
-    .homeImage, .homeContent{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .BigText span{
-        opacity: 0;
-    }
 }
