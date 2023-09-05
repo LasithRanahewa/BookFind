@@ -68,7 +68,7 @@ const VendorSignUp = () => {
       <ThemeProvider theme={theme}>
         <Grid container>
           <Grid item xs={12} sm={4}></Grid>
-          <Grid item xs={12} sm={8} sx={{ backgroundColor: "white" }}>
+          <Grid item xs={12} sm={8} sx={{ backgroundColor: "#DAE1E7" }}>
             <Form onSubmit={handleSubmit}>
               <Typography
                 variant="h3"
