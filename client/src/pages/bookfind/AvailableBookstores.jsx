@@ -16,10 +16,11 @@ import { useSearchParams } from "react-router-dom";
 const AvailableBookstores = ({ instance }) => {
   const styles = {
     heading: {
-      padding: "2rem",
-      paddingTop: "4rem",
+      // padding: "2rem",
+      paddingTop: "2rem",
       color: "#DAE1E7",
       textAlign: "center",
+      fontSize: "1.5rem",
     },
   };
 

@@ -4,43 +4,6 @@ import { Button, TextField } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
-const vendorsArr = [
-  {
-    id: 1,
-    name: "Bookstore 1",
-    address: "Address 1",
-    contact: "Contact 1",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 2,
-    name: "Bookstore 2",
-    address: "Address 2",
-    contact: "Contact 2",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 3,
-    name: "Bookstore 3",
-    address: "Address 3",
-    contact: "Contact 3",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 4,
-    name: "Bookstore 4",
-    address: "Address 4",
-    contact: "Contact 4",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 5,
-    name: "Bookstore 5",
-    address: "Address 5",
-    contact: "Contact 5",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-];
 
 const Vendors = ({ instance }) => {
   const styles={
