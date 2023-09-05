@@ -16,7 +16,7 @@ function Footer() {
         height: "10vh",
         // position: "fixed",
         // position: "absolute",
-        //bottom: 0,
+        // bottom: 0,
         width: "100%",
         paddingBottom: "2rem",
         paddingTop: "2rem",
