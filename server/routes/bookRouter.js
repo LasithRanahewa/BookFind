@@ -14,7 +14,7 @@ router.post("/new", (req, res) => newBook(req, res));
 
 router.post("/search", (req, res) => searchBook(req, res));
 
-router.get("/get", (req, res) => getBook(req, res));
+router.get("/get:id", (req, res) => getBook(req, res));
 
 router.get("/all", (req, res) => getAllBooks(req, res));
 
