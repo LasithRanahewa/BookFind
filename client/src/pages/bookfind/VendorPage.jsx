@@ -16,9 +16,31 @@ const VendorPage = ({ instance }) => {
       // textShadow: "0.07rem 0.07rem 0.5rem #176B87",
       color: "#142850",
       textAlign: "center",
-      fontSize: "3rem",
-      letterSpacing: "0.12rem",
+      fontSize: "3.5rem",
+      letterSpacing: "0.06rem",
       fontWeight: "bold",
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+    name:{
+      fontSize: "1.6rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    author:{
+      color: "#176B87",
+    },
+    publisher:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
     },
   };
 
@@ -143,7 +165,7 @@ const VendorPage = ({ instance }) => {
           variant="h4"
           style={{
             textShadow: "0.07rem 0.07rem 0.5rem #176B87",
-            // paddingTop: "3rem",
+            paddingTop: "2rem",
             color: "#DAE1E7",
             textAlign: "center",
             fontSize: "3rem",
@@ -230,20 +252,21 @@ const VendorPage = ({ instance }) => {
                     image={book.image}
                     alt={book.name}
                   />
-                  <CardContent sx={{ flex: 1 }}>
-                    <Typography gutterBottom variant="h5" component="div">
+                  <CardContent sx={{ flex: 1 }} style={styles.content}>
+                    <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                       {book.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" style={styles.author}>
                       {book.author}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" style={styles.publisher}>
                       {book.publisher}
                     </Typography>
                     <Button
                       variant="contained"
                       size="small"
                       onClick={() => handleReserveClick(book)}
+                      style={styles.view}
                     >
                       Reserve
                     </Button>
@@ -262,21 +285,22 @@ const VendorPage = ({ instance }) => {
                     alt={book.name}
                   />
                   <CardContent sx={{ flex: 1 }}>
-                    <Link to={`/book?book=${book._id}`}>
-                      <Typography gutterBottom variant="h5" component="div">
+                    <Link to={`/book?book=${book._id}`} style={{textDecoration:"none"}}>
+                      <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                         {book.name}
                       </Typography>
                     </Link>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" style={styles.author}>
                       {book.author}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" style={styles.publisher}>
                       {book.publisher}
                     </Typography>
                     <Button
                       variant="contained"
                       size="small"
                       onClick={() => handleReserveClick(book)}
+                      style={styles.view}
                     >
                       Reserve
                     </Button>
