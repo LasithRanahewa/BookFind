@@ -9,11 +9,9 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link as L } from "@mui/material/";
-
 import Effect from "../../components/Effect";
 import featureImg from "../../assets/Featuredbook.jpg";
 import homeImg from "../../assets/home-img.png";
-
 import '../../App.css';
 
 const Home = ({ instance }) => {
@@ -40,9 +38,7 @@ const Home = ({ instance }) => {
       <Navbar />
       <Grid container minHeight={"100vh"}>
         <Grid container>
-
           <Grid item className="homeContent" xs={12} sm={6} >
-
             <Typography variant="h5" align="left" sx={{ color: "#DAE1E7" }}>
               <span className="firstLine">Explore | Discover | Acquire</span>
               <br />
@@ -79,29 +75,28 @@ const Home = ({ instance }) => {
               </Button>
             </Link>
           </Grid>
-
           <Grid item className="homeImage" sx={{ height: 'auto', width: 'auto' }} xs={12} sm={12} lg={6}>
             <img
               src={homeImg}
               alt="Book Cover"
               width="50%" 
-
             />
           </Grid>
         </Grid>
       </Grid>
-
-      {/* Trending Books */}
-      <Typography className="BigText" variant="h4" align="center">
-        <span>Trending</span>
-      </Typography>
-      <Typography className="trendbooks" variant="h4" align="center">
-        <span>Trending Books</span>
-      </Typography>
+      {/* <Grid container xs={12} xm={12} lg={12}>       */}
+        {/* Trending Books */}
+        <Typography className="BigText" variant="h4" align="center">
+          <span>Trending</span>
+        </Typography>
+        <Typography className="trendbooks" variant="h4" align="center">
+          <span>Trending Books</span>
+        </Typography>
+      {/* </Grid> */}
 
       <Grid className="cards" container spacing={2}>
         {trendingBooksArr.map((book) => (
-          <Grid item xs={12} sm={6} lg={3}>
+          <Grid item lg={3} sm={6} xs={12}>
             <Link to="/book">
               <TrendingBookCard book={book} />
             </Link>
@@ -114,16 +109,14 @@ const Home = ({ instance }) => {
       <span>Featured Book</span>
       </Typography>
       <Grid container>
-        <Grid className="featuredImage" item xs={7}>
+        <Grid item className="featuredImage" xs={12} xm={6} lg={6}>
           <img
             src={featureImg}
             alt="Book Cover"
             width="50%"
           />
         </Grid>
-
         <Grid item sx={{ itemAlign: 'center'}} xs={12} xm={6} lg={5}>
-
           <Typography variant="h5" sx={{ textAlign: 'justify', m: 1, 
           position: 'relative', left: '0', color: '#DAE1E7' }}>
             It was one of the most searing images of the twentieth century: 
@@ -143,6 +136,7 @@ const Home = ({ instance }) => {
         {/* Footer */}
         <Footer />
       </Grid>
+      <Effect></Effect>
     </>
   );
 };
