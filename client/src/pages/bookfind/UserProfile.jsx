@@ -12,12 +12,11 @@ import {
   Paper,
   TextField,
   Typography,
-  IconButton
+  IconButton,
 } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
-
 
 const TextFieldWrapper = styled(TextField)({
   // margin: "8px",
@@ -217,9 +216,10 @@ const UserProfile = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          backgroundColor: "#DAE1E7",
         }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom color={"#27496D"}>
           {username}
         </Typography>
         <Grid container spacing={2}>
@@ -255,7 +255,11 @@ const UserProfile = () => {
                 endAdornment: (
                   <>
                     {!isEditingUsername && (
-                      <Button onClick={handleEditUsernameClick}>Edit</Button>
+                      <Button onClick={handleEditUsernameClick}>
+                        <IconButton style={{ color: "#27496D" }}>
+                          <EditIcon />
+                        </IconButton>
+                      </Button>
                     )}
                   </>
                 ),
@@ -274,7 +278,11 @@ const UserProfile = () => {
                 endAdornment: (
                   <>
                     {!isEditingEmail && (
-                      <Button onClick={handleEditEmailClick}>Edit</Button>
+                      <Button onClick={handleEditEmailClick}>
+                        <IconButton style={{ color: "#27496D" }}>
+                          <EditIcon />
+                        </IconButton>
+                      </Button>
                     )}
                   </>
                 ),
@@ -294,7 +302,11 @@ const UserProfile = () => {
                 endAdornment: (
                   <>
                     {!isEditingPassword && (
-                      <Button onClick={handleEditPasswordClick}>Edit</Button>
+                      <Button onClick={handleEditPasswordClick}>
+                         <IconButton style={{ color: "#27496D" }}>
+                          <EditIcon />
+                        </IconButton>
+                      </Button>
                     )}
                   </>
                 ),
@@ -313,7 +325,11 @@ const UserProfile = () => {
                 endAdornment: (
                   <>
                     {!isEditingAddress && (
-                      <Button onClick={handleEditAddressClick}>Edit</Button>
+                      <Button onClick={handleEditAddressClick}>
+                        <IconButton style={{ color: "#27496D" }}>
+                          <EditIcon />
+                        </IconButton>
+                      </Button>
                     )}
                   </>
                 ),
@@ -347,45 +363,58 @@ const UserProfile = () => {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
-            {isEditingProfilePicture && (
-              <div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleProfilePictureChange}
-                />
-                {profilePicture && (
-                  <Button onClick={handleDeselectProfilePictureClick}>
-                    Deselect
+          <Grid
+            item
+            xs={12}
+            md={6}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+                    {isEditingProfilePicture && (
+                      <div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleProfilePictureChange}
+                        />
+                        {profilePicture && (
+                          <Button onClick={handleDeselectProfilePictureClick} style={{ color: "#27496D" }}>
+                            Deselect
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                    {!isEditingProfilePicture && (
+                      <Button onClick={handleEditProfilePictureClick} style={{ color: "#27496D" }}>
+                        Change Profile Picture
+                      </Button>
+                    )}
+                  </Grid>
+                </Grid>
+                {shouldShowSaveButton && (
+                  <Button onClick={handleSaveChangesClick} style={{ color: "#27496D", marginTop:"1rem"}}>
+                    Save Changes
                   </Button>
                 )}
-              </div>
-            )}
-            {!isEditingProfilePicture && (
-              <Button onClick={handleEditProfilePictureClick}>Change Profile Picture</Button>
-            )}
-          </Grid>
-        </Grid>
-        {shouldShowSaveButton && (
-          <Button onClick={handleSaveChangesClick}>Save Changes</Button>
-        )}
-      </Paper>
+              </Paper>
 
-      <Dialog
-        open={isConfirmationDialogOpen}
-        onClose={handleConfirmationDialogClose}
-      >
-        <DialogTitle>Confirmation</DialogTitle>
-        <DialogContent>
-          <Typography>Are you sure you want to save changes?</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleConfirmationDialogClose}>Cancel</Button>
-          <Button onClick={handleConfirmAllChanges}>Save</Button>
-        </DialogActions>
-      </Dialog>
-    </>
+              <Dialog
+                open={isConfirmationDialogOpen}
+                onClose={handleConfirmationDialogClose}
+              >
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                  <Typography>Are you sure you want to save changes?</Typography>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleConfirmationDialogClose} style={{ color: "#27496D" }}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handleConfirmAllChanges} style={{ color: "#27496D"}}>
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </>
   );
 };
 export default UserProfile;
