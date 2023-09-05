@@ -2,12 +2,81 @@
 
 body {
     background-color: #142850;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #142850;
+    overflow-x: hidden;
 } 
 div {
     margin: 0;
     padding: 0;
+}
+
+.homeContent{
+    position: relative;
+    top: 11rem;
+    left: 4rem;
+}
+
+.firstLine, .thirdLine{
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+
+.secondLine{
+    font-size: 4.3rem;
+    font-weight: bold;
+}
+
+.homeImage{
+    position: relative;
+    top: 5rem;
+    left: 9.8rem;
+}
+
+.trendbooks{
+    position: relative;
+    color: #DAE1E7;
+    padding: 2rem;
+    bottom: 5rem;
+}
+
+.trendbooks span{
+    font-size: 3.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.BigText{
+    position: relative;
+    top: 3rem;
+}
+
+.BigText span{
+    font-size: 9rem;
+    letter-spacing: 0.4rem;
+    opacity: 0.2;
+}
+
+.featuredbooks{
+    color: #DAE1E7;
+    padding: 2rem;
+    padding-top: 6rem;
+    text-shadow: 1px 1px 2px #27496D, 0 0 1em blue, 0 0 0.2em blue;
+}
+
+.featuredbooks span{
+    font-size: 4rem;
+    letter-spacing: 0.2rem;
+}
+
+.featuredImage{
+    position: relative;
+    padding: 2rem;
+    padding-top: 0;
+    left: 7.5rem;
+}
+
+.cards{
+    background-color: #27496D;
 }

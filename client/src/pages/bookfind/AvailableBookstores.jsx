@@ -1,51 +1,31 @@
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
-const bookstores = [
-  {
-    id: 1,
-    name: "Bookstore 1",
-    address: "Address 1",
-    contact: "Contact 1",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 2,
-    name: "Bookstore 2",
-    address: "Address 2",
-    contact: "Contact 2",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 3,
-    name: "Bookstore 3",
-    address: "Address 3",
-    contact: "Contact 3",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 4,
-    name: "Bookstore 4",
-    address: "Address 4",
-    contact: "Contact 4",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 5,
-    name: "Bookstore 5",
-    address: "Address 5",
-    contact: "Contact 5",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-];
-
 const AvailableBookstores = ({ instance }) => {
+  const styles = {
+    heading: {
+      padding: "2rem",
+      paddingTop: "4rem",
+      color: "#DAE1E7",
+      textAlign: "center",
+    },
+  };
+
   const [vendorsArr, setVendorsArr] = useState([]);
+  const [selectedBookstore, setSelectedBookstore] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -64,44 +44,85 @@ const AvailableBookstores = ({ instance }) => {
         ]);
       });
   }, []);
+
+  const handleReserveClick = (bookstore) => {
+    setSelectedBookstore(bookstore);
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = (confirmed) => {
+    if (confirmed) {
+      // Perform reservation logic here
+      console.log("Reservation confirmed for", selectedBookstore.name);
+    }
+    setSelectedBookstore(null);
+    setOpenDialog(false);
+  };
+
   return (
     <>
       <Navbar />
-      <Typography variant="h4">
-        The following bookstores have the requested book in stock.
-      </Typography>
-      {/* Bookstores */}
-      <Grid container spacing={2} padding={5}>
-        {vendorsArr.map((bookstore) => (
-          <Grid item xs={12} sm={6} md={3} key={bookstore.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                sx={{ height: "15rem" }}
-                image={bookstore.image}
-                alt={bookstore.name}
-              />
-              <CardContent sx={{ flex: 1 }}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {bookstore.name}
+      <div>
+        {vendorsArr.length > 0 ? (
+          <>
+            <Typography variant="h4" style={styles.heading}>
+              The following bookstores have the requested book in stock
+            </Typography>
+            {/* Bookstores */}
+            <Grid container spacing={2} padding={5}>
+              {vendorsArr.map((bookstore) => (
+                <Grid item xs={12} sm={6} md={3} key={bookstore.id}>
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      sx={{ height: "15rem" }}
+                      image={bookstore.image}
+                      alt={bookstore.name}
+                    />
+                    <CardContent sx={{ flex: 1 }}>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {bookstore.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {bookstore.location}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {bookstore.email}
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => handleReserveClick(bookstore)}
+                      >
+                        Reserve
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+            <Dialog open={openDialog} onClose={() => handleDialogClose(false)}>
+              <DialogTitle>Confirm Reservation</DialogTitle>
+              <DialogContent>
+                <Typography variant="body1">
+                  Bookstore: {selectedBookstore?.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {bookstore.location}
+                <Typography variant="body1">
+                  Book: {searchParams.get("book")}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {bookstore.email}
-                </Typography>
-                <Link to="/bookstore">
-                  <Button variant="contained" size="small">
-                    {/* logic */}
-                    Visit to reserve
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => handleDialogClose(false)}>Cancel</Button>
+                <Button onClick={() => handleDialogClose(true)}>Confirm</Button>
+              </DialogActions>
+            </Dialog>
+          </>
+        ) : (
+          <Typography variant="h4" style={styles.heading}>
+            Requested book is not available in any of the bookstores
+          </Typography>
+        )}
+      </div>
     </>
   );
 };
