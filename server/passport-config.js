@@ -2,7 +2,6 @@
 const LocalStratergy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
-const findOrCreate = require("mongoose-findorcreate");
 const User = require("./models/user");
 
 // initialize strategies

@@ -60,7 +60,8 @@ const bookSchema = new mongoose.Schema({
 
     rating: {
         type: Number,
-        required: false
+        required: false,
+        default: 5.0
     },
 
     unitPrice: {
@@ -76,7 +77,7 @@ const bookSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
-    },
+    }
 });
 
 // export the book model

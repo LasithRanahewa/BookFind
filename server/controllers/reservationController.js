@@ -36,7 +36,7 @@ const getAllReservations = async(req, res) => {
 const newReservation = async(req, res) => {
     try {
         const {reservationDate, copyid, quantity} = req.body;
-        var copy = Copy.findById(copyid);
+        const copy = await Copy.findById(copyid);
 
         if(!reservationDate || !copyid || !quantity) {
             return res.json({ error: "Incomplete Reservation Data" });
@@ -48,6 +48,7 @@ const newReservation = async(req, res) => {
         if(copy.quantity === 0) {
             copy.isAvailable = false;
         }
+        await copy.save();
 
         const newReservation = new Reservation({ reservationDate, copyid, quantity });
         await newReservation.save();
