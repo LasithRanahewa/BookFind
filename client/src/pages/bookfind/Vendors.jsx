@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
+
 const vendorsArr = [
   {
     id: 1,
@@ -41,6 +42,7 @@ const vendorsArr = [
     coverUrl: "https://via.placeholder.com/200x300",
   },
 ];
+
 
 
 const Vendors = ({ instance }) => {
@@ -171,7 +173,10 @@ const Vendors = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {vendorsArr.map((vendor) => (
           <Grid item xs={12} sm={6} md={3} key={vendor.id}>
+
             <Card style={{height:'100%'}}>
+
+
               <CardMedia
                 component="img"
                 sx={{ height: "15rem" }}

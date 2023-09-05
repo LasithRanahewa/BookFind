@@ -17,3 +17,5 @@ router.get("/get/:id", (req, res) => getReservation(req, res));
 router.post("/new", (req, res) => newReservation(req, res));
 
 router.post("/delete", (req, res) => deleteReservation(req, res));
+
+module.exports = router;

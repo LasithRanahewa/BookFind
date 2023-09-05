@@ -35,19 +35,18 @@ const getAllReservations = async(req, res) => {
 // new reservation
 const newReservation = async(req, res) => {
     try {
-        const {reservationDate, copyid, quantity} = req.body;
-        var copy = Copy.findById(copyid);
+        const { vendorId, bookId, reservationDate } = req.body;
+        // const copy = await Copy.findById(copyid);
 
-        if(!reservationDate || !copyid || !quantity) {
+        if(!reservationDate || !vendorId || !bookId) {
             return res.json({ error: "Incomplete Reservation Data" });
-        } else if(copy.quantity < quantity) {
-            return res.json({ error: "Not Enough Copies" });
-        }
+        } 
 
-        copy.quantity -= quantity;
-        if(copy.quantity === 0) {
-            copy.isAvailable = false;
-        }
+        // copy.quantity -= quantity;
+        // if(copy.quantity === 0) {
+        //     copy.isAvailable = false;
+        // }
+        // await copy.save();
 
         const newReservation = new Reservation({ reservationDate, copyid, quantity });
         await newReservation.save();

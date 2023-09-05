@@ -1,5 +1,7 @@
 // import modules
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 // define the bookstore schema
 const vendorSchema = new mongoose.Schema ({
@@ -8,8 +10,8 @@ const vendorSchema = new mongoose.Schema ({
         required: true
     },
 
-    userAccount: {
-        type: mongoose.Schema.Types.ObjectId,
+    password: {
+        type: String,
         required: true
     },
 
@@ -25,7 +27,8 @@ const vendorSchema = new mongoose.Schema ({
 
     description: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     },
 
     phoneNumber: {
@@ -35,18 +38,16 @@ const vendorSchema = new mongoose.Schema ({
 
     rating: {
         type: Number,
-        required: true
+        required: false,
+        default: 5.0
     },
 
-    availableBooks: {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Copy"
-            }
-        ],
-        required: false
-    },
+    availableBooks: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "Book",
+        },
+      ],
 
     brn: {
         type: String,
@@ -55,9 +56,23 @@ const vendorSchema = new mongoose.Schema ({
 
     image: {
         type: String,
-        required: true
+        required: false
     }
 });
+
+// method to hash and set the password
+vendorSchema.methods.setPassword = function(password) {
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+        this.password = hash;
+    });
+};
+
+// method to check whether a password is correct or not
+vendorSchema.methods.isValidPassword = function(password) {
+    bcrypt.compare(password, this.password, function(err, result) {
+        return result === true;
+    });
+};
 
 // export the bookstore model
 module.exports = mongoose.model("Vendor", vendorSchema);

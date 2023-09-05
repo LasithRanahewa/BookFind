@@ -11,10 +11,11 @@ import {
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
-// import BookstoreInfo from "../../components/vendor-components/BookstoreInfo";
 import ReservationsDataGrid from "../../components/admin-components/ReservationsDataGrid";
 import BooksGrid from "../../components/vendor-components/BooksGrid";
 import VendorProfile from "../../components/vendor-components/VendorProfile";
+
+const drawerWidth = 240;
 
 const VendorDashboard = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -33,23 +34,23 @@ const VendorDashboard = () => {
   };
 
   const drawer = (
-    <div style={{ width: "100vw" }}>
+    <div style={{ width: drawerWidth }}>
       <List>
         <ListItem>
-          <Button onClick={() => handleButtonClick("bookstore")}>
+          <Button onClick={() => handleButtonClick("bookstore")} sx={{color: "#142850"}}>
             Bookstore Info
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("books")}>Books</Button>
+          <Button onClick={() => handleButtonClick("books")} sx={{color: "#142850"}}>Books</Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("reservations")}>
+          <Button onClick={() => handleButtonClick("reservations")} sx={{color: "#142850"}}>
             Reservations
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("logout")}>Log Out</Button>
+          <Button onClick={() => handleButtonClick("logout")} sx={{color: "#142850"}}>Log Out</Button>
         </ListItem>
       </List>
     </div>
@@ -75,33 +76,47 @@ const VendorDashboard = () => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <Typography variant="h4">Vendor Dashboard</Typography>
-      </div>
-      <Grid container sx={{ border: "1px solid black" }}>
-        {!isMobile && (
-          <Grid item xs={12} sm={4} sx={{ minHeight: "85vh" }}>
-            {drawer}
-          </Grid>
-        )}
-        <Grid
-          item
-          xs={12}
-          sm={isMobile ? 12 : 8}
-          sx={{ outline: "1px solid black", minHeight: "85vh" }}
-        >
-          {isMobile && (
-            <IconButton onClick={toggleDrawer}>
-              <MenuIcon />
-            </IconButton>
+      <Grid
+        container
+        sx={{
+          backgroundColor: "white",
+          minHeight: "100vh",
+          padding: "1rem",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <Typography variant="h4" sx={{color: "#142850"}}>Vendor Dashboard</Typography>
+        </div>
+        <Grid container sx={{ border: "1px solid black" }}>
+          {!isMobile && (
+            <Grid item xs={12} sm={4} sx={{ minHeight: "85vh" }}>
+              {drawer}
+            </Grid>
           )}
-          {rightGridComponent}
+          <Grid
+            item
+            xs={12}
+            sm={isMobile ? 12 : 8}
+            sx={{ outline: "1px solid black", minHeight: "85vh" }}
+          >
+            {isMobile && (
+              <IconButton onClick={toggleDrawer}>
+                <MenuIcon />
+              </IconButton>
+            )}
+            {rightGridComponent}
+          </Grid>
+          {isMobile && (
+            <Drawer
+              anchor="left"
+              open={open}
+              onClose={toggleDrawer}
+              sx={{ width: drawerWidth }}
+            >
+              {drawer}
+            </Drawer>
+          )}
         </Grid>
-        {isMobile && (
-          <Drawer anchor="left" open={open} onClose={toggleDrawer}>
-            {drawer}
-          </Drawer>
-        )}
       </Grid>
     </>
   );

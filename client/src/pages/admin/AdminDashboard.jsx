@@ -35,20 +35,20 @@ const AdminDashboard = ({ instance }) => {
     <div style={{ width: "100vw" }}>
       <List>
         <ListItem>
-          <Button onClick={() => handleButtonClick("bookstores")}>
+          <Button onClick={() => handleButtonClick("bookstores")} sx={{color: "#142850"}}>
             Bookstores
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("reservations")}>
+          <Button onClick={() => handleButtonClick("reservations")} sx={{color: "#142850"}}>
             Reservations
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("users")}>Users</Button>
+          <Button onClick={() => handleButtonClick("users")} sx={{color: "#142850"}}>Users</Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("logout")}>Log Out</Button>
+          <Button onClick={() => handleButtonClick("logout")} sx={{color: "#142850"}}>Log Out</Button>
         </ListItem>
       </List>
     </div>
@@ -74,33 +74,42 @@ const AdminDashboard = ({ instance }) => {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <Typography variant="h4">Admin Dashboard</Typography>
-      </div>
-      <Grid container sx={{ border: "1px solid black" }}>
-        {!isMobile && (
-          <Grid item xs={12} sm={4} sx={{ minHeight: "85vh" }}>
-            {drawer}
-          </Grid>
-        )}
-        <Grid
-          item
-          xs={12}
-          sm={isMobile ? 12 : 8}
-          sx={{ outline: "1px solid black", minHeight: "85vh" }}
-        >
-          {isMobile && (
-            <IconButton onClick={toggleDrawer}>
-              <MenuIcon />
-            </IconButton>
+      <Grid
+        container
+        sx={{
+          backgroundColor: "white",
+          minHeight: "100vh",
+          padding: "1rem",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <Typography variant="h4" sx={{color: "#142850"}}>Admin Dashboard</Typography>
+        </div>
+        <Grid container sx={{ border: "1px solid black" }}>
+          {!isMobile && (
+            <Grid item xs={12} sm={4} sx={{ minHeight: "85vh" }}>
+              {drawer}
+            </Grid>
           )}
-          {rightGridComponent}
+          <Grid
+            item
+            xs={12}
+            sm={isMobile ? 12 : 8}
+            sx={{ outline: "1px solid black", minHeight: "85vh" }}
+          >
+            {isMobile && (
+              <IconButton onClick={toggleDrawer}>
+                <MenuIcon />
+              </IconButton>
+            )}
+            {rightGridComponent}
+          </Grid>
+          {isMobile && (
+            <Drawer anchor="left" open={open} onClose={toggleDrawer}>
+              {drawer}
+            </Drawer>
+          )}
         </Grid>
-        {isMobile && (
-          <Drawer anchor="left" open={open} onClose={toggleDrawer}>
-            {drawer}
-          </Drawer>
-        )}
       </Grid>
     </>
   );

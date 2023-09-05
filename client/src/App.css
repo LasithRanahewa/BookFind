@@ -34,7 +34,6 @@ div {
 
 .homeImage{
     position: relative;
-    align: center;
     top: 5rem;
     left: 9.8rem;
 }
@@ -93,6 +92,7 @@ div {
 
 .cards{
     background-color: #27496D;
+
 }
 
 @media(max-width:950px){

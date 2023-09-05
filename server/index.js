@@ -7,22 +7,27 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 
+
 // import routes
 const authRouter = require("./routes/authRouter");
 const bookRouter = require("./routes/bookRouter");
 const bookstoreRouter = require("./routes/vendorRouter");
-const copyRouter = require("./routes/copyRouter");
-const reservationRouter = require("./routes/reservationRouter");
+// const copyRouter = require("./routes/copyRouter");
+const findACopyRouter = require("./routes/findACopyRouter");
+// const reservationRouter = require("./routes/reservationRouter");
 const userRouter = require("./routes/userRouter");
-const bookController = require("./controllers/bookController");
-const vendorController = require("./controllers/vendorController");
-const findACopyController = require("./controllers/findACopyController");
-const bookstoreController = require("./controllers/bookstoreController");
+const vendorRouter = require("./routes/vendorRouter");
 
 // do not load the environment varibles on a production environment
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
+// HANDELING UPLOADS
+const { parseFormData } = require("pechkin");
+const fs = require("fs");
+const path = require("path");
+const pechkinFileUpload = require("./controllers/upload.js");
 
 // setup express
 const app = express();
@@ -90,17 +95,48 @@ const initializePassport = require("./passport-config");
 initializePassport(passport);
 
 // routes for REST API
-// app.use("/api/auth", authRouter);
-app.use("/api/book", bookController);
-app.use("/api/vendor", vendorController);
-app.use("/api/bookstore", bookstoreController);
-
+app.use("/api/auth", authRouter);
+app.use("/api/book", bookRouter);
+app.use("/api/bookstore", bookstoreRouter);
 // app.use("/api/copy", copyRouter);
+app.use("/api/findACopy", findACopyRouter);
 // app.use("/api/reservation", reservationRouter);
-// app.use("/api/user",userRouter);
+app.use("/api/vendor", vendorRouter);
+app.use("/api/user",userRouter);
 
 // test
-app.get("/", (req, res) => console.log(req, res));
+app.get("/", (req, res) => {
+  Post.find({}).then(data => {
+    res.json(data)
+  }).catch(error => {
+    res.status(408).json({error})
+  })
+});
+
+app.post("/upload", pechkinFileUpload(), async (req, res) => {
+  const files = [];
+  for await (const { stream, field, filename } of req.files) {
+    try {
+      const fileExtension = path.extname(filename);
+      const uniqueFilename = `${Date.now()}${fileExtension}`;
+      const filePath = path.join(__dirname, "uploads", uniqueFilename);
+      const writeStream = fs.createWriteStream(filePath);
+      stream.pipe(writeStream);
+      await new Promise((resolve, reject) => {
+        writeStream.on("finish", resolve);
+        writeStream.on("error", reject);
+      });
+
+      files.push({ field, filename, filePath });
+    } catch (err) {
+      console.error("Error saving file:", err);
+    } finally {
+      stream.resume();
+    }
+  }
+  console.log(files); //Try logic here as its the easiest
+  return res.json({ fields: req.body, files });
+});
 
 // server connection
 const PORT = process.env.PORT || 8080;
