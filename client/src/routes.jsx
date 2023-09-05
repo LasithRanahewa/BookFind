@@ -18,6 +18,9 @@ import Page404 from "./pages/Page404";
 
 import VendorDashboard from "./pages/vendor/VendorDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+
+import VendorSignUp from "./pages/vendor/VendorSignUp";
+import VendorLogIn from "./pages/vendor/VendorLogIn";
 import axios from "axios";
 
 function Router() {
@@ -80,6 +83,15 @@ function Router() {
       path: "/book",
       element: <BookPage instance={instance} />,
     },
+    {
+      path: "/vendor-signup",
+      element: <VendorSignUp instance={instance} />,
+    },
+    {
+      path: "/vendor-login",
+      element: <VendorLogIn instance={instance} />,
+    },
+  
 
     // 404
     {

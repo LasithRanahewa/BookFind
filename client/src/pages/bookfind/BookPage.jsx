@@ -12,6 +12,27 @@ import Button from "@mui/material/Button";
 import Navbar from "../../components/bookfind-components/Navbar";
 
 const BookPage = ({ instance }) => {
+
+  const styles={
+    button:{
+      backgroundColor: "#18B1C8",
+      "&:hover": {
+        backgroundColor: "#18B1C8",
+      },
+      marginTop: "4rem",
+    },
+    content:{
+      paddingTop: "2rem",
+      color: "#DAE1E7",
+    },
+    image:{
+      width:"50%",
+      paddingLeft: "4rem",
+      paddingTop: "4rem",
+    }
+  };
+
+
   const [searchParams] = useSearchParams();
   const [bookData, setBookData] = useState({});
 
@@ -40,7 +61,7 @@ const BookPage = ({ instance }) => {
           <img
             src="https://via.placeholder.com/200"
             alt="Book Cover"
-            style={{ width: "50%" }}
+            style={styles.image}
           />
         </Grid>
         <Grid item xs={12} sm={8}>
@@ -52,7 +73,7 @@ const BookPage = ({ instance }) => {
             {bookData.author}
           </Typography>
           <Rating name="book-rating" value={4.2} precision={0.01} readOnly />
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" gutterBottom style={styles.content}>
             Description
             <br />
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
@@ -65,7 +86,7 @@ const BookPage = ({ instance }) => {
           </Typography>
 
           <Link to={`/availablebookstores?book=${bookData._id}`}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" style={styles.button}>
               Find a Copy
             </Button>
           </Link>

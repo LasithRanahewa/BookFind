@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link as L } from "@mui/material/";
+import '../../App.css';
 
 const Home = ({ instance }) => {
   const [trendingBooksArr, setTrendingBooksArr] = useState([]);
@@ -34,14 +35,14 @@ const Home = ({ instance }) => {
       <Navbar />
       <Grid container minHeight={"100vh"}>
         <Grid container>
-          <Grid item xs={12} sm={6}>
+          <Grid className="homeContent" item xs={12} sm={6}>
             <Typography variant="h5" align="left" sx={{ color: "#DAE1E7" }}>
-              e-Books Galore | Explore | Discover
+              <span className="firstLine">Explore | Discover | Acquire</span>
               <br />
-              IT'S NOT JUST A <br />
+              <span className="secondLine">IT'S NOT JUST A <br />
               BOOKSTORE.
-              <br />
-              It's a universe.
+              <br /></span>
+              <span className="thirdLine">It's a universe.</span>
             </Typography>
             <br />
             {/* <TextField
@@ -57,12 +58,21 @@ const Home = ({ instance }) => {
               }}
             /> */}
             <Link to={`/books`}>
-              <Button variant="contained" size="small">
+              <Button variant="contained" size="small"
+              style={{
+                // alignSelf: "center",
+                backgroundColor: "#00909E",
+                "&:hover": {
+                  backgroundColor: "#00909E",
+                },
+                padding: "0.5rem ",
+                margin: "2rem 0 4rem 0",
+              }}>
                 Search for Books
               </Button>
             </Link>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid className="homeImage" item xs={12} sm={6}>
             <img
               src="https://via.placeholder.com/300x400.png?text=Image"
               alt="Book Cover"
@@ -72,12 +82,15 @@ const Home = ({ instance }) => {
         </Grid>
       </Grid>
 
-      {/* Tranding Books */}
-      <Typography variant="h4" align="center">
-        Trending Books
+      {/* Trending Books */}
+      <Typography className="BigText" variant="h4" align="center">
+        <span>Trending</span>
+      </Typography>
+      <Typography className="trendbooks" variant="h4" align="center">
+        <span>Trending Books</span>
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid className="cards" container spacing={2}>
         {trendingBooksArr.map((book) => (
           <Grid item xs={12} sm={6} lg={3}>
             <Link to="/book">
@@ -88,19 +101,20 @@ const Home = ({ instance }) => {
       </Grid>
 
       {/* Featured Book */}
-      <Typography variant="h4" align="center">
-        Featured Book
+      <Typography className="featuredbooks" variant="h4" align="center">
+      <span>Featured Book</span>
       </Typography>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid className="featuredImage" item xs={7}>
           <img
             src="https://via.placeholder.com/300x400.png?text=Image"
             alt="Book Cover"
             width="50%"
           />
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h5">
+        <Grid item xs={4}>
+          <Typography variant="h5" sx={{ textAlign: 'justify', m: 1, 
+          position: 'relative', left: '0', color: '#DAE1E7' }}>
             Book Content Lorem ipsum dolor sit amet consectetur adipisicing
             elit. Ea nostrum enim cum quasi nobis qui odio eos, quis temporibus
             architecto rem mollitia omnis nesciunt officiis quas quidem pariatur
@@ -110,7 +124,7 @@ const Home = ({ instance }) => {
             ipsum, hic nulla corporis! Suscipit, officiis!
           </Typography>
 
-          <Typography variant="body1">
+          <Typography sx={{position: 'relative', paddingTop: '2rem'}} variant="body1">
             <L href="/book">Learn more...</L>
           </Typography>
         </Grid>

@@ -1,5 +1,6 @@
 import React from "react";
 import Router from "./routes";
+import Effect from "./components/Effect";
 import "./App.css";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
     <div>
       <Router />
+      {/* <Effect></Effect> */}
     </div>
   );
 }

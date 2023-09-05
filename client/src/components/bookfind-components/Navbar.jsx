@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -18,6 +19,8 @@ import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const Navbar = () => {
+  const location = useLocation();
+
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -40,13 +43,18 @@ const Navbar = () => {
       onClick={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
-      <List sx={{ width: "100vw"}} >
+      <List sx={{ width: "100vw" }}>
         <ListItem>
           <Button
             color="inherit"
             component={Link}
             to="/"
-            sx={{ color: "#DAE1E7", textDecoration: "none" }}
+            sx={{
+              color: location.pathname === "/" ? "#00909E" : "#DAE1E7",
+              fontWeight: location.pathname === "/" ? "bold" : "normal",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
           >
             Home
           </Button>
@@ -57,7 +65,12 @@ const Navbar = () => {
             color="inherit"
             component={Link}
             to="/books"
-            sx={{ color: "#DAE1E7", textDecoration: "none" }}
+            sx={{
+              color: location.pathname === "/books" ? "#00909E" : "#DAE1E7",
+              fontWeight: location.pathname === "/books" ? "bold" : "normal",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
           >
             Books
           </Button>
@@ -68,7 +81,12 @@ const Navbar = () => {
             color="inherit"
             component={Link}
             to="/vendors"
-            sx={{ color: "#DAE1E7", textDecoration: "none" }}
+            sx={{
+              color: location.pathname === "/vendors" ? "#00909E" : "#DAE1E7",
+              fontWeight: location.pathname === "/vendors" ? "bold" : "normal",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
           >
             Vendors
           </Button>
@@ -79,7 +97,12 @@ const Navbar = () => {
             color="inherit"
             component={Link}
             to="/about"
-            sx={{ color: "#DAE1E7", textDecoration: "none" }}
+            sx={{
+              color: location.pathname === "/about" ? "#00909E" : "#DAE1E7",
+              fontWeight: location.pathname === "/about" ? "bold" : "normal",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
           >
             About
           </Button>
@@ -90,8 +113,15 @@ const Navbar = () => {
             <ListItem>
               <Button
                 color="inherit"
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-                sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                component={Link}
+                to="/profile"
+                sx={{
+                  color:
+                    location.pathname === "/profile" ? "#00909E" : "#DAE1E7",
+                    fontWeight: location.pathname === "/profile" ? "bold" : "normal",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                }}
               >
                 Profile
               </Button>
@@ -100,7 +130,11 @@ const Navbar = () => {
               <Button
                 color="inherit"
                 onClick={handleLogout}
-                sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                sx={{
+                  color: "#DAE1E7",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                }}
               >
                 Logout
               </Button>
@@ -112,7 +146,12 @@ const Navbar = () => {
               color="inherit"
               component={Link}
               to="/login"
-              sx={{ color: "#DAE1E7", textDecoration: "none" }}
+              sx={{
+                color: location.pathname === "/login" ? "#00909E" : "#DAE1E7",
+                fontWeight: location.pathname === "/login" ? "bold" : "normal",
+                textDecoration: "none",
+                fontSize: "1rem",
+              }}
             >
               Login
             </Button>
@@ -152,6 +191,11 @@ const Navbar = () => {
                 open={drawerOpen}
                 onClose={() => toggleDrawer(false)}
                 sx={{ width: "100vw" }}
+                PaperProps={{
+                  sx: {
+                    backgroundColor: "#142850",
+                  },
+                }}
               >
                 {drawerItems}
               </Drawer>
@@ -163,9 +207,11 @@ const Navbar = () => {
                 component={Link}
                 to="/"
                 sx={{
-                  color: "#DAE1E7",
+                  color: location.pathname === "/" ? "#00909E" : "#DAE1E7",
+                  fontWeight: location.pathname === "/" ? "bold" : "normal",
+                  fontSize: "1rem",
                   textDecoration: "none",
-                  marginRight: "16px",
+                  marginRight: "1.5rem",
                 }}
               >
                 Home
@@ -175,9 +221,11 @@ const Navbar = () => {
                 component={Link}
                 to="/books"
                 sx={{
-                  color: "#DAE1E7",
+                  color: location.pathname === "/books" ? "#00909E" : "#DAE1E7",
+                  fontWeight: location.pathname === "/books" ? "bold" : "normal",
+                  fontSize: "1rem",
                   textDecoration: "none",
-                  marginRight: "16px",
+                  marginRight: "1.5rem",
                 }}
               >
                 Books
@@ -187,9 +235,12 @@ const Navbar = () => {
                 component={Link}
                 to="/vendors"
                 sx={{
-                  color: "#DAE1E7",
+                  color:
+                    location.pathname === "/vendors" ? "#00909E" : "#DAE1E7",
+                    fontWeight: location.pathname === "/vendors" ? "bold" : "normal",
+                  fontSize: "1rem",
                   textDecoration: "none",
-                  marginRight: "16px",
+                  marginRight: "1.5rem",
                 }}
               >
                 Vendors
@@ -199,9 +250,12 @@ const Navbar = () => {
                 component={Link}
                 to="/about"
                 sx={{
-                  color: "#DAE1E7",
+                  color: location.pathname === "/about" ? "#00909E" : "#DAE1E7",
+                  fontWeight: location.pathname === "/about" ? "bold" : "normal",
+                  fontSize: "1rem",
                   textDecoration: "none",
-                  marginRight: "16px",
+                  marginRight: "1rem",
+                  fontSize: "1rem",
                 }}
               >
                 About
@@ -210,7 +264,11 @@ const Navbar = () => {
                 <Button
                   color="inherit"
                   onClick={(event) => setAnchorEl(event.currentTarget)}
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                  sx={{
+                    color: "#DAE1E7",
+                    textDecoration: "none",
+                    fontSize: "1rem",
+                  }}
                 >
                   <AccountCircle />
                 </Button>
@@ -219,7 +277,13 @@ const Navbar = () => {
                   color="inherit"
                   component={Link}
                   to="/login"
-                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                  sx={{
+                    color:
+                      location.pathname === "/login" ? "#00909E" : "#DAE1E7",
+                      fontWeight: location.pathname === "/login" ? "bold" : "normal",
+                    textDecoration: "none",
+                    fontSize: "1rem",
+                  }}
                 >
                   Login
                 </Button>
@@ -228,15 +292,31 @@ const Navbar = () => {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
+                PaperProps={{
+                  sx: {
+                    backgroundColor: "#00909E",
+                  },
+                }}
               >
                 <MenuItem
                   component={Link}
                   to="/profile"
                   onClick={() => setAnchorEl(null)}
+                  sx={{
+                    color:
+                      location.pathname === "/profile" ? "#142850" : "#DAE1E7",
+                    fontWeight: location.pathname === "/profile" ? "bold" : "normal",
+                    textDecoration: "none",
+                  }}
                 >
                   Profile
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem
+                  onClick={handleLogout}
+                  sx={{ color: "#DAE1E7", textDecoration: "none" }}
+                >
+                  Logout
+                </MenuItem>
               </Menu>
             </div>
           )}

@@ -38,6 +38,41 @@ import { Link } from "react-router-dom";
 //];
 
 const Books = ({ instance }) => {
+  const styles={
+    heading:{
+      textShadow: "0.07rem 0.07rem 0.5rem #176B87",
+      paddingTop: "3rem",
+      color: "#DAE1E7",
+      textAlign: "center",
+      fontSize: "3rem",
+      letterSpacing: "0.12rem",
+      fontWeight: "bold",
+    },
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+    },
+    name:{
+      fontSize: "1.6rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    author:{
+      color: "#176B87",
+    },
+    publisher:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+  };
+
+
   const [inputText, setInputText] = useState("");
   const [booksArr, setBooksArr] = useState([]);
 
@@ -59,40 +94,78 @@ const Books = ({ instance }) => {
   };
 
   useEffect(() => {
-    handleClose()
+    handleClose();
   }, []);
 
   return (
     <>
       <Navbar />
-      <Typography variant="h4">Books</Typography>
-      <TextField
-        label="Search"
-        variant="outlined"
-        size="small"
-        sx={{ mr: 1 }}
-        onChange={(e) => setInputText(e.target.value)}
-      />
-      <Select
-        label="Category"
-        variant="outlined"
-        size="small"
-        sx={{ mr: 1 }}
-        defaultValue="all"
+      <Typography variant="h4" style={styles.heading}>BOOKS</Typography>
+      {/* <Typography variant="h4" color={"#DAE1E7"} sx={{p:"2rem"}}>
+        Books
+      </Typography> */}
+      <Grid
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 2,
+          width: "100%",
+        }}
       >
-        <MenuItem value="all">All</MenuItem>
-        <MenuItem value="fiction">Fiction</MenuItem>
-        <MenuItem value="nonfiction">Nonfiction</MenuItem>
-      </Select>
-      <Button variant="contained" size="small" onClick={() => handleClose()}>
-        Search
-      </Button>
+        <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "#18B1C8",
+                borderWidth: "0.1rem",
+              },
+              "&:hover fieldset": {
+                borderColor: "#00909E",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#00909E",
+              },
+            },
+            "& .MuiFormLabel-root": {
+              color: "#00909E",
+            },
+            "& .MuiInputBase-input": {
+              color: "#00909E",
+            },
+            width: "70%",
+            maxWidth: "50rem",
+            marginBottom: "2rem",
+            // alignSelf: "center",
+          }}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          onClick={() => handleClose()}
+          style={{
+            // alignSelf: "center",
+            backgroundColor: "#00909E",
+            "&:hover": {
+              backgroundColor: "#00909E",
+            },
+            padding: "0.5rem ",
+            marginBottom: "2rem",
+          }}
+        >
+          Search
+        </Button>
+      </Grid>
 
       {/* Books */}
       <Grid container spacing={2} padding={5}>
         {booksArr.map((book) => (
           <Grid item xs={12} key={book.id}>
-            <Link to={`/book?book=${book._id}`}>
+            <Link to={`/book?book=${book._id}`} style={{textDecoration:"none"}}>
               <Card sx={{ display: "flex" }}>
                 <CardMedia
                   component="img"
@@ -100,19 +173,19 @@ const Books = ({ instance }) => {
                   image={book.coverUrl}
                   alt={book.name}
                 />
-                <CardContent sx={{ flex: 1 }}>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent sx={{ flex: 1 }} style={styles.content}>
+                  <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                     {book.name}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" style={styles.author}>
                     {book.author}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" style={styles.publisher}>
                     {book.publisher}
                   </Typography>
                   <Link to={`/availablebookstores?book=${book._id}`}>
                     {console.log(book)}
-                    <Button variant="contained" size="small">
+                    <Button variant="contained" size="small" style={styles.view}>
                       Find a Copy
                     </Button>
                   </Link>
@@ -127,5 +200,3 @@ const Books = ({ instance }) => {
 };
 
 export default Books;
-
-

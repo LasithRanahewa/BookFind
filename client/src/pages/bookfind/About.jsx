@@ -1,21 +1,3 @@
-// import React from "react";
-// import Footer from "../../components/bookfind-components/Footer";
-// import Navbar from "../../components/bookfind-components/Navbar";
-
-// const About = () => {
-//   return (
-//     <>
-//       <div style={{height:"85vh"}}>
-//         <Navbar />
-//         About
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// };
-
-// export default About;
-
 import React from "react";
 import Footer from "../../components/bookfind-components/Footer";
 import Navbar from "../../components/bookfind-components/Navbar";
@@ -41,15 +23,18 @@ const About = () => {
     },
     heading: {
       padding: 0,
-      fontSize: "80px",
-      letterSpacing: "0.8px",
-      paddingTop: "4.6875rem",
+      textShadow: "0.2rem 0.2rem 1rem #176B87",
+      fontSize: "4.5rem",
+      fontWeight: "1100",
+      letterSpacing: "0.1rem",
+      paddingTop: "3rem",
+      textAlign: "center",
     },
     paragraph: {
       padding: 0,
       fontSize: "1.2rem",
       textAlign: "center",
-      maxWidth: "800px",
+      maxWidth: "50rem",
     },
     line: {
       width: "60%",
@@ -59,7 +44,7 @@ const About = () => {
     },
     para:{
       display: "flex",
-      alignItems: "flex-start",
+      alignItems: "center",
     },
   };
 
@@ -83,9 +68,9 @@ const About = () => {
             <hr style={styles.line} />
           </div>
         </div>
-        <div style={{position:"absolute", bottom:0, width:"100%"}}>
+        {/* <div style={{position:"absolute", bottom:0, width:"100%"}}> */}
         <Footer />
-        </div>
+        {/* </div> */}
       </div>
       
 
@@ -101,7 +86,7 @@ const About = () => {
 
         <hr style={styles.line} /> */}
         
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
