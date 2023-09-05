@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Router />
-      <Effect></Effect>
+      {/* <Effect></Effect> */}
     </div>
   );
 }
