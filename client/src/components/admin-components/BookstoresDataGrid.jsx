@@ -85,11 +85,11 @@ const columns = [
     headerName: "Index",
     width: 150,
   },
-  {
-    field: "vendorID",
-    headerName: "ID",
-    width: 150,
-  },
+  // {
+  //   field: "vendorID",
+  //   headerName: "ID",
+  //   width: 150,
+  // },
   {
     field: "name",
     headerName: "Name",
@@ -266,10 +266,10 @@ export default function BookstoresDataGrid({ instance }) {
           },
         }}
       >
-        {" "}
-        <Stack direction="row" spacing={1}>
+        
+        {/* <Stack direction="row" spacing={1}>
           {/* Add onClick event to "Add BookStore" button */}
-          <Button size="small" onClick={toggleForm}>
+          {/* <Button size="small" onClick={toggleForm}>
             Add BookStore
           </Button>
           <Button
@@ -279,8 +279,8 @@ export default function BookstoresDataGrid({ instance }) {
             }}
           >
             Delete BookStore
-          </Button>
-        </Stack>
+          </Button> */}
+        {/* </Stack> */} 
         <Box>
           <DataGrid
             rows={vendorList}
@@ -293,8 +293,8 @@ export default function BookstoresDataGrid({ instance }) {
               },
             }}
             pageSizeOptions={[5]}
-            checkboxSelection
-            onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
+            // checkboxSelection
+            // onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />
         </Box>
