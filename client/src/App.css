@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-body {
+html, body {
     background-color: #142850;
     font-family: 'Open Sans Condensed', sans-serif;
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     background-color: #142850;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 } 
 div {
     margin: 0;
@@ -14,6 +16,7 @@ div {
 }
 
 .homeContent{
+    width: 100vw;
     position: relative;
     top: 11rem;
     left: 4rem;
@@ -44,8 +47,13 @@ div {
 }
 
 .trendbooks span{
-    font-size: 3.5rem;
-    letter-spacing: 0.2rem;
+    text-shadow: 0.07rem 0.07rem 0.5rem #176B87;
+    padding-top: 3rem;
+    color: #DAE1E7;
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 0.12rem;
+    font-weight: bold;
 }
 
 .BigText{
@@ -63,12 +71,17 @@ div {
     color: #DAE1E7;
     padding: 2rem;
     padding-top: 6rem;
-    text-shadow: 1px 1px 2px #27496D, 0 0 1em blue, 0 0 0.2em blue;
+    text-shadow: 0.02rem 0.02rem 0.13rem #176B87;
 }
 
 .featuredbooks span{
-    font-size: 4rem;
-    letter-spacing: 0.2rem;
+    text-shadow: 0.07rem 0.07rem 0.5rem #176B87;
+    padding-top: 3rem;
+    color: #DAE1E7;
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 0.12rem;
+    font-weight: bold;
 }
 
 .featuredImage{
@@ -82,13 +95,54 @@ div {
     background-color: #27496D;
 }
 
+@media(max-width:950px){
+    .homeContent{
+        width: 100vw;
+        position: relative;
+        top: 0rem;
+        left: 4rem;
+    }
+}
+
 @media (max-width:500px){
     .homeImage, .homeContent{
         flex-direction: column;
         align-items: center;
     }
 
+    .homeContent{
+        width: 100vw;
+        position: relative;
+        top: 0rem;
+        left: 4rem;
+    }
+    
+    .homeImage{
+        position: relative;
+        padding-top: 4.5rem;
+        align: center;
+        top: 2rem;
+        left: 6.75rem;
+    }
+
+    .firstLine, .thirdLine{
+        font-size: 1rem;
+        letter-spacing: 0.1rem;
+    }
+    
+    .secondLine{
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
     .BigText span{
         opacity: 0;
+    }
+
+    .featuredImage{
+        position: relative;
+        align: center;
+        top: 1rem;
+        left: 4.75rem;
     }
 }
