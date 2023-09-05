@@ -25,9 +25,9 @@ export default function Page404() {
     body:{
       backgroundColor:"#021734",
     },
-    container:{
-      backgroundColor:"#021734",
-    },
+    // container:{
+    //   backgroundColor:"#021734",
+    // },
     heading:{
       color: "#64CCC5",
       fontSize: "4rem",
