@@ -43,10 +43,15 @@ const VendorSignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission here
+  };
+
+  const handleProfilePictureChange = (event) => {
+    setProfilePicture(event.target.files[0]);
   };
 
   const Form = styled("form")({
@@ -55,7 +60,7 @@ const VendorSignUp = () => {
     flexDirection: "column",
     alignItems: "center",
     // marginTop: "32px",
-    backgroundColor: "#DAE1E7", 
+    backgroundColor: "#DAE1E7",
     minHeight: "100vh",
   });
 
@@ -140,6 +145,55 @@ const VendorSignUp = () => {
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
+              <TextFieldWrapper
+                sx={{
+                  margin: "8px",
+                  width: "60%",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#27496D",
+                      borderWidth: "0.1rem",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#27496D",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#27496D",
+                    },
+                  },
+                  "& .MuiFormLabel-root": {
+                    color: "#27496D",
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "#27496D",
+                  },
+                  "& .MuiInputBase-input[type=file]": {
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    opacity: "0",
+                    zIndex: "2",
+                  },
+                  "& .MuiInputBase-root": {
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    zIndex: "1",
+                  },
+                  "& .MuiInputBase-root::before": {
+                    color : "#27496D",
+                    // content: '"Choose File"',
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: "0",
+                  },
+                }}
+                label="Profile Picture"
+                type="file"
+                onChange={handleProfilePictureChange}
+              />
               <FormControlLabel
                 control={
                   <Checkbox
@@ -150,6 +204,7 @@ const VendorSignUp = () => {
                 }
                 label="I agree to the terms and conditions"
               />
+
               <ButtonWrapper
                 variant="contained"
                 //   color="primary"
