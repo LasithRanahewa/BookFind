@@ -1,6 +1,6 @@
 // import models
-const Book = require("../models/book");
-const Vendor = require("../models/vendor");
+const Book = require("../models/book.js");
+const Vendor = require("../models/vendor.js");
 
 const findACopy = async(req, res) => {
     try {
@@ -8,7 +8,7 @@ const findACopy = async(req, res) => {
         if (!id) {
             return res.status(400).json({ error: "Incomplete book data" });
         }
-        const book = await Book.find({ book: id });
+        const book = await Book.findById(id);
         if (!book) {
             res.send("Book not found");
         }

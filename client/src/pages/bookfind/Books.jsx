@@ -38,6 +38,10 @@ import { Link } from "react-router-dom";
 //];
 
 const Books = ({ instance }) => {
+
+  const [inputText, setInputText] = useState("");
+  const [booksArr, setBooksArr] = useState([]);
+  
   const styles={
     heading:{
       textShadow: "0.07rem 0.07rem 0.5rem #176B87",
@@ -71,10 +75,6 @@ const Books = ({ instance }) => {
       backgroundColor: "#EEEEEE",
     },
   };
-
-
-  const [inputText, setInputText] = useState("");
-  const [booksArr, setBooksArr] = useState([]);
 
   const handleClose = () => {
     instance

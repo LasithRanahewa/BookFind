@@ -35,20 +35,20 @@ const AdminDashboard = ({ instance }) => {
     <div style={{ width: "100vw" }}>
       <List>
         <ListItem>
-          <Button onClick={() => handleButtonClick("bookstores")}>
+          <Button onClick={() => handleButtonClick("bookstores")} sx={{color: "#142850"}}>
             Bookstores
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("reservations")}>
+          <Button onClick={() => handleButtonClick("reservations")} sx={{color: "#142850"}}>
             Reservations
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("users")}>Users</Button>
+          <Button onClick={() => handleButtonClick("users")} sx={{color: "#142850"}}>Users</Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("logout")}>Log Out</Button>
+          <Button onClick={() => handleButtonClick("logout")} sx={{color: "#142850"}}>Log Out</Button>
         </ListItem>
       </List>
     </div>
@@ -74,21 +74,16 @@ const AdminDashboard = ({ instance }) => {
 
   return (
     <>
-      <Grid container sx={{ backgroundColor: "white", minHeight: "100vh" }}>
-        <div
-          style={{
-            textAlign: "center",
-            display: "flex",
-            alignItems: "center",
-            width: "100vw",
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{ textAlign: "center", alignSelf: "center" }}
-          >
-            Admin Dashboard
-          </Typography>
+      <Grid
+        container
+        sx={{
+          backgroundColor: "white",
+          minHeight: "100vh",
+          padding: "1rem",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <Typography variant="h4" sx={{color: "#142850"}}>Admin Dashboard</Typography>
         </div>
         <Grid container sx={{ border: "1px solid black" }}>
           {!isMobile && (

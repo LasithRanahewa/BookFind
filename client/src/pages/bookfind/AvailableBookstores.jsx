@@ -22,6 +22,28 @@ const AvailableBookstores = ({ instance }) => {
       textAlign: "center",
       fontSize: "1.5rem",
     },
+    name:{
+      fontSize: "1.6rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    location:{
+      color: "#176B87",
+    },
+    email:{
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    content:{
+      backgroundColor: "#EEEEEE",
+    },
+    view:{
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+    },
   };
 
   const [vendorsArr, setVendorsArr] = useState([]);
@@ -80,20 +102,21 @@ const AvailableBookstores = ({ instance }) => {
                       image={bookstore.image}
                       alt={bookstore.name}
                     />
-                    <CardContent sx={{ flex: 1 }}>
-                      <Typography gutterBottom variant="h5" component="div">
+                    <CardContent sx={{ flex: 1 }} style={styles.content}>
+                      <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                         {bookstore.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary" style={styles.location}>
                         {bookstore.location}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary" style={styles.email}>
                         {bookstore.email}
                       </Typography>
                       <Button
                         variant="contained"
                         size="small"
                         onClick={() => handleReserveClick(bookstore)}
+                        style={styles.view}
                       >
                         Reserve
                       </Button>

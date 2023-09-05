@@ -22,10 +22,9 @@ function BookForm({ open, onClose, onSubmit }) {
 
   const [copies, setCopies] = React.useState(1);
   const [categories, setCategories] = React.useState([]);
-  const [image, setImage] = React.useState("");
+  const [image, setImage] = React.useState();
   const [publishedDate, setPublishedDate] = React.useState("");
   const [unitPrice, setUnitPrice] = React.useState(1);
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -109,7 +108,52 @@ function BookForm({ open, onClose, onSubmit }) {
           <TextField
             label="Book Picture"
             value={image}
+            sx={{
+              // margin: "8px",
+              // width: "60%",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  // borderColor: "#27496D",
+                  borderWidth: "0.1rem",
+                },
+                "&:hover fieldset": {
+                  // borderColor: "#27496D",
+                },
+                "&.Mui-focused fieldset": {
+                  // borderColor: "#27496D",
+                },
+              },
+              "& .MuiFormLabel-root": {
+                // color: "#27496D",
+              },
+              "& .MuiInputBase-input": {
+                // color: "#27496D",
+              },
+              "& .MuiInputBase-input[type=file]": {
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                opacity: "0",
+                zIndex: "2",
+              },
+              "& .MuiInputBase-root": {
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                zIndex: "1",
+              },
+              "& .MuiInputBase-root::before": {
+                // color: "#27496D",
+                // content: '"Choose File"',
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: "0",
+              },
+            }}
             onChange={(e) => setBookPic(e.target.value)}
+            type="file"
             fullWidth
             margin="normal"
           />
@@ -124,13 +168,6 @@ function BookForm({ open, onClose, onSubmit }) {
             label="Categories"
             value={categories}
             onChange={(e) => setCategories(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Publisher"
-            value={publisher}
-            onChange={(e) => setPublisher(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -230,7 +267,6 @@ const columns = [
     width: 250,
   },
 ];
-
 
 const handleFormSubmit = (formData) => {
   // Here you can handle the form data however you need to, such as sending it to a server or updating state

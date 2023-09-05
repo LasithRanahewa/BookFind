@@ -1,5 +1,6 @@
 // import models
-const Vendor = require("../models/vendor");
+const Vendor = require("../models/vendor.js");
+const Book = require("../models/book.js");
 
 // get a specific book
 const getBook = async(req, res) => {
