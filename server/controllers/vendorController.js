@@ -1,5 +1,6 @@
 // import vendor model
-const Vendor = require("../models/vendor");
+const Vendor = require("../models/vendor.js");
+const Book = require("../models/book.js");
 
 // register a new vendor
 const registerVendor = async (req, res) => {

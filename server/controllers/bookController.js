@@ -1,6 +1,6 @@
 // import book model
-const Book = require("../models/book");
-const Copy = require("../models/copy");
+const Book = require("../models/book.js");
+const Copy = require("../models/copy.js");
 
 // new book
 const newBook = async(req, res) => {
