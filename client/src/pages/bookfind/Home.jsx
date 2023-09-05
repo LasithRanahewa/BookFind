@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link as L } from "@mui/material/";
+import Effect from "../../components/Effect";
 import '../../App.css';
 
 const Home = ({ instance }) => {
@@ -132,6 +133,7 @@ const Home = ({ instance }) => {
         {/* Footer */}
         <Footer />
       </Grid>
+      <Effect></Effect>
     </>
   );
 };
