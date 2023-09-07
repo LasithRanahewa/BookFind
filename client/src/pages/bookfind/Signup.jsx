@@ -10,13 +10,18 @@ const Signup = () => {
   };
 
   const styles = {
+    container:{
+      display: "flex",
+      height:"100vh",
+      alignItems: "center",
+    },
     root: {
       backgroundColor: "#142850",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "100vh",
+      // height: "100vh",
     },
     formControl: {
       display: "flex",
@@ -51,7 +56,7 @@ const Signup = () => {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={styles.container}>
       <Grid
         container
         item
@@ -155,3 +160,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
