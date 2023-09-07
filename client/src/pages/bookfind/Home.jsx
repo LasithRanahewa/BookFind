@@ -94,9 +94,9 @@ const Home = ({ instance }) => {
         </Typography>
       {/* </Grid> */}
 
-      <Grid className="cards" container spacing={2}>
+      <Grid className="cards" container spacing={2} sx={{padding: '1rem'}}>
         {trendingBooksArr.map((book) => (
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={3} sm={6} xs={12} >
             <Link to="/book" style={{textDecoration: 'none'}}>
               <TrendingBookCard book={book} />
             </Link>
