@@ -31,7 +31,7 @@ const bookSchema = new mongoose.Schema({
 
     noOfPages: {
         type: Number,
-        required: true
+        required: false
     },
 
     copies: {
@@ -46,7 +46,7 @@ const bookSchema = new mongoose.Schema({
 
     isbn: {
         type: String,
-        required: true
+        required: false
     },
 
     categories: {
@@ -55,7 +55,7 @@ const bookSchema = new mongoose.Schema({
                 type: String,
             }
         ],
-        required: true
+        required: false
     },
 
     rating: {
@@ -66,17 +66,17 @@ const bookSchema = new mongoose.Schema({
 
     unitPrice: {
         type: Number,
-        required: true
+        required: false
     },
 
     publishedDate: {
         type: Date,
-        required: true
+        required: false
     },
 
     image: {
         type: String,
-        required: true
+        required: false
     }
 });
 

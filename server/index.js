@@ -7,11 +7,10 @@ const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 
-
 // import routes
 const authRouter = require("./routes/authRouter");
 const bookRouter = require("./routes/bookRouter");
-const bookstoreRouter = require("./routes/vendorRouter");
+const bookstoreRouter = require("./routes/bookstoreRouter");
 // const copyRouter = require("./routes/copyRouter");
 const findACopyRouter = require("./routes/findACopyRouter");
 // const reservationRouter = require("./routes/reservationRouter");
@@ -102,15 +101,17 @@ app.use("/api/bookstore", bookstoreRouter);
 app.use("/api/findACopy", findACopyRouter);
 // app.use("/api/reservation", reservationRouter);
 app.use("/api/vendor", vendorRouter);
-app.use("/api/user",userRouter);
+app.use("/api/user", userRouter);
 
 // test
 app.get("/", (req, res) => {
-  Post.find({}).then(data => {
-    res.json(data)
-  }).catch(error => {
-    res.status(408).json({error})
-  })
+  Post.find({})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.status(408).json({ error });
+    });
 });
 
 app.post("/upload", pechkinFileUpload(), async (req, res) => {

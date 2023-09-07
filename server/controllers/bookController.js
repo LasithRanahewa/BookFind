@@ -4,13 +4,14 @@ const Copy = require("../models/copy.js");
 
 // new book
 const newBook = async(req, res) => {
+	console.log(req.body)
 	try {
-		const { name, author, publisher } = req.body;
-		if (!name || !author || !publisher) {
-		return res.status(400).json({ error: "Incomplete book data" });
+		const { name, author, publisher ,description} = req.body;
+		if (!name || !author || !publisher || !description) {
+		return res.status(401).json({ error: "Incomplete book data" });
 		}
 	
-		const newBook = new Book({ name, author, publisher });
+		const newBook = new Book({ name, author, publisher,description });
 		await newBook.save();
 		// const newCopy = new Copy({ newBook._id, vendorId, quantity });
 		// await newCopy.save();
