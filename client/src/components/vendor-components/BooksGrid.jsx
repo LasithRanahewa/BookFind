@@ -55,6 +55,7 @@ function BookForm({ open, onClose, onSubmit }) {
         name,
         author,
         publisher,
+        description,
       })
       .then((obj) => {
         console.log("Book Added");
@@ -86,8 +87,8 @@ function BookForm({ open, onClose, onSubmit }) {
           />
           <TextField
             label="publisher"
-            value={isbn}
-            onChange={(e) => setISBN(e.target.value)}
+            value={publisher}
+            onChange={(e) => setPublisher(e.target.value)}
             fullWidth
             margin="normal"
           />

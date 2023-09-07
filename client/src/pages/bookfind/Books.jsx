@@ -38,12 +38,11 @@ import { Link } from "react-router-dom";
 //];
 
 const Books = ({ instance }) => {
-
   const [inputText, setInputText] = useState("");
   const [booksArr, setBooksArr] = useState([]);
-  
-  const styles={
-    heading:{
+
+  const styles = {
+    heading: {
       textShadow: "0.07rem 0.07rem 0.5rem #176B87",
       paddingTop: "3rem",
       color: "#DAE1E7",
@@ -52,26 +51,26 @@ const Books = ({ instance }) => {
       letterSpacing: "0.12rem",
       fontWeight: "bold",
     },
-    view:{
+    view: {
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
       },
     },
-    name:{
+    name: {
       fontSize: "1.6rem",
       textShadow: "0.02rem 0.02rem 0.13rem #176B87",
       color: "#053B50",
       fontWeight: "bold",
     },
-    author:{
+    author: {
       color: "#176B87",
     },
-    publisher:{
+    publisher: {
       color: "#176B87",
       paddingBottom: "1rem",
     },
-    content:{
+    content: {
       backgroundColor: "#EEEEEE",
     },
   };
@@ -100,7 +99,9 @@ const Books = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4" style={styles.heading}>BOOKS</Typography>
+      <Typography variant="h4" style={styles.heading}>
+        BOOKS
+      </Typography>
       {/* <Typography variant="h4" color={"#DAE1E7"} sx={{p:"2rem"}}>
         Books
       </Typography> */}
@@ -162,9 +163,9 @@ const Books = ({ instance }) => {
       </Grid>
 
       {/* Books */}
-      <Grid container spacing={2} padding={5}>
+      {/* <Grid container spacing={2} padding={5}>
         {booksArr.map((book) => (
-          <Grid item xs={12} key={book.id}>
+          <Grid item xs={12} key={book.id} sx={{margin:"0 "}}>
             <Link to={`/book?book=${book._id}`} style={{textDecoration:"none"}}>
               <Card sx={{ display: "flex" }}>
                 <CardMedia
@@ -187,6 +188,57 @@ const Books = ({ instance }) => {
                     {console.log(book)}
                     <Button variant="contained" size="small" style={styles.view}>
                       Find a Copy
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </Link>
+          </Grid> */}
+
+      <Grid container spacing={2} padding={5}>
+        {booksArr.map((book) => (
+          <Grid item xs={12} sm={6} md={3} key={book.id}>
+            <Link
+              to={`/book?book=${book._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Card style={{ height: "100%" }}>
+                <CardMedia
+                  component="img"
+                  sx={{ height: "15rem" }}
+                  image={book.coverUrl}
+                  alt={book.name}
+                />
+                <CardContent sx={{ flex: 1 }} style={styles.content}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    style={styles.name}
+                  >
+                    {book.name}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={styles.address}
+                  >
+                    {book.author}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={styles.email}
+                  >
+                    {book.publisher}
+                  </Typography>
+                  <Link to={`/availablebookstores?book=${book._id}`}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      style={styles.view}
+                    >
+                      Find a copy
                     </Button>
                   </Link>
                 </CardContent>
