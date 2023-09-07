@@ -95,7 +95,7 @@ function Router() {
     {
       path: "/featuredbook",
       element: <FeaturedBook instance={instance} />,
-    }
+    },
 
   
 
