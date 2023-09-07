@@ -31,7 +31,7 @@ const About = () => {
       textAlign: "center",
     },
     paragraph: {
-      padding: 0,
+      padding: "3rem 0rem",
       fontSize: "1.2rem",
       textAlign: "center",
       maxWidth: "50rem",
