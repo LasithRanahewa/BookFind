@@ -23,13 +23,18 @@ const Login = () => {
     // TODO: Add form validation and submit logic
   };
   const styles = {
+    container:{
+      display: "flex",
+      height:"100vh",
+      alignItems: "center",
+    },
     root: {
       backgroundColor: "#142850",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "100vh",
+      // height: "100vh",
     },
     formControl: {
       display: "flex",
@@ -88,8 +93,9 @@ const Login = () => {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={styles.container}>
       <Grid
+      
         container
         item
         xs={12}
@@ -104,7 +110,8 @@ const Login = () => {
             // maxHeight: "50%",
             width: "50%",
             height: "auto",
-            margin: "1rem 0 1rem 0",
+            margin: "1rem 0 0 0",
+            paddingBottom:"0",
             "@media (min-width: 960px)": {
               width: "70%",
               height: "70%",
