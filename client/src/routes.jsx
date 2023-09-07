@@ -13,6 +13,7 @@ import Profile from "./pages/bookfind/UserProfile";
 import AvailableBookstores from "./pages/bookfind/AvailableBookstores";
 import VendorPage from "./pages/bookfind/VendorPage";
 import BookPage from "./pages/bookfind/BookPage";
+import FeaturedBook from "./pages/bookfind/FeaturedBook";
 
 import Page404 from "./pages/Page404";
 
@@ -38,10 +39,10 @@ function Router() {
       path: "/books",
       element: <Books instance={instance} />,
     },
-    {
-      path: "/bookstores",
-      element: <Bookstores instance={instance} />,
-    },
+    // {
+    //   path: "/bookstores",
+    //   element: <Bookstores instance={instance} />,
+    // },
     {
       path: "/vendors",
       element: <Vendors instance={instance} />,
@@ -91,6 +92,11 @@ function Router() {
       path: "/vendor-login",
       element: <VendorLogIn instance={instance} />,
     },
+    {
+      path: "/featuredbook",
+      element: <FeaturedBook instance={instance} />,
+    }
+
   
 
     // 404
