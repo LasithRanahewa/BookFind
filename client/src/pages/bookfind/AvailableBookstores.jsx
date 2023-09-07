@@ -22,23 +22,23 @@ const AvailableBookstores = ({ instance }) => {
       textAlign: "center",
       fontSize: "1.5rem",
     },
-    name:{
+    name: {
       fontSize: "1.6rem",
       textShadow: "0.02rem 0.02rem 0.13rem #176B87",
       color: "#053B50",
       fontWeight: "bold",
     },
-    location:{
+    location: {
       color: "#176B87",
     },
-    email:{
+    email: {
       color: "#176B87",
       paddingBottom: "1rem",
     },
-    content:{
+    content: {
       backgroundColor: "#EEEEEE",
     },
-    view:{
+    view: {
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
@@ -49,6 +49,7 @@ const AvailableBookstores = ({ instance }) => {
   const [vendorsArr, setVendorsArr] = useState([]);
   const [selectedBookstore, setSelectedBookstore] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [dialogBoxBook, setDialogBoxBook] = useState("");
 
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -70,6 +71,22 @@ const AvailableBookstores = ({ instance }) => {
 
   const handleReserveClick = (bookstore) => {
     setSelectedBookstore(bookstore);
+
+    instance
+      .post("/book/get", {
+        id: searchParams.get("book"),
+      })
+      .then((obj) => {
+        setDialogBoxBook(obj.data.name);
+      })
+      .catch(() => {
+        setVendorsArr([
+          {
+            error: "Fetch error",
+          },
+        ]);
+      });
+
     setOpenDialog(true);
   };
 
@@ -103,13 +120,26 @@ const AvailableBookstores = ({ instance }) => {
                       alt={bookstore.name}
                     />
                     <CardContent sx={{ flex: 1 }} style={styles.content}>
-                      <Typography gutterBottom variant="h5" component="div" style={styles.name}>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        style={styles.name}
+                      >
                         {bookstore.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" style={styles.location}>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={styles.location}
+                      >
                         {bookstore.location}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" style={styles.email}>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={styles.email}
+                      >
                         {bookstore.email}
                       </Typography>
                       <Button
@@ -132,11 +162,18 @@ const AvailableBookstores = ({ instance }) => {
                   Bookstore: {selectedBookstore?.name}
                 </Typography>
                 <Typography variant="body1">
-                  Book: {searchParams.get("book")}
+                  Book: {dialogBoxBook == "" ? "" : dialogBoxBook}
                 </Typography>
               </DialogContent>
               <DialogActions>
-                <Button onClick={() => handleDialogClose(false)}>Cancel</Button>
+                <Button
+                  onClick={() => {
+                    handleDialogClose(false);
+                    setDialogBoxBook("");
+                  }}
+                >
+                  Cancel
+                </Button>
                 <Button onClick={() => handleDialogClose(true)}>Confirm</Button>
               </DialogActions>
             </Dialog>
