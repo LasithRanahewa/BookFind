@@ -94,7 +94,7 @@ const Home = ({ instance }) => {
         </Typography>
       {/* </Grid> */}
 
-      <Grid className="cards" container spacing={2} sx={{padding: '1rem'}}>
+      <Grid className="cards" container spacing={2} sx={{padding: '2rem'}}>
         {trendingBooksArr.map((book) => (
           <Grid item lg={3} sm={6} xs={12} >
             <Link to="/book" style={{textDecoration: 'none'}}>
@@ -116,7 +116,7 @@ const Home = ({ instance }) => {
             width="50%"
           />
         </Grid>
-        <Grid item sx={{ itemAlign: 'center'}} xs={12} xm={6} lg={5}>
+        <Grid item sx={{ itemAlign: 'center', padding: '2rem'}} xs={12} xm={6} lg={5}>
           <Typography variant="h5" sx={{ textAlign: 'justify', m: 1, 
           position: 'relative', left: '0', color: '#DAE1E7' }}>
             It was one of the most searing images of the twentieth century: 
