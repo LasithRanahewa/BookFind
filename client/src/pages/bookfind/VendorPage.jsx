@@ -9,6 +9,12 @@ import Navbar from "../../components/bookfind-components/Navbar";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
 const VendorPage = ({ instance }) => {
   const styles = {
@@ -20,23 +26,23 @@ const VendorPage = ({ instance }) => {
       letterSpacing: "0.06rem",
       fontWeight: "bold",
     },
-    content:{
+    content: {
       backgroundColor: "#EEEEEE",
     },
-    name:{
+    name: {
       fontSize: "1.6rem",
       textShadow: "0.02rem 0.02rem 0.13rem #176B87",
       color: "#053B50",
       fontWeight: "bold",
     },
-    author:{
+    author: {
       color: "#176B87",
     },
-    publisher:{
+    publisher: {
       color: "#176B87",
       paddingBottom: "1rem",
     },
-    view:{
+    view: {
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
@@ -44,8 +50,8 @@ const VendorPage = ({ instance }) => {
     },
   };
 
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedBookstore, setSelectedBookstore] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const [searchParams] = useSearchParams();
 
@@ -82,19 +88,18 @@ const VendorPage = ({ instance }) => {
     setFilteredBooks(filteredBooks);
   };
 
-  const handleReserveClick = (book) => {
-    setSelectedBook(book);
-    setShowConfirmation(true);
+  const handleReserveClick = (bookstore) => {
+    setSelectedBookstore(bookstore);
+    setOpenDialog(true);
   };
 
-  const handleConfirmClick = () => {
-    // Handle the confirmation logic here, such as sending a request to the server
-    setShowConfirmation(false);
-  };
-
-  const handleCancelClick = () => {
-    setSelectedBook(null);
-    setShowConfirmation(false);
+  const handleDialogClose = (confirmed) => {
+    if (confirmed) {
+      // Perform reservation logic here
+      console.log("Reservation confirmed for", selectedBookstore.name);
+    }
+    setSelectedBookstore(null);
+    setOpenDialog(false);
   };
 
   return (
@@ -253,13 +258,26 @@ const VendorPage = ({ instance }) => {
                     alt={book.name}
                   />
                   <CardContent sx={{ flex: 1 }} style={styles.content}>
-                    <Typography gutterBottom variant="h5" component="div" style={styles.name}>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      style={styles.name}
+                    >
                       {book.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" style={styles.author}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={styles.author}
+                    >
                       {book.author}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" style={styles.publisher}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={styles.publisher}
+                    >
                       {book.publisher}
                     </Typography>
                     <Button
@@ -285,15 +303,31 @@ const VendorPage = ({ instance }) => {
                     alt={book.name}
                   />
                   <CardContent sx={{ flex: 1 }}>
-                    <Link to={`/book?book=${book._id}`} style={{textDecoration:"none"}}>
-                      <Typography gutterBottom variant="h5" component="div" style={styles.name}>
+                    <Link
+                      to={`/book?book=${book._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        style={styles.name}
+                      >
                         {book.name}
                       </Typography>
                     </Link>
-                    <Typography variant="body2" color="text.secondary" style={styles.author}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={styles.author}
+                    >
                       {book.author}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" style={styles.publisher}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={styles.publisher}
+                    >
                       {book.publisher}
                     </Typography>
                     <Button
@@ -309,6 +343,21 @@ const VendorPage = ({ instance }) => {
               </Grid>
             ))}
         </Grid>
+        <Dialog open={openDialog} onClose={() => handleDialogClose(false)}>
+          <DialogTitle>Confirm Reservation</DialogTitle>
+          <DialogContent>
+            <Typography variant="body1">
+              Bookstore: {searchParams.get("book")}
+            </Typography>
+            <Typography variant="body1">
+              Book: {selectedBookstore?.name}
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => handleDialogClose(false)}>Cancel</Button>
+            <Button onClick={() => handleDialogClose(true)}>Confirm</Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     </>
   );
