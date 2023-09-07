@@ -97,7 +97,7 @@ const Home = ({ instance }) => {
       <Grid className="cards" container spacing={2}>
         {trendingBooksArr.map((book) => (
           <Grid item lg={3} sm={6} xs={12}>
-            <Link to="/book">
+            <Link to="/book" style={{textDecoration: 'none'}}>
               <TrendingBookCard book={book} />
             </Link>
           </Grid>

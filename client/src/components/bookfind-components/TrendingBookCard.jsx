@@ -2,15 +2,9 @@ import React from "react";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import Rating from "@mui/material/Rating";
 
-const cardStyle = {
-  height: "430px", // Set the desired fixed height for all cards
-  width: "350px",
-  backgroundColor: '#EEEEEE',  // Set the desired fixed width for all cards (optional)
-};
-
 const TrendingBookCard = ({ book }) => {
   return (
-    <Card style={cardStyle}>
+    <Card style={{height: '100%'}}>
       <CardMedia
         component="img"
         height="200"
@@ -29,7 +23,7 @@ const TrendingBookCard = ({ book }) => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Rating name="read-only" value={4.3} precision={0.01} readOnly />
-          <Typography variant="body2" color="text.secondary">
+          <Typography sx={{ display: "flex" }} variant="body2" color="text.secondary">
             4.3 (120 reviews)
           </Typography>
         </Box>
