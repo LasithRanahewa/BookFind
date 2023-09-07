@@ -32,13 +32,18 @@ const VendorLogIn = () => {
     // TODO: Add form validation and submit logic
   };
   const styles = {
+    container:{
+      display: "flex",
+      height:"100vh",
+      alignItems: "center",
+    },
     root: {
       backgroundColor: "#142850",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "100vh",
+      // height: "100vh",
     },
     formControl: {
       display: "flex",
@@ -98,7 +103,7 @@ const VendorLogIn = () => {
 
   return (
     
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={styles.container}>
       <Grid
         container
         item
@@ -115,6 +120,7 @@ const VendorLogIn = () => {
             width: "50%",
             height: "auto",
             margin: "1rem 0 1rem 0",
+            paddingBottom: "0",
             "@media (min-width: 960px)": {
               width: "70%",
               height: "70%",
@@ -124,7 +130,7 @@ const VendorLogIn = () => {
         />
       </Grid>
 
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={6} >
         <div>
           <form onSubmit={handleSubmit} style={styles.root}>
             <FormControl style={styles.formControl}>
