@@ -129,7 +129,7 @@ const Home = ({ instance }) => {
           </Typography>
 
           <Typography sx={{position: 'relative', paddingTop: '2rem'}} variant="body1">
-            <L href="/book">Learn more...</L>
+            <L href="/featuredbook">Learn more...</L>
           </Typography>
         </Grid>
 
