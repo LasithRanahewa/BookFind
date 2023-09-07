@@ -21,18 +21,25 @@ const BookPage = ({ instance }) => {
       },
       marginTop: "4rem",
     },
+    container:{
+      paddingTop:"2rem",
+    },
     left:{
       display:"flex",
       justifyContent: "center",
       alignItems: "center",
-
+      paddingBottom: "3rem"
+    },
+    right:{
+      padding: "0rem 3.5rem",
     },
     content:{
-      paddingRight: "5rem",
+      // padding: " 0rem 4rem",
       color: "#DAE1E7",
+      textAlign: "justify",
     },
     image:{
-      width:"60%",
+      width:"65%",
       justifyContent: "center",
       // paddingLeft: "4rem",
       // paddingTop: "4rem",
@@ -45,12 +52,14 @@ const BookPage = ({ instance }) => {
     },
     author:{
       color:"#DAE1E7",
+      fontWeight: "bold",
+      fontSize: "1.6rem",   
+
     },
     span:{
       fontSize: "1.6rem",   
       paddingTop: "3rem",
       color: "#DAE1E7",
-
     }
   };
 
@@ -77,7 +86,7 @@ const BookPage = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Grid container>
+      <Grid container style={styles.container}>
         <Grid item xs={12} sm={4} style={styles.left}>
           {/* Content for the left side */}
           <img
@@ -86,7 +95,7 @@ const BookPage = ({ instance }) => {
             style={styles.image}
           />
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={8} style={styles.right}>
           {/* Content for the right side */}
           <Typography variant="h4" gutterBottom style={styles.name}>
             {bookData.name}

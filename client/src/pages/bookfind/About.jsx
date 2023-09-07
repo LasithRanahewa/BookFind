@@ -20,6 +20,7 @@ const About = () => {
       width: "100%", // Set width to 100%
       margin: "auto",
       color: "#DAE1E7",
+      paddingTop: "3rem",
     },
     heading: {
       padding: 0,
@@ -31,7 +32,7 @@ const About = () => {
       textAlign: "center",
     },
     paragraph: {
-      padding: "3rem 0rem",
+      padding: "3rem 2rem",
       fontSize: "1.2rem",
       textAlign: "center",
       maxWidth: "50rem",
