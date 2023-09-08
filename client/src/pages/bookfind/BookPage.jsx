@@ -58,9 +58,12 @@ const BookPage = ({ instance }) => {
     },
     span:{
       fontSize: "1.6rem",   
-      paddingTop: "3rem",
+      paddingTop: "2rem",
       color: "#DAE1E7",
-    }
+    },
+    rating:{
+      color:"#DAE1E7"
+    },
   };
 
 
@@ -103,18 +106,25 @@ const BookPage = ({ instance }) => {
           <Typography variant="h6" gutterBottom style={styles.author}>
             {bookData.author}
           </Typography>
+
           <Rating name="book-rating" value={4.2} precision={0.01} readOnly />
+          <Typography variant="h6" gutterBottom style={styles.rating}>
+            {bookData.rating}
+          </Typography>
+
           <Typography variant="body1" gutterBottom style={styles.span}>Description</Typography>
           <Typography variant="body1" gutterBottom style={styles.content}>
             {/* <Span style={styles.span}>Description</Span> */}
             
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
+            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
             possimus vel cupiditate, iusto qui culpa quo pariatur suscipit?
             Architecto nam quisquam officia autem commodi, aliquid maxime veniam
             hic molestias soluta. Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Iste veritatis quod non modi odio, natus sequi!
             Labore dolore similique animi illo alias officiis sunt ex, nesciunt,
-            voluptas, pariatur beatae corrupti!
+            voluptas, pariatur beatae corrupti! */}
+
+            {bookData.description}
           </Typography>
 
           <Link to={`/availablebookstores?book=${bookData._id}`}>
