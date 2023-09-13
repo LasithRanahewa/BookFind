@@ -104,7 +104,7 @@ const deleteBooks = async (req, res) => {
 // update a book
 const updateBook = async (req, res) => {
 	try {
-		const bookId = req.params.id;
+		const bookId = req.body.id;
 		const updates = req.body;
 
 		// Find the book by its ID
