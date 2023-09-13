@@ -13,11 +13,11 @@ const {
     logoutUser
 } = require("../controllers/authController");
 
-// router.get("/register", (req, res) => res.render("/register"));
+router.get("/register", (req, res) => res.render("/register"));
 
 router.post("/register", (req, res) => registerUser(req, res));
 
-// router.get("/login", (req, res) => res.render("/login"));
+router.get("/login", (req, res) => res.render("/login"));
 
 router.post("/login", (req, res, next) => loginLocalUser(req, res, next));
 

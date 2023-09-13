@@ -1,55 +1,53 @@
 // import modules
 const passport = require("passport");
-const User = require("../models/user");
+const { User } = require("../models/user");
 
 // register a user
 const registerUser = async (req, res) => {
-    User.findOne({email: req.body.email}, (err, user) => {
-      if (err) {
-        return res.status(400).json({success: false, err});
-      }
-      if (user) {
-        return res.status(403).json({success: false, message: "User already exists"});
-      } else {
-        const newUser = new User(req.body);
-        newUser.setPassword(req.body.password);
-        newUser.save((err, user) => {
-          if (err) {
-            return res.status(400).json({success: false, err});
-          }
-          return res.status(201).json({
-            success: true,
-            user
-          });
-        })
-      }
-    })
+	try {
+		const existingUser = await User.findOne({ email: req.body.email });
+
+		if (existingUser) {
+			return res.status(403).json({ success: false, message: "User already exists" });
+		}
+
+		const newUser = new User(req.body);
+		newUser.setPassword(req.body.password);
+
+		const savedUser = await newUser.save();
+
+		return res.status(201).json({ success: true, user: savedUser });
+	} catch (err) {
+		return res.status(400).json({ success: false, err });
+	}
 };
 
+
 // login a local user
-const loginLocalUser = async (req, res, next) => {
-    User.findOne({email: req.body.email}, (err, user) => {
-        if(err) {
-            return res.status(500).json({success: false, err});
-        }
-        if(!user) {
-            return res.status(404).json({success: false, message: "User not found"});
-        }
-        if(!user.isValidPassword(req.body.password)) {
-            return res.status(401).json({success: false, message: "Password incorrect"});
-        }
-        passport.authenticate("local", (err, user, info) => {
-        req.logIn(user, (err) => {
-            if(err) {
-                throw err;
-            }
-            return res.status(200).json({
-                success: true,
-                user
-            });
-        });
-        })(req, res, next);
-    })
+const loginLocalUser = async(req, res) => {
+	try {
+		const user = await User.findOne({email : req.body.email});
+		
+		if(!user) {
+			return res.status(404).json({success : false, message : "User not found"});
+		}
+		if(!user.isValidPassword(req.body.password)) {
+			return res.status(401).json({success: false, message: "Password incorrect"});
+		}
+		passport.authenticate("local", (err, user, info) => {
+		req.logIn(user, (err) => {
+			if(err) {
+				throw err;
+			}
+			return res.status(200).json({
+				success: true,
+				user
+			});
+		});
+		})(req, res, next);
+	} catch(err) {
+		return res.status(500).json({ success: false, err });
+	}
 };
 
 // login a google user
