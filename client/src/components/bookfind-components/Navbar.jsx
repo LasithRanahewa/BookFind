@@ -24,7 +24,7 @@ const Navbar = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:760px)");
 
   const handleLogout = () => {
     setIsSignedIn(false);
@@ -89,6 +89,22 @@ const Navbar = () => {
             }}
           >
             Vendors
+          </Button>
+        </ListItem>
+
+        <ListItem>
+          <Button
+            color="inherit"
+            component={Link}
+            to="/authors"
+            sx={{
+              color: location.pathname === "/authors" ? "#00909E" : "#DAE1E7",
+              fontWeight: location.pathname === "/authors" ? "bold" : "normal",
+              textDecoration: "none",
+              fontSize: "1rem",
+            }}
+          >
+            Authors
           </Button>
         </ListItem>
 
@@ -244,6 +260,21 @@ const Navbar = () => {
                 }}
               >
                 Vendors
+              </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/authors"
+                sx={{
+                  color:
+                    location.pathname === "/authors" ? "#00909E" : "#DAE1E7",
+                    fontWeight: location.pathname === "/authors" ? "bold" : "normal",
+                  fontSize: "1rem",
+                  textDecoration: "none",
+                  marginRight: "1.5rem",
+                }}
+              >
+                Authors
               </Button>
               <Button
                 color="inherit"
