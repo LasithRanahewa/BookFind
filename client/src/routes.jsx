@@ -20,6 +20,10 @@ import Page404 from "./pages/Page404";
 import VendorDashboard from "./pages/vendor/VendorDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
+import AuthorPage from "./pages/bookfind/AuthorPage";
+import Authors from "./pages/bookfind/Authors";
+
+
 import VendorSignUp from "./pages/vendor/VendorSignUp";
 import VendorLogIn from "./pages/vendor/VendorLogIn";
 import axios from "axios";
@@ -95,6 +99,14 @@ function Router() {
     {
       path: "/featuredbook",
       element: <FeaturedBook instance={instance} />,
+    },
+    {
+      path: "/authors",
+      element: <Authors instance={instance} />,
+    },
+    {
+      path: "/authorpage",
+      element: <AuthorPage instance={instance} />,
     },
 
   
