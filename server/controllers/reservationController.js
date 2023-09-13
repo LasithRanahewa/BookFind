@@ -1,6 +1,6 @@
 // import modules
 const Reservation = require("../models/reservation");
-const Copy = require("../models/copy");
+// const Copy = require("../models/copy");
 
 // get a specific reservation
 const getReservation = async(req, res) => {
@@ -12,7 +12,7 @@ const getReservation = async(req, res) => {
             return res.status(500).json({ error: "Internal Server Error" });
         }
 
-        await book.save();
+        await reservation.save();
 
         return res.json(reservationData);
     } catch(err) {
@@ -35,10 +35,10 @@ const getAllReservations = async(req, res) => {
 // new reservation
 const newReservation = async(req, res) => {
     try {
-        const { vendorId, bookId, reservationDate } = req.body;
+        const { vendorId, reservationId, reservationDate } = req.body;
         // const copy = await Copy.findById(copyid);
 
-        if(!reservationDate || !vendorId || !bookId) {
+        if(!reservationDate || !vendorId || !reservationId) {
             return res.json({ error: "Incomplete Reservation Data" });
         } 
 
@@ -50,7 +50,7 @@ const newReservation = async(req, res) => {
 
         const newReservation = new Reservation({ reservationDate, copyid, quantity });
         await newReservation.save();
-        return res.status(201).json({ message: "Book added successfully" });
+        return res.status(201).json({ message: "reservation added successfully" });
     } catch(err) {
         console.error(err);
         res.status(500).json({ error: "Internal server error" });
@@ -75,9 +75,40 @@ const deleteReservation = async(req, res) => {
       }
 };
 
+// update reservation
+const updateReservation = async (req, res) => {
+	try {
+		const reservationId = req.body.id;
+		const updates = req.body;
+
+		// Find the reservation by its ID
+		const reservation = await Reservation.findById(reservationId);
+
+		if (!reservation) {
+			return res.status(404).json({ success: false, message: 'reservation not found' });
+		}
+
+		// Update the reservation properties with the values from req.body
+		if (updates.reservationDate) {
+			reservation.reservationDate = updates.reservationDate;
+		}
+		
+		// Save the updated reservation to the database
+		await reservation.save();
+
+		return res.status(200).json({
+			success: true,
+			updatedreservation: reservation,
+		});
+	} catch (error) {
+		return res.status(500).json({ success: false, error: error.message });
+	}
+};
+
 module.exports = {
     getReservation,
     getAllReservations,
     newReservation,
-    deleteReservation
+    deleteReservation,
+    updateReservation
 };
