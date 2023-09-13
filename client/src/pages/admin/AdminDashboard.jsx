@@ -14,6 +14,7 @@ import { Menu as MenuIcon } from "@mui/icons-material";
 import BookstoresDataGrid from "../../components/admin-components/BookstoresDataGrid";
 import ReservationsDataGrid from "../../components/admin-components/ReservationsDataGrid";
 import UsersDataGrid from "../../components/admin-components/UsersDataGrid";
+import AuthorsGrid from "../../components/admin-components/AuthorsGrid";
 
 const AdminDashboard = ({ instance }) => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -35,20 +36,44 @@ const AdminDashboard = ({ instance }) => {
     <div style={{ width: "100vw" }}>
       <List>
         <ListItem>
-          <Button onClick={() => handleButtonClick("bookstores")} sx={{color: "#142850"}}>
+          <Button
+            onClick={() => handleButtonClick("bookstores")}
+            sx={{ color: "#142850" }}
+          >
             Bookstores
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("reservations")} sx={{color: "#142850"}}>
+          <Button
+            onClick={() => handleButtonClick("authors")}
+            sx={{ color: "#142850" }}
+          >
+            Authors
+          </Button>
+        </ListItem>
+        <ListItem>
+          <Button
+            onClick={() => handleButtonClick("reservations")}
+            sx={{ color: "#142850" }}
+          >
             Reservations
           </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("users")} sx={{color: "#142850"}}>Users</Button>
+          <Button
+            onClick={() => handleButtonClick("users")}
+            sx={{ color: "#142850" }}
+          >
+            Users
+          </Button>
         </ListItem>
         <ListItem>
-          <Button onClick={() => handleButtonClick("logout")} sx={{color: "#142850"}}>Log Out</Button>
+          <Button
+            onClick={() => handleButtonClick("logout")}
+            sx={{ color: "#142850" }}
+          >
+            Log Out
+          </Button>
         </ListItem>
       </List>
     </div>
@@ -58,6 +83,9 @@ const AdminDashboard = ({ instance }) => {
   switch (activeButton) {
     case "bookstores":
       rightGridComponent = <BookstoresDataGrid instance={instance} />;
+      break;
+    case "authors":
+      rightGridComponent = <AuthorsGrid instance={instance} />;
       break;
     case "reservations":
       rightGridComponent = <ReservationsDataGrid instance={instance} />;
@@ -83,7 +111,9 @@ const AdminDashboard = ({ instance }) => {
         }}
       >
         <div style={{ textAlign: "center", marginBottom: "1rem" }}>
-          <Typography variant="h4" sx={{color: "#142850"}}>Admin Dashboard</Typography>
+          <Typography variant="h4" sx={{ color: "#142850" }}>
+            Admin Dashboard
+          </Typography>
         </div>
         <Grid container sx={{ border: "1px solid black" }}>
           {!isMobile && (
