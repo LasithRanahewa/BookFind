@@ -1,0 +1,21 @@
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 3px;
+      background: radial-gradient(circle, #fff 0%, #fff 30%, transparent 40%);
+      border-radius: 50%;
+      animation: twinkle 4s infinite;
+      animation-delay: calc(2s * random());
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.5;
+      }
+    }
