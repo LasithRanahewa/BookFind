@@ -61,18 +61,18 @@ const vendorSchema = new mongoose.Schema ({
 });
 
 // method to hash and set the password
-vendorSchema.methods.setPassword = function(password) {
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-        this.password = hash;
-    });
-};
+// vendorSchema.methods.setPassword = function(password) {
+//     bcrypt.hash(password, saltRounds, function(err, hash) {
+//         this.password = hash;
+//     });
+// };
 
 // method to check whether a password is correct or not
-vendorSchema.methods.isValidPassword = function(password) {
-    bcrypt.compare(password, this.password, function(err, result) {
-        return result === true;
-    });
-};
+// vendorSchema.methods.isValidPassword = function(password) {
+//     bcrypt.compare(password, this.password, function(err, result) {
+//         return result === true;
+//     });
+// };
 
 // export the bookstore model
 module.exports = mongoose.model("Vendor", vendorSchema);
