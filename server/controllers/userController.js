@@ -1,5 +1,6 @@
 // import user model
-const { User } = require("../models/user");
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
 
 // get a specific user
 const getUser = async (req, res) => {
@@ -37,16 +38,16 @@ const getAllUsers = async (req, res) => {
 // add a user
 const addUser = async (req, res) => {
     try {
-        const newUser = req.body;
+        const { name, email, password } = req.body;
 
-        const existingUser = await User.findOne({ email: newUser.email });
+        const existingUser = await User.findOne({ email: email });
         if (existingUser) {
             return res.status(403).json({ success: false, message: "User already exists" });
         }
 
-        const user = new User(newUser);
-        user.setPassword(newUser.password);
-        await user.save();
+        const salt = await bcrypt.genSalt(10)
+		const hashedPassword = await bcrypt.hash(password, salt)
+        const user = await User.create({ name: name, email: email, password: hashedPassword });
 
         return res.status(201).json({
             success: true,
@@ -56,30 +57,6 @@ const addUser = async (req, res) => {
         return res.status(400).json({ success: false, error: error.message });
     }
 };
-
-// // update a user
-// const updateUser = async (req, res) => {
-//     try {
-//         const userId = req.params.id;
-//         const updatedUser = req.body;
-
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return res.status(404).json({ success: false, message: "User not found" });
-//         }
-
-//         user.set(updatedUser);
-//         user.setPassword(updatedUser.password);
-//         await user.save();
-
-//         return res.status(200).json({
-//             success: true,
-//             updatedUser: user,
-//         });
-//     } catch (error) {
-//         return res.status(400).json({ success: false, error: error.message });
-//     }
-// };
 
 // delete a user
 const deleteUser = async (req, res) => {
@@ -107,7 +84,7 @@ const updateUser = async (req, res) => {
 		const updates = req.body;
 
 		// Find the user by its ID
-		const user = await user.findById(userId);
+		const user = await User.findById(userId);
 
 		if (!user) {
 			return res.status(404).json({ success: false, message: 'user not found' });
@@ -124,7 +101,9 @@ const updateUser = async (req, res) => {
 			user.email = updates.email;
 		}
 		if (updates.password) {
-			user.password = updates.password;
+            const salt = await bcrypt.genSalt(10)
+			const hashedPassword = await bcrypt.hash(updates.password, salt)
+			user.password = hashedPassword;
 		}
 		if (updates.address) {
 			user.address = updates.address;
