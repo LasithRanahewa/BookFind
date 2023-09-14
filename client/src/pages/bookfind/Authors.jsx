@@ -5,13 +5,9 @@ import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
 
-
-
-
-
-const Authors = ({instance}) => {
-  const styles={
-    heading:{
+const Authors = ({ instance }) => {
+  const styles = {
+    heading: {
       textShadow: "0.07rem 0.07rem 0.5rem #176B87",
       paddingTop: "3rem",
       color: "#DAE1E7",
@@ -20,45 +16,44 @@ const Authors = ({instance}) => {
       letterSpacing: "0.12rem",
       fontWeight: "bold",
     },
-    name:{
+    name: {
       fontSize: "1.57rem",
       textShadow: "0.02rem 0.02rem 0.13rem #176B87",
       color: "#053B50",
       fontWeight: "bold",
     },
-    address:{
+    address: {
       color: "#176B87",
     },
-    email:{
+    email: {
       color: "#176B87",
       paddingBottom: "1rem",
     },
-    view:{
+    view: {
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
       },
     },
-    content:{
+    content: {
       backgroundColor: "#EEEEEE",
     },
   };
 
-
+  const [authorsArr, setAuthorsArr] = useState([]);
   const [inputText, setInputText] = useState("");
-  const [vendorsArr, setVendorsArr] = useState([]);
 
   const handleSearch = () => {
     instance
-      .post("vendor/search", {
+      .post("author/search", {
         name: inputText,
       })
       .then((obj) => {
         console.log(obj);
-        setVendorsArr(obj.data);
+        setAuthorsArr(obj.data);
       })
       .catch(() => {
-        setVendorsArr([
+        setAuthorsArr([
           {
             error: "Fetch error",
           },
@@ -73,7 +68,9 @@ const Authors = ({instance}) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4" style={styles.heading}>AUTHORS</Typography>
+      <Typography variant="h4" style={styles.heading}>
+        AUTHORS
+      </Typography>
       {/* <Typography variant="h4">Vendors</Typography> */}
       <Grid
         sx={{
@@ -135,33 +132,43 @@ const Authors = ({instance}) => {
 
       {/* Bookstores */}
       <Grid container spacing={2} padding={5}>
-        {vendorsArr.map((vendor) => (
-          <Grid item xs={12} sm={6} md={3} key={vendor.id}>
-
-            <Card style={{height:'100%'}}>
-
-
+        {authorsArr.map((author) => (
+          <Grid item xs={12} sm={6} md={3} key={author.id}>
+            <Card style={{ height: "100%" }}>
               <CardMedia
                 component="img"
                 sx={{ height: "15rem" }}
-                image={vendor.image}
-                alt={vendor.name}
+                image={author.image}
+                alt={author.name}
               />
               <CardContent sx={{ flex: 1 }} style={styles.content}>
-                <Typography gutterBottom variant="h5" component="div" style={styles.name}>
-                  {vendor.name.toUpperCase()}
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={styles.name}
+                >
+                  {author.name.toUpperCase()}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" style={styles.address}>
-                  {vendor.location}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={styles.address}
+                >
+                  {author.contactNo}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" style={styles.email}>
-                  {vendor.email}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={styles.email}
+                >
+                  {author.email}
                 </Typography>
-                <Link to={`/bookstore?vendor=${vendor._id}`}>
+                {/* <Link to={`/bookstore?vendor=${vendor._id}`}>
                   <Button variant="contained" size="small" style={styles.view}>
                     View Books
                   </Button>
-                </Link>
+                </Link> */}
               </CardContent>
             </Card>
           </Grid>
