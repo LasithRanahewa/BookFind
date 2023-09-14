@@ -1,13 +1,12 @@
 // import modules
 const passport = require("passport");
-const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 
 // register a user
-// const registerUser = async (req, res) => {
-// 	console.log(req.body);
-// 	try {
-// 		const existingUser = await User.findOne({ email: req.body.email });
+const registerUser = async (req, res) => {
+	console.log(req.body);
+	try {
+		const existingUser = await User.findOne({ email: req.body.email });
 
 // 		if (existingUser) {
 // 			return res.status(403).json({ success: false, message: "User already exists" });
@@ -64,7 +63,6 @@ const registerUser = async(req, res) => {
 		return res.status(400).json({ success: false, err });
 	}
 };
-
 
 // login a local user
 const loginLocalUser = async(req, res) => {
