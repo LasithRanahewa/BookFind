@@ -93,7 +93,7 @@ const BookPage = ({ instance }) => {
         <Grid item xs={12} sm={4} style={styles.left}>
           {/* Content for the left side */}
           <img
-            src="https://via.placeholder.com/200"
+            src={bookData.image}
             alt="Book Cover"
             style={styles.image}
           />

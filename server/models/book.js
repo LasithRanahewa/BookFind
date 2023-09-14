@@ -31,7 +31,7 @@ const bookSchema = new mongoose.Schema({
 
     noOfPages: {
         type: Number,
-        required: true
+        required: false
     },
 
     copies: {
@@ -71,12 +71,12 @@ const bookSchema = new mongoose.Schema({
 
     publishedDate: {
         type: Date,
-        required: true
+        required: false
     },
 
     image: {
         type: String,
-        required: true
+        required: false
     }
 });
 
