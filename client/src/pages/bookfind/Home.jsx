@@ -52,7 +52,8 @@ const Home = ({ instance }) => {
   const styles = {
     container: {
       display: "flex",
-      height: "95vh",
+      // height: "95vh",
+      minHeight: "100vh",
       alignItems: "center",
     },
     root: {
