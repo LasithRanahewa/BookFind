@@ -1,29 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-html, body {
+html,
+body {
     background-color: #142850;
     font-family: 'Open Sans Condensed', sans-serif;
-    width: 100vw;
+    /* width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
     background-color: #142850;
-    overflow-x: hidden;
-} 
-div {
-    margin: 0;
-    padding: 0;
+    overflow-x: hidden; */
 }
 
+/* div {
+    margin: 0;
+    padding: 0;
+} */
+/* 
 .homeContent{
     width: 100vw;
     position: relative;
     top: 11rem;
     left: 4rem;
-}
+} */
 
 .firstLine, .thirdLine{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     letter-spacing: 0.1rem;
 }
 
@@ -32,18 +34,39 @@ div {
     font-weight: bold;
 }
 
-.homeImage{
+.heading{
+    text-align:center;
+    font-size: 5rem;
+    font-weight:bold;
+    margin: 0;
+    /* padding: 1rem 0; */
+     /* textShadow: "-1px -1px 0px rgba(255, 255, 255, 0.2), 1px 1px 0px rgba(7, 63, 69, 0.8)", */
+  }
+  .h-trending{
+    color: #142850;
+  }
+
+  .h-featured{
+    margin-bottom: 2rem;
+    color: #465f91;
+    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8);
+  }
+
+  .learnmore{
+    color:#748ec2;
+  }
+/* .homeImage{
     position: relative;
     top: 5rem;
     left: 9.8rem;
-}
+} */
 
-.trendbooks{
+/* .trendbooks{
     position: relative;
     color: #DAE1E7;
     padding: 2rem;
     bottom: 5rem;
-}
+} */
 
 .trendbooks span{
     text-shadow: 0.07rem 0.07rem 0.5rem #176B87;
@@ -55,25 +78,25 @@ div {
     font-weight: bold;
 }
 
-.BigText{
+/* .BigText{
     position: relative;
     top: 3rem;
-}
+} */
 
-.BigText span{
+/* .BigText span{
     font-size: 9rem;
     letter-spacing: 0.4rem;
     opacity: 0.2;
-}
+} */
 
-.featuredbooks{
+/* .featuredbooks{
     color: #DAE1E7;
     padding: 2rem;
     padding-top: 6rem;
     text-shadow: 0.02rem 0.02rem 0.13rem #176B87;
-}
+} */
 
-.featuredbooks span{
+/* .featuredbooks span{
     text-shadow: 0.07rem 0.07rem 0.5rem #176B87;
     padding-top: 3rem;
     color: #DAE1E7;
@@ -81,19 +104,19 @@ div {
     font-size: 3rem;
     letter-spacing: 0.12rem;
     font-weight: bold;
-}
+} */
 
-.featuredImage{
+/* .featuredImage{
     position: relative;
     padding: 2rem;
     padding-top: 0;
     left: 7.5rem;
-}
+} */
 
-.cards{
+/* .cards{
     background-color: #27496D;
 
-}
+} */
 
 @media(max-width:950px){
     .homeContent{
@@ -117,13 +140,13 @@ div {
         left: 4rem;
     }
     
-    .homeImage{
+    /* .homeImage{
         position: relative;
-        padding-top: 4.5rem;
+        padding-top: 1.8rem;
         align: center;
-        top: 2rem;
+        top: 0.1rem;
         left: 6.75rem;
-    }
+    } */
 
     .firstLine, .thirdLine{
         font-size: 1rem;
@@ -135,13 +158,13 @@ div {
         font-weight: bold;
     }
 
-    .BigText span{
+    /* .BigText span{
         opacity: 0;
-    }
+    } */
 
     .featuredImage{
         position: relative;
-        align: center;
+        text-align: center;
         top: 1rem;
         left: 4.75rem;
     }

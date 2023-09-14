@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-const VendorPage = ({ instance }) => {
+const AuthorPage = ({ instance }) => {
   const styles = {
     heading: {
       // textShadow: "0.07rem 0.07rem 0.5rem #176B87",
@@ -178,7 +178,7 @@ const VendorPage = ({ instance }) => {
             fontWeight: "bold",
           }}
         >
-          AVAILABLE BOOKS
+          AUTHOR'S BOOKS
         </Typography>
 
         {/* Search bar */}
@@ -363,4 +363,4 @@ const VendorPage = ({ instance }) => {
   );
 };
 
-export default VendorPage;
+export default AuthorPage;

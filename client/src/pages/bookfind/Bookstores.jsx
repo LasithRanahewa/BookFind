@@ -138,11 +138,11 @@ const Bookstores = () => {
             <Card>
               <CardMedia
                 component="img"
-                sx={{ height: "15rem" }}
+                sx={{ height: "15rem"}}
                 image={bookstore.coverUrl}
                 alt={bookstore.name}
               />
-              <CardContent sx={{ flex: 1 }} style={styles.content}>
+              <CardContent sx={{ flex: 1}} style={styles.content}>
                 <Typography gutterBottom variant="h5" component="div" style={styles.name}>
                   {bookstore.name}
                 </Typography>

@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-
+import React from 'react';
+import featured from "../../assets/Featuredbook.jpg";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-
 import Rating from "@mui/material/Rating";
-
-import Button from "@mui/material/Button";
-
 import Navbar from "../../components/bookfind-components/Navbar";
 
-const BookPage = ({ instance }) => {
+
+const FeaturedBook = () => {
 
   const styles={
     button:{
@@ -31,24 +26,22 @@ const BookPage = ({ instance }) => {
       paddingBottom: "3rem"
     },
     right:{
-      padding: "0rem 3.5rem",
+      padding: "4rem 3.5rem",
     },
     content:{
-      // padding: " 0rem 4rem",
       color: "#DAE1E7",
       textAlign: "justify",
     },
     image:{
       width:"65%",
       justifyContent: "center",
-      // paddingLeft: "4rem",
-      // paddingTop: "4rem",
     },
     name:{
       // color:"#DAE1E7",
       color: "#64CCC5",
       fontWeight: "bold",
       textShadow: "0.2rem 0.2rem 1rem #176B87",
+      
     },
     author:{
       color:"#DAE1E7",
@@ -58,34 +51,13 @@ const BookPage = ({ instance }) => {
     },
     span:{
       fontSize: "1.6rem",   
-      paddingTop: "2rem",
+      paddingTop: "3rem",
       color: "#DAE1E7",
     },
-    rating:{
-      color:"#DAE1E7"
-    },
+    
   };
 
 
-  const [searchParams] = useSearchParams();
-  const [bookData, setBookData] = useState({});
-
-  useEffect(() => {
-    instance
-      .post("/book/get", {
-        id: searchParams.get("book"),
-      })
-      .then((obj) => {
-        setBookData(obj.data);
-      })
-      .catch(() => {
-        setBookData([
-          {
-            error: "Fetch error",
-          },
-        ]);
-      });
-  }, []);
   return (
     <>
       <Navbar />
@@ -93,49 +65,39 @@ const BookPage = ({ instance }) => {
         <Grid item xs={12} sm={4} style={styles.left}>
           {/* Content for the left side */}
           <img
-            src="https://via.placeholder.com/200"
+            src={featured}
             alt="Book Cover"
             style={styles.image}
           />
         </Grid>
+        <div class="vl"></div>
         <Grid item xs={12} sm={8} style={styles.right}>
           {/* Content for the right side */}
           <Typography variant="h4" gutterBottom style={styles.name}>
-            {bookData.name}
+            SPARE
           </Typography>
           <Typography variant="h6" gutterBottom style={styles.author}>
-            {bookData.author}
+            Prince Harry
           </Typography>
-
           <Rating name="book-rating" value={4.2} precision={0.01} readOnly />
-          <Typography variant="h6" gutterBottom style={styles.rating}>
-            {bookData.rating}
-          </Typography>
-
           <Typography variant="body1" gutterBottom style={styles.span}>Description</Typography>
           <Typography variant="body1" gutterBottom style={styles.content}>
             {/* <Span style={styles.span}>Description</Span> */}
             
-            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-            possimus vel cupiditate, iusto qui culpa quo pariatur suscipit?
-            Architecto nam quisquam officia autem commodi, aliquid maxime veniam
-            hic molestias soluta. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Iste veritatis quod non modi odio, natus sequi!
-            Labore dolore similique animi illo alias officiis sunt ex, nesciunt,
-            voluptas, pariatur beatae corrupti! */}
-
-            {bookData.description}
+            Spare is a memoir by Prince Harry, Duke of Sussex, which was released on 10 January 2023. It was ghostwritten
+            by J. R. Moehringer and published by Penguin Random House. It is 416 pages long and available in digital, paperback, 
+            and hardcover formats and has been translated into fifteen languages. There is also a 15-hour audiobook edition, which 
+            Harry narrates himself.
+            Spare received generally mixed reviews from critics, some who praised Harry's openness but were critical of the inclusion
+             of too many personal details. According to Guinness World Records, Spare became "the fastest selling non-fiction book of 
+             all time" on the date of its release.
           </Typography>
 
-          <Link to={`/availablebookstores?book=${bookData._id}`}>
-            <Button variant="contained" color="primary" style={styles.button}>
-              Find a Copy
-            </Button>
-          </Link>
         </Grid>
       </Grid>
     </>
   );
+ 
 };
 
-export default BookPage;
+export default FeaturedBook;

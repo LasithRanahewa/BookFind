@@ -1,101 +1,109 @@
 // import user model
-const User = require("../models/user");
+const { User } = require("../models/user");
 
 // get a specific user
-const getUser = async(req, res) => {
-    const userId = req.params.id;
+const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findById(userId);
 
-    User.findById(userId, (err, user) => {
-        if(err) {
-            return res.status(400).json({ success: false, err });
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
         }
 
         return res.status(200).json({
             success: true,
-            user
+            user,
         });
-    });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
 };
 
 // get all the users
-const getAllUsers = async(req, res) => {
-    User.find({ isAdmin: false }, (err, users) => {
-        if(err) {
-            return res.status(400).json({ success: false, err });
-        }
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({ isAdmin: false });
 
         return res.status(200).json({
             success: true,
-            usersList: users
+            usersList: users,
         });
-    });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
 };
 
-// add a new user
-const addUser = async(req, res) => {
-    const newUser = req.body;
-    console.log(req.body);
+// add a user
+const addUser = async (req, res) => {
+    try {
+        const newUser = req.body;
 
-    User.findOne({email: newUser.email}, (err, user) => {
-        if (err) {
-          return res.status(400).json({success: false, err});
+        const existingUser = await User.findOne({ email: newUser.email });
+        if (existingUser) {
+            return res.status(403).json({ success: false, message: "User already exists" });
         }
-        if (user) {
-          return res.status(403).json({success: false, message: "User already exists"});
-        } else {
-          const newUser = new User(req.body);
-          newUser.setPassword(req.body.password);
-          newUser.save((err, user) => {
-            if (err) {
-              return res.status(400).json({success: false, err});
-            }
-            return res.status(201).json({
-              success: true,
-              user
-            });
-          });
-        }
-    });
+
+        const user = new User(newUser);
+        user.setPassword(newUser.password);
+        await user.save();
+
+        return res.status(201).json({
+            success: true,
+            user,
+        });
+    } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+    }
 };
 
-// update user
+// update a user
 const updateUser = async (req, res) => {
-    const userId = req.params.id
-    const updatedUser = new User(req.body)
-    updatedUser.setPassword(req.body.password);
+    try {
+        const userId = req.params.id;
+        const updatedUser = req.body;
 
-    User.findByIdAndUpdate(userId,updatedUser, (err, user) => {
-        if (err) {
-            return res.status(400).json({ success: false, err });
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
         }
+
+        user.set(updatedUser);
+        user.setPassword(updatedUser.password);
+        await user.save();
 
         return res.status(200).json({
             success: true,
-            updatedUser: user
+            updatedUser: user,
         });
-    })
-}
+    } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+    }
+};
 
-// delete user
+// delete a user
 const deleteUser = async (req, res) => {
-    const userId = req.params.id
+    try {
+        const userId = req.params.id;
 
-    User.findByIdAndDelete(userId, (err, user) => {
-        if (err) {
-            return res.status(400).json({ success: false, err });
+        const user = await User.findByIdAndDelete(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
         }
 
         return res.status(200).json({
             success: true,
-            deletedUser: user
+            deletedUser: user,
         });
-    })
-}
+    } catch (error) {
+        return res.status(400).json({ success: false, error: error.message });
+    }
+};
 
 module.exports = {
     getUser,
     getAllUsers,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
 };

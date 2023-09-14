@@ -9,7 +9,6 @@ import {
   DialogTitle,
   Grid,
   InputAdornment,
-  Paper,
   TextField,
   Typography,
   IconButton,
@@ -17,6 +16,25 @@ import {
 import Navbar from "../../components/bookfind-components/Navbar";
 import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+
+const reservations = [
+  {
+    id: 1,
+    book: "The Great Gatsby",
+    bookstore: "Barnes & Noble",
+    date: "10/10/2021",
+    time: "10:00 AM",
+  },
+];
 
 const TextFieldWrapper = styled(TextField)({
   // margin: "8px",
@@ -303,7 +321,7 @@ const UserProfile = () => {
                   <>
                     {!isEditingPassword && (
                       <Button onClick={handleEditPasswordClick}>
-                         <IconButton style={{ color: "#27496D" }}>
+                        <IconButton style={{ color: "#27496D" }}>
                           <EditIcon />
                         </IconButton>
                       </Button>
@@ -369,52 +387,103 @@ const UserProfile = () => {
             md={6}
             style={{ display: "flex", justifyContent: "center" }}
           >
-                    {isEditingProfilePicture && (
-                      <div>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleProfilePictureChange}
-                        />
-                        {profilePicture && (
-                          <Button onClick={handleDeselectProfilePictureClick} style={{ color: "#27496D" }}>
-                            Deselect
-                          </Button>
-                        )}
-                      </div>
-                    )}
-                    {!isEditingProfilePicture && (
-                      <Button onClick={handleEditProfilePictureClick} style={{ color: "#27496D" }}>
-                        Change Profile Picture
-                      </Button>
-                    )}
-                  </Grid>
-                </Grid>
-                {shouldShowSaveButton && (
-                  <Button onClick={handleSaveChangesClick} style={{ color: "#27496D", marginTop:"1rem"}}>
-                    Save Changes
+            {isEditingProfilePicture && (
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
+                />
+                {profilePicture && (
+                  <Button
+                    onClick={handleDeselectProfilePictureClick}
+                    style={{ color: "#27496D" }}
+                  >
+                    Deselect
                   </Button>
                 )}
-              </Paper>
-
-              <Dialog
-                open={isConfirmationDialogOpen}
-                onClose={handleConfirmationDialogClose}
+              </div>
+            )}
+            {!isEditingProfilePicture && (
+              <Button
+                onClick={handleEditProfilePictureClick}
+                style={{ color: "#27496D" }}
               >
-                <DialogTitle>Confirmation</DialogTitle>
-                <DialogContent>
-                  <Typography>Are you sure you want to save changes?</Typography>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleConfirmationDialogClose} style={{ color: "#27496D" }}>
-                    Cancel
-                  </Button>
-                  <Button onClick={handleConfirmAllChanges} style={{ color: "#27496D"}}>
-                    Save
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </>
+                Change Profile Picture
+              </Button>
+            )}
+          </Grid>
+        </Grid>
+        {shouldShowSaveButton && (
+          <Button
+            onClick={handleSaveChangesClick}
+            style={{ color: "#27496D", marginTop: "1rem" }}
+          >
+            Save Changes
+          </Button>
+        )}
+      </Paper>
+      <Dialog
+        open={isConfirmationDialogOpen}
+        onClose={handleConfirmationDialogClose}
+      >
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to save changes?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleConfirmationDialogClose}
+            style={{ color: "#27496D" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleConfirmAllChanges}
+            style={{ color: "#27496D" }}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Paper
+        sx={{
+          p: 5,
+          m: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          backgroundColor: "#DAE1E7",
+        }}
+      >
+        <Typography variant="h4" gutterBottom color={"#27496D"}>Reservations</Typography>
+        <TableContainer component={Paper} sx={{backgroundColor: "#DAE1E7",}}>
+          <Table>
+            <TableHead sx={{backgroundColor:"#27496D"} }>
+              <TableRow>
+                <TableCell><Typography color={"#DAE1E7"}> ID</Typography> </TableCell>
+                <TableCell><Typography color={"#DAE1E7"}>Book</Typography></TableCell>
+                <TableCell><Typography color={"#DAE1E7"}>Bookstore</Typography></TableCell>
+                <TableCell><Typography color={"#DAE1E7"}>Date</Typography></TableCell>
+                <TableCell><Typography color={"#DAE1E7"}>Time</Typography></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {reservations.map((reservation) => (
+                <TableRow key={reservation.id}>
+                  <TableCell>{reservation.id}</TableCell>
+                  <TableCell>{reservation.book}</TableCell>
+                  <TableCell>{reservation.bookstore}</TableCell>
+                  <TableCell>{reservation.date}</TableCell>
+                  <TableCell>{reservation.time}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 };
 export default UserProfile;

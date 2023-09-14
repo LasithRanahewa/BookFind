@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -43,6 +44,13 @@ const AvailableBookstores = ({ instance }) => {
       "&:hover": {
         backgroundColor: "#00909E",
       },
+    },
+    button: {
+      backgroundColor: "#00909E",
+      "&:hover": {
+        backgroundColor: "#00909E",
+      },
+      marginTop: "2rem",
     },
   };
 
@@ -179,9 +187,17 @@ const AvailableBookstores = ({ instance }) => {
             </Dialog>
           </>
         ) : (
-          <Typography variant="h4" style={styles.heading}>
-            Requested book is not available in any of the bookstores
-          </Typography>
+          <Grid container spacing={2} padding={5} justifyContent={"center"}>
+            <Typography variant="h4" style={styles.heading}>
+              Requested book is not available in any of the bookstores
+            </Typography>
+            <Grid item xs={12} display={"flex"} justifyContent={"center"}> 
+            <Button to="/" size="large" variant="contained" component={RouterLink} style={styles.button}>
+            Go to Home
+          </Button>
+            </Grid>
+            
+          </Grid>
         )}
       </div>
     </>

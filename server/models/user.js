@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
 
     address: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     },
 
     password: {
@@ -31,34 +32,38 @@ const userSchema = new mongoose.Schema({
                 type: String
             }
         ],
-        required: true
+        required: false,
+        default: ""
     },
 
     isAdmin: {
         type: Boolean,
-        required: true,
+        required: false,
         default: false
     },
 
     image: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     }
 });
 
 // method to hash and set the password
-userSchema.methods.setPassword = function(password) {
+userSchema.statics.setPassword = function(password) {
     bcrypt.hash(password, saltRounds, function(err, hash) {
         this.password = hash;
     });
 };
 
 // method to check whether a password is correct or not
-userSchema.methods.isValidPassword = function(password) {
+userSchema.statics.isValidPassword = function(password) {
     bcrypt.compare(password, this.password, function(err, result) {
         return result === true;
     });
 };
 
 // export the user model
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
