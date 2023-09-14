@@ -206,7 +206,7 @@ const Books = ({ instance }) => {
                 <CardMedia
                   component="img"
                   sx={{ height: "15rem" }}
-                  image={book.coverUrl}
+                  image={book.image}
                   alt={book.name}
                 />
                 <CardContent sx={{ flex: 1 }} style={styles.content}>

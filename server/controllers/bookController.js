@@ -1,17 +1,18 @@
 // import book model
 const Book = require("../models/book.js");
-// const Copy = require("../models/copy.js");		
+// const Copy = require("../models/copy.js");	
+const path = require("path"); // Import the 'path' module	
 
 // new book
 const newBook = async (req, res) => {
 	console.log(req.body)
 	try {
-		const { name, author, publisher, description } = req.body;
+		const { name, author, publisher, description, image} = req.body;
 		if (!name || !author || !publisher || !description) {
 			return res.status(401).json({ error: "Incomplete book data" });
 		}
 
-		const newBook = new Book({ name, author, publisher, description });
+		const newBook = new Book({ name, author, publisher, description, image });
 		await newBook.save();
 		// const newCopy = new Copy({ newBook._id, vendorId, quantity });
 		// await newCopy.save();
@@ -28,6 +29,12 @@ const searchBook = async (req, res) => {
 		const { name } = req.body;
 		const regex = new RegExp(name, "i");
 		const books = await Book.find({ name: { $regex: regex } });
+		books.forEach((book) => {
+			if (book.image) {
+			  const imagePath = `./uploads/${book.image}`;
+			  book.image = imagePath;
+			}
+		  });
 		res.json(books);
 	} catch (error) {
 		console.error(error);
@@ -48,6 +55,11 @@ const getBook = async (req, res) => {
 		bookData.clicks = bookData.clicks + 1;
 		await bookData.save();
 
+		if (bookData.image) {
+			const imagePath = `./uploads/${bookData.image}`;
+			bookData.image = imagePath;
+		  }
+
 		res.json(bookData);
 	} catch (error) {
 		console.error(error);
@@ -59,6 +71,12 @@ const getBook = async (req, res) => {
 const getAllBooks = async (req, res) => {
 	try {
 		const books = await Book.find();
+		books.forEach((book) => {
+			if (book.image) {
+			  const imagePath = `./uploads/${book.image}`;
+			  book.image = imagePath;
+			}
+		  });
 		res.json(books);
 	} catch (error) {
 		console.error(error);
@@ -70,6 +88,12 @@ const getAllBooks = async (req, res) => {
 const trendingBooks = async (req, res) => {
 	try {
 		const mostClickedBooks = await Book.find().sort({ clicks: -1 }).limit(4);
+		mostClickedBooks.forEach((book) => {
+			if (book.image) {
+			  const imagePath = `./uploads/${book.image}`;
+			  book.image = imagePath;
+			}
+		  });
 		res.send(mostClickedBooks);
 	} catch (error) {
 		res.send(error);
