@@ -150,7 +150,9 @@ const updateVendor = async (req, res) => {
 			vendor.email = updates.email;
 		}
 		if (updates.password) {
-			vendor.password = updates.password;
+			const salt = await bcrypt.genSalt(10)
+			const hashedPassword = await bcrypt.hash(updates.password, salt)
+			vendor.password = hashedPassword;
 		}
 		if (updates.address) {
 			vendor.address = updates.address;
