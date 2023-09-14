@@ -77,7 +77,7 @@ export default function UserDataGrid() {
             },
           }}
           pageSizeOptions={[5]}
-          checkboxSelection
+          // checkboxSelection
           disableRowSelectionOnClick
         />
       </Box>

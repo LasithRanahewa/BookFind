@@ -13,62 +13,46 @@ import { Typography } from "@mui/material";
 
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
-  const [isbn, setISBN] = React.useState("");
-  const [author, setAddress] = React.useState("");
-  const [publisher, setPublisher] = React.useState("");
-  const [clicks, setClicks] = React.useState(0);
+  const [email, setEmail] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [noOfPages, setNoOfPages] = React.useState(1);
-
-  const [copies, setCopies] = React.useState(1);
-  const [categories, setCategories] = React.useState([]);
-  const [image, setImage] = React.useState();
-  const [publishedDate, setPublishedDate] = React.useState("");
-  const [unitPrice, setUnitPrice] = React.useState(1);
+  const [contactNo, setContactNo] = React.useState("");
+  const [image, setImage] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit({
       name,
-      author,
-      isbn,
-      publisher,
+      email,
       description,
-      noOfPages,
+      contactNo,
       image,
-      publishedDate,
-      categories,
-      copies,
-      publisher,
-      unitPrice,
     });
     onClose();
   };
 
-  const handleAddBook = () => {
-    axios
-      .create({
-        withCredentials: true,
-        baseURL: "http://localhost:8080/api",
-      })
-      .post("/book/new", {
-        name,
-        author,
-        publisher,
-        description,
-      })
-      .then((obj) => {
-        console.log("Book Added");
-        handleDataFetch();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  // const handleAddBook = () => {
+  //   axios
+  //     .create({
+  //       withCredentials: true,
+  //       baseURL: "http://localhost:8080/api",
+  //     })
+  //     .post("/book/new", {
+  //       name,
+  //       author,
+  //       publisher,
+  //       description,
+  //     })
+  //     .then((obj) => {
+  //       console.log("Book Added");
+  //       handleDataFetch();
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add Book</DialogTitle>
+      <DialogTitle>Add Author</DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -79,16 +63,16 @@ function BookForm({ open, onClose, onSubmit }) {
             margin="normal"
           />
           <TextField
-            label="Author"
-            value={author}
+            label="Email"
+            value={email}
             onChange={(e) => setAddress(e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
-            label="publisher"
-            value={publisher}
-            onChange={(e) => setPublisher(e.target.value)}
+            label="Mobile No"
+            value={email}
+            onChange={(e) => setAddress(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -100,14 +84,7 @@ function BookForm({ open, onClose, onSubmit }) {
             margin="normal"
           />
           <TextField
-            label="No of Pages"
-            value={noOfPages}
-            onChange={(e) => setNoOfPages(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Book Picture"
+            label="Admin Image"
             value={image}
             sx={{
               // margin: "8px",
@@ -153,29 +130,8 @@ function BookForm({ open, onClose, onSubmit }) {
                 zIndex: "0",
               },
             }}
-            onChange={(e) => setBookPic(e.target.value)}
+            onChange={(e) => setAuthorPic(e.target.value)}
             type="file"
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Publish Date"
-            value={publishedDate}
-            onChange={(e) => setPublishDate(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Categories"
-            value={categories}
-            onChange={(e) => setCategories(e.target.value)}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Copies"
-            value={copies}
-            onChange={(e) => setCopies(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -208,65 +164,27 @@ const columns = [
     width: 250,
   },
   {
-    field: "author",
-    headerName: "Author",
+    field: "email",
+    headerName: "Email",
     width: 250,
-  },
-  {
-    field: "publisher",
-    headerName: "Publisher",
-    width: 250,
-  },
-  {
-    field: "clicks",
-    headerName: "Clicks",
-    width: 150,
   },
   {
     field: "description",
     headerName: "Description",
-    width: 400,
-  },
-  {
-    field: "isbn",
-    headerName: "ISBN",
     width: 250,
   },
   {
-    field: "noOfPages",
-    headerName: "No of Pages",
+    field: "contactNo",
+    headerName: "Contact No",
     width: 250,
   },
   {
     field: "image",
-    headerName: "Image",
+    headerName: "Admin Image",
     width: 250,
-  },
-  {
-    field: "publishedDate",
-    headerName: "Published Date",
-    width: 250,
-  },
-  {
-    field: "categories",
-    headerName: "Categories",
-    width: 250,
-  },
-  {
-    field: "publisher",
-    headerName: "Publisher",
-    width: 250,
-  },
-  {
-    field: "copies",
-    headerName: "Copies",
-    width: 250,
-  },
-  {
-    field: "unitPrice",
-    headerName: "Unit Price",
-    width: 250,
-  },
+  }
+
+  
 ];
 
 const handleFormSubmit = (formData) => {
@@ -359,7 +277,7 @@ export default function AuthorsGrid() {
         <Stack direction="row" spacing={1}>
           {/* Add onClick event to "Add BookStore" button */}
           <Button size="small" onClick={toggleForm}>
-            Add Book
+            Add Author
           </Button>
           <Button
             size="small"
@@ -367,7 +285,7 @@ export default function AuthorsGrid() {
               handleDelete(selectedForDelete);
             }}
           >
-            Delete Book
+            Delete Author
           </Button>
         </Stack>
         <Box>
@@ -382,7 +300,7 @@ export default function AuthorsGrid() {
               },
             }}
             pageSizeOptions={[5]}
-            checkboxSelection
+            // checkboxSelection
             onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />
