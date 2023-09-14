@@ -5,17 +5,17 @@ body {
     background-color: #142850;
     font-family: 'Open Sans Condensed', sans-serif;
     /* width: 100vw;
-    height: 100vh;
+    height: 100vh; */
     margin: 0;
     padding: 0;
-    background-color: #142850;
+    /* background-color: #142850;
     overflow-x: hidden; */
 }
 
-/* div {
+div {
     margin: 0;
     padding: 0;
-} */
+}
 /* 
 .homeContent{
     width: 100vw;
@@ -32,6 +32,8 @@ body {
 .secondLine{
     font-size: 4.3rem;
     font-weight: bold;
+    text-shadow: 0.2rem 0.2rem 1rem #176B87;
+
 }
 
 .heading{

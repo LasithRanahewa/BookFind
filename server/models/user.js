@@ -49,21 +49,19 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// method to hash and set the password
-userSchema.statics.setPassword = function(password) {
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-        this.password = hash;
-    });
-};
+// // method to hash and set the password
+// userSchema.methods.setPassword = function(password) {
+//     bcrypt.hash(password, saltRounds, function(err, hash) {
+//         this.password = hash;
+//     });
+// };
 
-// method to check whether a password is correct or not
-userSchema.statics.isValidPassword = function(password) {
-    bcrypt.compare(password, this.password, function(err, result) {
-        return result === true;
-    });
-};
+// // method to check whether a password is correct or not
+// userSchema.methods.isValidPassword = function(password) {
+//     bcrypt.compare(password, this.password, function(err, result) {
+//         return result === true;
+//     });
+// };
 
 // export the user model
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

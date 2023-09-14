@@ -31,11 +31,6 @@ const columns = [
     headerName: "BookStore Ref",
     width: 150,
   },
-  // {
-  //   field: "quantity",
-  //   headerName: "Quantity",
-  //   width: 150,
-  // },
   {
     field: "reservationTime",
     headerName: "Reservation Time",

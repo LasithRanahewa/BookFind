@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import ReservationsDataGrid from "../../components/admin-components/ReservationsDataGrid";
+import ReservationsGrid from "../../components/vendor-components/ReservationsGrid";
 import BooksGrid from "../../components/vendor-components/BooksGrid";
 import VendorProfile from "../../components/vendor-components/VendorProfile";
 
@@ -31,7 +31,7 @@ const VendorDashboard = () => {
       rightGridComponent = <BooksGrid />;
       break;
     case "reservations":
-      rightGridComponent = <ReservationsDataGrid />;
+      rightGridComponent = <ReservationsGrid />;
       break;
     case "logout":
       rightGridComponent = <div>Log Out</div>;
