@@ -43,7 +43,6 @@ const BookPage = ({ instance }) => {
       })
       .then((obj) => {
         setBookData(obj.data);
-        console.log(obj.data)
       })
       .catch(() => {
         setBookData([
@@ -60,7 +59,7 @@ const BookPage = ({ instance }) => {
         <Grid item xs={12} sm={4}>
           {/* Content for the left side */}
           <img
-            src={bookData.image}
+            src="https://via.placeholder.com/200"
             alt="Book Cover"
             style={styles.image}
           />
@@ -74,10 +73,7 @@ const BookPage = ({ instance }) => {
             {bookData.author}
           </Typography>
           <Rating name="book-rating" value={4.2} precision={0.01} readOnly />
-          <Typography variant="h6" gutterBottom>
-            {bookData.rating}
-          </Typography>
-          {/* <Typography variant="body1" gutterBottom style={styles.content}>
+          <Typography variant="body1" gutterBottom style={styles.content}>
             Description
             <br />
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
@@ -87,9 +83,6 @@ const BookPage = ({ instance }) => {
             adipisicing elit. Iste veritatis quod non modi odio, natus sequi!
             Labore dolore similique animi illo alias officiis sunt ex, nesciunt,
             voluptas, pariatur beatae corrupti!
-          </Typography> */}
-          <Typography variant="h6" gutterBottom>
-            {bookData.description}
           </Typography>
 
           <Link to={`/availablebookstores?book=${bookData._id}`}>

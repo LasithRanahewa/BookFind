@@ -16,7 +16,7 @@ const findACopyRouter = require("./routes/findACopyRouter");
 // const reservationRouter = require("./routes/reservationRouter");
 const userRouter = require("./routes/userRouter");
 const vendorRouter = require("./routes/vendorRouter");
-const uploadRouter = require("./routes/uploadRouter");
+
 // do not load the environment varibles on a production environment
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== "production") {
 const { parseFormData } = require("pechkin");
 const fs = require("fs");
 const path = require("path");
-// const pechkinFileUpload = require("./controllers/upload.js");
+const pechkinFileUpload = require("./controllers/upload.js");
 
 // setup express
 const app = express();
@@ -102,7 +102,6 @@ app.use("/api/findACopy", findACopyRouter);
 // app.use("/api/reservation", reservationRouter);
 app.use("/api/vendor", vendorRouter);
 app.use("/api/user", userRouter);
-app.use("/api/upload", uploadRouter);
 
 // test
 app.get("/", (req, res) => {
@@ -113,6 +112,31 @@ app.get("/", (req, res) => {
     .catch((error) => {
       res.status(408).json({ error });
     });
+});
+
+app.post("/upload", pechkinFileUpload(), async (req, res) => {
+  const files = [];
+  for await (const { stream, field, filename } of req.files) {
+    try {
+      const fileExtension = path.extname(filename);
+      const uniqueFilename = `${Date.now()}${fileExtension}`;
+      const filePath = path.join(__dirname, "uploads", uniqueFilename);
+      const writeStream = fs.createWriteStream(filePath);
+      stream.pipe(writeStream);
+      await new Promise((resolve, reject) => {
+        writeStream.on("finish", resolve);
+        writeStream.on("error", reject);
+      });
+
+      files.push({ field, filename, filePath });
+    } catch (err) {
+      console.error("Error saving file:", err);
+    } finally {
+      stream.resume();
+    }
+  }
+  console.log(files); //Try logic here as its the easiest
+  return res.json({ fields: req.body, files });
 });
 
 // server connection
