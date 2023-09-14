@@ -5,6 +5,7 @@ const router = express.Router();
 // import functions from controller
 const {
     registerVendor,
+	loginVendor,
 	searchVendors,
 	getVendor,
 	getAllVendors,
@@ -12,6 +13,8 @@ const {
 } = require("../controllers/vendorController");
 
 router.post("/new", (req, res) => registerVendor(req, res));
+
+router.post("/login", (req, res) => loginVendor(req, res));
 
 router.post("/search", (req, res) => searchVendors(req, res));
 

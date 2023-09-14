@@ -16,7 +16,7 @@ const reservationSchema = new mongoose.Schema({
     reservationDate: {
         type: Date,
         required: true
-    },
+    }
 
     // copy: {
     //     type: mongoose.Schema.Types.ObjectId,
