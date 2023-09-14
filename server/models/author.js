@@ -26,13 +26,9 @@ const authorShema = new mongoose.Schema({
 
     image: {
         type: String,
-        required: false
-    },
-
-    writtenBooks: [
-        {
-          type: mongoose.Types.ObjectId,
-          ref: "Book",
-        },
-    ]
+        required: true,
+    }
 });
+
+// export author model
+module.exports = mongoose.model("Author", authorShema);

@@ -206,16 +206,19 @@ const columns = [
     field: "name",
     headerName: "Name",
     width: 250,
+    editable: true,
   },
   {
     field: "author",
     headerName: "Author",
     width: 250,
+    editable: true,
   },
   {
     field: "publisher",
     headerName: "Publisher",
     width: 250,
+    editable: true,
   },
   {
     field: "clicks",
@@ -226,6 +229,7 @@ const columns = [
     field: "description",
     headerName: "Description",
     width: 400,
+    editable: true,
   },
   {
     field: "isbn",
@@ -241,32 +245,20 @@ const columns = [
     field: "image",
     headerName: "Image",
     width: 250,
+    editable: true,
   },
   {
     field: "publishedDate",
     headerName: "Published Date",
     width: 250,
+    editable: true,
   },
   {
     field: "categories",
     headerName: "Categories",
     width: 250,
+    editable: true,
   },
-  {
-    field: "publisher",
-    headerName: "Publisher",
-    width: 250,
-  },
-  // {
-  //   field: "copies",
-  //   headerName: "Copies",
-  //   width: 250,
-  // },
-  // {
-  //   field: "unitPrice",
-  //   headerName: "Unit Price",
-  //   width: 250,
-  // },
 ];
 
 const handleFormSubmit = (formData) => {
