@@ -10,6 +10,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
@@ -25,6 +27,22 @@ function BookForm({ open, onClose, onSubmit }) {
   const [image, setImage] = React.useState();
   const [publishedDate, setPublishedDate] = React.useState("");
   const [unitPrice, setUnitPrice] = React.useState(1);
+  const [imageName, setImageName] = React.useState("");
+
+  const VisuallyHiddenInput = styled("input")`
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +59,7 @@ function BookForm({ open, onClose, onSubmit }) {
       copies,
       publisher,
       unitPrice,
+      image: imageName,
     });
     onClose();
   };
@@ -56,6 +75,7 @@ function BookForm({ open, onClose, onSubmit }) {
         author,
         publisher,
         description,
+        image: imageName,
       })
       .then((obj) => {
         console.log("Book Added");
@@ -64,6 +84,35 @@ function BookForm({ open, onClose, onSubmit }) {
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  const [selectedFile, setSelectedFile] = React.useState(null);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        // Replace 'your-backend-url' with the actual URL of your backend API endpoint.
+        const response = await axios.post(
+          "http://localhost:8080/api/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setImageName(response.data[0].filename, () => {
+          console.log("Image uploaded successfully:", imageName);
+        });
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
   };
 
   return (
@@ -106,7 +155,7 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          <TextField
+          {/* <TextField
             label="Book Picture"
             value={image}
             sx={{
@@ -157,7 +206,8 @@ function BookForm({ open, onClose, onSubmit }) {
             type="file"
             fullWidth
             margin="normal"
-          />
+          /> */}
+
           <TextField
             label="Publish Date"
             value={publishedDate}
@@ -179,6 +229,16 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
+          {/* <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            href="#file-upload"
+          >
+            Upload book image
+            <VisuallyHiddenInput type="file" onChange={handleUpload} />
+          </Button> */}
+          <input type="file" accept="image/*" onChange={handleFileChange} />
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
             <Button

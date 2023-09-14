@@ -7,7 +7,7 @@ const saltRounds = 10;
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: false
     },
 
     email: {
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
 
     address: {
         type: String,
-        required: true
+        required: false
     },
 
     password: {
@@ -31,18 +31,18 @@ const userSchema = new mongoose.Schema({
                 type: String
             }
         ],
-        required: true
+        required: false
     },
 
     isAdmin: {
         type: Boolean,
-        required: true,
+        // required: true,
         default: false
     },
 
     image: {
         type: String,
-        required: true
+        required: false
     }
 });
 
