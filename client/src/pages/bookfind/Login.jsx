@@ -214,7 +214,7 @@ const Login = () => {
               {/* Sign up link */}
               <Typography variant="body1" gutterBottom style={styles.signUp}>
                 No account?{" "}
-                <Link href="/signup" style={styles.signUpLink}>
+                <Link href="/register" style={styles.signUpLink}>
                   Sign up here
                 </Link>
               </Typography>
