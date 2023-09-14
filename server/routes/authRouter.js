@@ -17,6 +17,6 @@ router.get("/login", (req, res) => res.render("/login"));
 
 router.post("/login", (req, res, next) => loginLocalUser(req, res, next));
 
-router.get("/logout", (req, res, next) => logoutUser(req, res, next));
+router.post("/logout", (req, res, next) => logoutUser(req, res, next));
 
 module.exports = router;
