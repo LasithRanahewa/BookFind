@@ -13,7 +13,6 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
-
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
   const [isbn, setISBN] = React.useState("");
@@ -22,6 +21,7 @@ function BookForm({ open, onClose, onSubmit }) {
   const [clicks, setClicks] = React.useState(0);
   const [description, setDescription] = React.useState("");
   const [noOfPages, setNoOfPages] = React.useState(1);
+  const [rating, setRating] = React.useState(0);
 
   // const [copies, setCopies] = React.useState(1);
   const [categories, setCategories] = React.useState([]);
@@ -29,7 +29,6 @@ function BookForm({ open, onClose, onSubmit }) {
   const [publishedDate, setPublishedDate] = React.useState("");
   // const [unitPrice, setUnitPrice] = React.useState(1);
   const [imageName, setImageName] = React.useState("");
-
 
   const VisuallyHiddenInput = styled("input")`
     clip: rect(0 0 0 0);
@@ -61,6 +60,7 @@ function BookForm({ open, onClose, onSubmit }) {
       // copies,
       publisher,
       // unitPrice,
+      rating,
       image: imageName,
     });
     onClose();
@@ -78,6 +78,7 @@ function BookForm({ open, onClose, onSubmit }) {
         publisher,
         description,
         image: imageName,
+        rating,
       })
       .then((obj) => {
         console.log("Book Added");
@@ -167,6 +168,13 @@ function BookForm({ open, onClose, onSubmit }) {
             label="No of Pages"
             value={noOfPages}
             onChange={(e) => setNoOfPages(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Rating"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -303,6 +311,11 @@ const columns = [
   {
     field: "noOfPages",
     headerName: "No of Pages",
+    width: 250,
+  },
+  {
+    field: "rating",
+    headerName: "Rating",
     width: 250,
   },
   {

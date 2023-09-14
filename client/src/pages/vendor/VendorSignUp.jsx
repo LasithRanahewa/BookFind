@@ -35,18 +35,29 @@ const ButtonWrapper = styled(Button)({
 });
 
 const VendorSignUp = () => {
-  const [bookstoreName, setBookstoreName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [brn, setBrn] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreeTerms, setAgreeTerms] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
+  const [formData, setFormData] = useState({
+    bookstoreName: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    brn: "",
+    password: "",
+    confirmPassword: "",
+    agreeTerms: false,
+    profilePicture: null,
+  });
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log("Form data:", formData);
     // Handle form submission here
   };
 
@@ -85,40 +96,47 @@ const VendorSignUp = () => {
 
               <TextFieldWrapper
                 label="Bookstore Name"
-                value={bookstoreName}
-                onChange={(event) => setBookstoreName(event.target.value)}
+                name="bookstoreName"
+                value={formData.bookstoreName}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="Email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                name="email"
+                value={formData.email}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="Phone Number"
-                value={phoneNumber}
-                onChange={(event) => setPhoneNumber(event.target.value)}
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="Address"
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
+                name="address"
+                value={formData.address}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="BRN"
-                value={brn}
-                onChange={(event) => setBrn(event.target.value)}
+                name="brn"
+                value={formData.brn}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="Password"
                 type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
+                name="password"
+                value={formData.password}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 label="Confirm Password"
                 type="password"
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={onChange}
               />
               <TextFieldWrapper
                 sx={{
@@ -167,13 +185,15 @@ const VendorSignUp = () => {
                 }}
                 label="Profile Picture"
                 type="file"
-                onChange={handleProfilePictureChange}
+                name="profilePicture"
+                onChange={onChange}
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={agreeTerms}
-                    onChange={(event) => setAgreeTerms(event.target.checked)}
+                    cchecked={formData.agreeTerms}
+                    onChange={onChange}
+                    name="agreeTerms"
                   />
                 }
                 label="I agree to the terms and conditions"
@@ -182,7 +202,7 @@ const VendorSignUp = () => {
               <ButtonWrapper
                 variant="contained"
                 type="submit"
-                disabled={!agreeTerms}
+                disabled={!formData.agreeTerms}
               >
                 Sign Up
               </ButtonWrapper>
