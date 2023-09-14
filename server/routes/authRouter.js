@@ -11,8 +11,8 @@ const {
 
 router.get("/register", (req, res) => res.render("/register"));
 
-// router.post("/register", (req, res) => registerUser(req, res));
-router.post("/register", registerUser);
+router.post("/register", (req, res) => registerUser(req, res));
+// router.post("/register", registerUser);
 
 router.get("/login", (req, res) => res.render("/login"));
 
