@@ -14,6 +14,7 @@ import featureImg from "../../assets/Featuredbook.jpg";
 import homeImg from "../../assets/home-img.png";
 // import '../../App.css';
 import "./stars.css";
+import loginImage from "../../assets/loginpage.png";
 
 const stars = [];
 
@@ -51,7 +52,7 @@ const Home = ({ instance }) => {
   const styles = {
     container: {
       display: "flex",
-      height: "100vh",
+      height: "95vh",
       alignItems: "center",
     },
     root: {
@@ -124,15 +125,13 @@ const Home = ({ instance }) => {
           >
             {/* Right grid content */}
             <img
-              src={homeImg}
+              src={loginImage}
               alt="Book Cover"
-              width="50%"
+              width="60%"
+              className="swing"
               style={{
-                // maxWidth: "50%",
-                // maxHeight: "50%",
-                width: "50%",
+                width: "60%",
                 height: "auto",
-                margin: "1rem 0 0 0",
                 paddingBottom: "0",
                 "@media (min-width: 960px)": {
                   width: "70%",
