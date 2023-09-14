@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { Typography } from "@mui/material";
 
+
 function BookForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
   const [isbn, setISBN] = React.useState("");
@@ -291,7 +292,7 @@ export default function BooksGrid() {
           ...book,
           id: id++,
         }));
-        // console.log("hi",renamedBookList)
+        console.log(renamedBookList);
         setBookList(renamedBookList);
       })
       .catch(() => {
@@ -374,9 +375,9 @@ export default function BooksGrid() {
               },
             }}
             pageSizeOptions={[5]}
-            // checkboxSelection
+            checkboxSelection
             onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
-            disableRowSelectionOnClick
+            // disableRowSelectionOnClick
           />
         </Box>
         {/* Conditionally render the form component */}
