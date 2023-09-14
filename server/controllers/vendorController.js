@@ -129,7 +129,7 @@ const deleteVendor = async (req, res) => {
 // update vendor
 const updateVendor = async (req, res) => {
 	try {
-		const vendorId = req.body.id;
+		const vendorId = req.params.id;
 		const updates = req.body;
 
 		// Find the vendor by its ID

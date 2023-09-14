@@ -103,7 +103,7 @@ const deleteUser = async (req, res) => {
 // update user
 const updateUser = async (req, res) => {
 	try {
-		const userId = req.body.id;
+		const userId = req.params.id;
 		const updates = req.body;
 
 		// Find the user by its ID

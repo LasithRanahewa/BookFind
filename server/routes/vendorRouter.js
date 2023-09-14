@@ -25,6 +25,6 @@ router.get("/all", (req, res) => getAllVendors(req, res));
 
 router.post("/delete", (req, res) => deleteVendor(req, res));
 
-router.post("/update", (req, res) => updateVendor(req, res));
+router.post("/update/:id", (req, res) => updateVendor(req, res));
 
 module.exports = router;
