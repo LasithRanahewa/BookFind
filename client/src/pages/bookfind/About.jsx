@@ -28,11 +28,11 @@ const About = () => {
       fontSize: "4.5rem",
       fontWeight: "1100",
       letterSpacing: "0.1rem",
-      paddingTop: "3rem",
+      paddingTop: "0rem",
       textAlign: "center",
     },
     paragraph: {
-      padding: "3rem 2rem",
+      padding: "0rem 2rem 2rem 2rem",
       fontSize: "1.2rem",
       textAlign: "center",
       maxWidth: "50rem",
