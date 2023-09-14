@@ -116,6 +116,7 @@ const AuthorPage = ({ instance }) => {
           <Typography variant="body1" gutterBottom style={styles.content}>
             {/* <Span style={styles.span}>Description</Span> */}
             
+            
             {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
             possimus vel cupiditate, iusto qui culpa quo pariatur suscipit?
             Architecto nam quisquam officia autem commodi, aliquid maxime veniam
