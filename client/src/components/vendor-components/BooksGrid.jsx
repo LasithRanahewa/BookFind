@@ -20,11 +20,11 @@ function BookForm({ open, onClose, onSubmit }) {
   const [description, setDescription] = React.useState("");
   const [noOfPages, setNoOfPages] = React.useState(1);
 
-  const [copies, setCopies] = React.useState(1);
+  // const [copies, setCopies] = React.useState(1);
   const [categories, setCategories] = React.useState([]);
   const [image, setImage] = React.useState();
   const [publishedDate, setPublishedDate] = React.useState("");
-  const [unitPrice, setUnitPrice] = React.useState(1);
+  // const [unitPrice, setUnitPrice] = React.useState(1);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,9 +38,9 @@ function BookForm({ open, onClose, onSubmit }) {
       image,
       publishedDate,
       categories,
-      copies,
+      // copies,
       publisher,
-      unitPrice,
+      // unitPrice,
     });
     onClose();
   };
@@ -172,13 +172,13 @@ function BookForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          <TextField
+          {/* <TextField
             label="Copies"
             value={copies}
             onChange={(e) => setCopies(e.target.value)}
             fullWidth
             margin="normal"
-          />
+          /> */}
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
             <Button
@@ -257,16 +257,16 @@ const columns = [
     headerName: "Publisher",
     width: 250,
   },
-  {
-    field: "copies",
-    headerName: "Copies",
-    width: 250,
-  },
-  {
-    field: "unitPrice",
-    headerName: "Unit Price",
-    width: 250,
-  },
+  // {
+  //   field: "copies",
+  //   headerName: "Copies",
+  //   width: 250,
+  // },
+  // {
+  //   field: "unitPrice",
+  //   headerName: "Unit Price",
+  //   width: 250,
+  // },
 ];
 
 const handleFormSubmit = (formData) => {
@@ -382,7 +382,7 @@ export default function BooksGrid() {
               },
             }}
             pageSizeOptions={[5]}
-            checkboxSelection
+            // checkboxSelection
             onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />

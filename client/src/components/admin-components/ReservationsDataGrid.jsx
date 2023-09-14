@@ -95,7 +95,7 @@ export default function ReservationDataGrid() {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
         disableRowSelectionOnClick
       />
     </Box>
