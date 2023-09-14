@@ -3,6 +3,26 @@ import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import Rating from "@mui/material/Rating";
 
 const TrendingBookCard = ({ book }) => {
+
+  const styles = {
+    name: {
+      fontSize: "1.6rem",
+      textShadow: "0.02rem 0.02rem 0.13rem #176B87",
+      color: "#053B50",
+      fontWeight: "bold",
+    },
+    author: {
+      color: "#176B87",
+    },
+    publisher: {
+      color: "#176B87",
+      paddingBottom: "1rem",
+    },
+    content: {
+      backgroundColor: "#EEEEEE",
+    },
+    
+  };
   return (
     <Card style={{height: '100%'}}>
       <CardMedia
@@ -11,14 +31,14 @@ const TrendingBookCard = ({ book }) => {
         image="https://via.placeholder.com/200x300"
         alt="Book cover"
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent style={styles.content}>
+        <Typography gutterBottom variant="h5" component="div" style={styles.name}>
           {book.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" style={styles.author}>
           {book.author}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" style={styles.publisher}>
           {book.publisher}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
