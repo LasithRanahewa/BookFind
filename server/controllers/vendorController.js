@@ -133,7 +133,7 @@ const updateVendor = async (req, res) => {
 		const updates = req.body;
 
 		// Find the vendor by its ID
-		const vendor = await vendor.findById(vendorId);
+		const vendor = await Vendor.findById(vendorId);
 
 		if (!vendor) {
 			return res.status(404).json({ success: false, message: 'vendor not found' });

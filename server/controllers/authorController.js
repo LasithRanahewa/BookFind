@@ -97,7 +97,7 @@ const deleteAuthors = async (req, res) => {
 // update a author
 const updateAuthor = async (req, res) => {
 	try {
-		const authorId = req.body.id;
+		const authorId = req.params.id;
 		const updates = req.body;
 
 		// Find the author by its ID
@@ -119,6 +119,9 @@ const updateAuthor = async (req, res) => {
 		}
 		if (updates.contactNo) {
 			author.contactNo = updates.contactNo;
+		}
+		if (updates.image) {
+			author.image = updates.image;
 		}
 
 		// Save the updated author to the database
