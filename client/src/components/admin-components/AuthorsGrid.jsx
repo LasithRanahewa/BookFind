@@ -17,6 +17,7 @@ function AuthorForm({ open, onClose, onSubmit }) {
   const [description, setDescription] = React.useState("");
   const [contactNo, setContactNo] = React.useState("");
   const [image, setImage] = React.useState("");
+  const [imageName, setImageName] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,12 +26,13 @@ function AuthorForm({ open, onClose, onSubmit }) {
       email,
       description,
       contactNo,
-      image,
+      image: imageName,
     });
     onClose();
   };
 
   const handleAddAuthor = () => {
+    console.log(name, email, description, contactNo, image);
     axios
       .create({
         withCredentials: true,
@@ -41,7 +43,7 @@ function AuthorForm({ open, onClose, onSubmit }) {
         email,
         description,
         contactNo,
-        image,
+        image: imageName,
       })
       .then((obj) => {
         console.log("Author Added");
@@ -90,14 +92,14 @@ function AuthorForm({ open, onClose, onSubmit }) {
           <TextField
             label="Email"
             value={email}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
             label="Mobile No"
-            value={email}
-            onChange={(e) => setAddress(e.target.value)}
+            value={contactNo}
+            onChange={(e) => setContactNo(e.target.value)}
             fullWidth
             margin="normal"
           />
@@ -108,7 +110,7 @@ function AuthorForm({ open, onClose, onSubmit }) {
             fullWidth
             margin="normal"
           />
-          <TextField
+          {/* <TextField
             label="Author Image"
             value={image}
             sx={{
@@ -159,7 +161,7 @@ function AuthorForm({ open, onClose, onSubmit }) {
             type="file"
             fullWidth
             margin="normal"
-          />
+          /> */}
           <DialogActions>
             <Button onClick={onClose}>Cancel</Button>
             <Button
@@ -203,11 +205,11 @@ const columns = [
     headerName: "Contact No",
     width: 250,
   },
-  {
-    field: "image",
-    headerName: "Admin Image",
-    width: 250,
-  }
+  // {
+  //   field: "image",
+  //   headerName: "Admin Image",
+  //   width: 250,
+  // }
 
   
 ];
@@ -326,7 +328,7 @@ export default function AuthorsGrid() {
               },
             }}
             pageSizeOptions={[5]}
-            // checkboxSelection
+            checkboxSelection
             onRowSelectionModelChange={(id) => handleCheckBoxSelection(id)}
             disableRowSelectionOnClick
           />
