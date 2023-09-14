@@ -5,12 +5,18 @@ const Author = require("../models/author");
 const newAuthor = async (req, res) => {
 	console.log(req.body)
 	try {
-		const { name, email, description, contactNo } = req.body;
-		if (!name || !email || !description || !contactNo) {
+		const { name, email, description, contactNo, image } = req.body;
+		if (!name || !email || !description || !contactNo || !image) {
 			return res.status(401).json({ error: "Incomplete author data" });
 		}
 
-		const newAuthor = new Author({ name, email, description, contactNo });
+		const newAuthor = new Author({ 
+			name: name, 
+			email: email, 
+			description: description, 
+			contactNo: contactNo,
+			image: image 
+		});
 		await newAuthor.save();
 		
 		res.status(201).json({ message: "Author added successfully" });
