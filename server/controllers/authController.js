@@ -32,32 +32,20 @@ const loginLocalUser = async (req, res, next) => {
 		if (!user) {
 			return res.status(404).json({ success: false, message: "User not found" });
 		}
-		console.log(req.body, req.body.password);
 
 		const match = await bcrypt.compare(req.body.password, user.password)
 		if (!match) {
 			console.log("password error");
 			return (res.status(401).json({ success: false, message: "Password incorrect" }))
 		}
+		console.log(req.body, match);
 
-		// if (!user.isValidPassword(req.body.password)) {
-		// 	return res.status(401).json({ success: false, message: "Password incorrect" });
-		// }
-
-		passport.authenticate('local', (err, user, info) => {
+		req.login(user, (err) => {
 			if (err) {
 				return res.status(500).json({ success: false, err });
 			}
-			if (!user) {
-				return res.status(401).json({ success: false, message: 'Authentication failed' });
-			}
-			req.logIn(user, (err) => {
-				if (err) {
-					return res.status(500).json({ success: false, err });
-				}
-				return res.status(200).json({ success: true, user });
-			});
-		})(req, res, next);
+			return res.status(200).json({ success: true, user });
+		});
 	} catch (err) {
 		return res.status(500).json({ success: false, err });
 	}
