@@ -1,4 +1,5 @@
 import { Navigate, useRoutes } from "react-router-dom";
+// import ProtectedRoutes from "./ProtectedRoutes";
 
 import Home from "./pages/bookfind/Home";
 import Books from "./pages/bookfind/Books";
@@ -65,8 +66,10 @@ function Router() {
     },
     {
       path: "/profile",
+      // element: <ProtectedRoute><Profile instance={instance} /></ProtectedRoute>
       element: <Profile instance={instance} />,
     },
+    
     {
       path: "/vendor-dashboard",
       element: <VendorDashboard instance={instance} />,

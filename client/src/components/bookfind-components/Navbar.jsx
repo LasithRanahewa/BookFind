@@ -27,6 +27,7 @@ const Navbar = () => {
   const isMobile = useMediaQuery("(max-width:760px)");
 
   const handleLogout = () => {
+    localStorage.removeItem('user')
     setIsSignedIn(false);
     setAnchorEl(null);
   };

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import loginImage from "../../assets/loginpage.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -11,21 +13,48 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
+const API_URL = "/api/auth/";
+
 const Login = () => {
   const [shouldRememberUser, setShouldRememberUser] = useState(false);
+  const [formData, setFormData] = useState({
+    userEmail: "",
+    userPassword: "",
+  });
+  const navigate = useNavigate();
 
   const handleRememberMeChange = (event) => {
     setShouldRememberUser(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // TODO: Add form validation and submit logic
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    console.log("Form data:", formData);
+
+    try {
+      const response = await axios.post(API_URL + "login", formData);
+
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
   const styles = {
-    container:{
+    container: {
       display: "flex",
-      height:"100vh",
+      height: "100vh",
       alignItems: "center",
     },
     root: {
@@ -95,7 +124,6 @@ const Login = () => {
   return (
     <Grid container spacing={2} style={styles.container}>
       <Grid
-      
         container
         item
         xs={12}
@@ -111,7 +139,7 @@ const Login = () => {
             width: "50%",
             height: "auto",
             margin: "1rem 0 0 0",
-            paddingBottom:"0",
+            paddingBottom: "0",
             "@media (min-width: 960px)": {
               width: "70%",
               height: "70%",
@@ -135,6 +163,9 @@ const Login = () => {
                 variant="outlined"
                 type="email"
                 required
+                name="userEmail"
+                value={formData.userEmail}
+                onChange={onChange}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -162,6 +193,9 @@ const Login = () => {
                 variant="outlined"
                 type="password"
                 required
+                name="userPassword"
+                value={formData.userPassword}
+                onChange={onChange}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -227,4 +261,3 @@ const Login = () => {
 };
 
 export default Login;
-
