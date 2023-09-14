@@ -12,7 +12,7 @@ import { Link as L } from "@mui/material/";
 // import Effect from "../../components/Effect";
 import featureImg from "../../assets/Featuredbook.jpg";
 import homeImg from "../../assets/home-img.png";
-// import '../../App.css';
+import '../../App.css';
 import "./stars.css";
 import loginImage from "../../assets/loginpage.png";
 
@@ -52,8 +52,9 @@ const Home = ({ instance }) => {
   const styles = {
     container: {
       display: "flex",
-      height: "95vh",
+      // height: "95vh",
       alignItems: "center",
+      minHeight: "95vh",
     },
     root: {
       backgroundColor: "#142850",
@@ -83,9 +84,10 @@ const Home = ({ instance }) => {
             justifyContent="center"
             alignContent="center"
             style={{ order: 1 }}
+            
           >
             {/* Left grid content */}
-            <div style={{ margin: "0 2rem" }}>
+            <div style={{ margin: "0 2rem", padding:"0 1rem" }} >
               <Typography variant="h4" align="left" sx={{ color: "#DAE1E7" }}>
                 <span className="firstLine">Explore | Discover | Acquire</span>
                 <br />
