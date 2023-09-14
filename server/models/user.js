@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
 
     address: {
         type: String,
-        required: false
+        required: false,
+        default: ""
     },
 
     password: {
@@ -31,7 +32,8 @@ const userSchema = new mongoose.Schema({
                 type: String
             }
         ],
-        required: false
+        required: false,
+        default: ""
     },
 
     isAdmin: {
@@ -42,7 +44,8 @@ const userSchema = new mongoose.Schema({
 
     image: {
         type: String,
-        required: false
+        required: false,
+        default: ""
     }
 });
 
