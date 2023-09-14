@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { Typography } from "@mui/material";
 
-function BookForm({ open, onClose, onSubmit }) {
+function AuthorForm({ open, onClose, onSubmit }) {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -29,6 +29,31 @@ function BookForm({ open, onClose, onSubmit }) {
     });
     onClose();
   };
+
+  const handleAddAuthor = () => {
+    axios
+      .create({
+        withCredentials: true,
+        baseURL: "http://localhost:8080/api",
+      })
+      .post("/author/new", {
+        name,
+        email,
+        description,
+        contactNo,
+        image,
+      })
+      .then((obj) => {
+        console.log("Author Added");
+        handleDataFetch();
+      })
+      .catch((e) => {
+        console.log(e);
+      }
+      );
+  };
+
+  
 
   // const handleAddBook = () => {
   //   axios
@@ -84,7 +109,7 @@ function BookForm({ open, onClose, onSubmit }) {
             margin="normal"
           />
           <TextField
-            label="Admin Image"
+            label="Author Image"
             value={image}
             sx={{
               // margin: "8px",
@@ -141,7 +166,7 @@ function BookForm({ open, onClose, onSubmit }) {
               type="submit"
               variant="contained"
               color="primary"
-              onClick={() => handleAddBook()}
+              onClick={() => handleAddAuthor()}
             >
               Add
             </Button>
@@ -194,7 +219,7 @@ const handleFormSubmit = (formData) => {
 
 export default function AuthorsGrid() {
   const [showForm, setShowForm] = React.useState(false);
-  const [bookList, setBookList] = React.useState([]);
+  const [authorList, setAuthorList] = React.useState([]);
   const [selectedForDelete, setSelectedForDelete] = React.useState([]);
 
   // Function to toggle the state variable
@@ -209,25 +234,26 @@ export default function AuthorsGrid() {
         withCredentials: true,
         baseURL: "http://localhost:8080/api",
       })
-      .get("/book/all")
+      .get("/author/all")
       .then((obj) => {
-        // console.log(obj);
         // Rename the _id property to id using map
-        const renamedBookList = obj.data.map((book) => ({
-          ...book,
-          id: id++,
+        const renamedAuthorList = obj.data.map((author) => ({
+          ...author,
+          id: id++, // This is assigning an incremental id
         }));
-        // console.log("hi",renamedBookList)
-        setBookList(renamedBookList);
+        console.log(renamedAuthorList);
+        setAuthorList(renamedAuthorList);
       })
       .catch(() => {
-        setBookList([
+        setAuthorList([
           {
             error: "Fetch error",
           },
         ]);
       });
   };
+  
+
 
   const handleDelete = (data) => {
     axios
@@ -235,11 +261,11 @@ export default function AuthorsGrid() {
         withCredentials: true,
         baseURL: "http://localhost:8080/api",
       })
-      .post("/book/delete", {
+      .post("/author/delete", {
         data,
       })
       .then((obj) => {
-        console.log("Deleted Vendor");
+        console.log("Deleted Author");
         onClose();
         setSelectedForDelete(null);
         handleDataFetch();
@@ -251,7 +277,7 @@ export default function AuthorsGrid() {
 
   const handleCheckBoxSelection = (ids) => {
     const selectedRowsData = ids.map((id) =>
-      bookList.find((row) => row.id === id)
+      authorList.find((row) => row.id === id)
     );
 
     var arr = selectedRowsData;
@@ -260,7 +286,7 @@ export default function AuthorsGrid() {
 
   React.useEffect(() => {
     handleDataFetch();
-  }, [bookList, selectedForDelete]);
+  }, [authorList, selectedForDelete]);
 
   return (
     <>
@@ -290,7 +316,7 @@ export default function AuthorsGrid() {
         </Stack>
         <Box>
           <DataGrid
-            rows={bookList}
+            rows={authorList}
             columns={columns}
             initialState={{
               pagination: {
@@ -307,7 +333,7 @@ export default function AuthorsGrid() {
         </Box>
         {/* Conditionally render the form component */}
         {/* {showForm && <BookstoreForm />} */}
-        <BookForm
+        <AuthorForm
           open={showForm}
           onClose={toggleForm}
           onSubmit={handleFormSubmit}
