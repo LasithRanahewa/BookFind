@@ -1,6 +1,6 @@
 // import modules
 const passport = require("passport");
-const { User } = require("../models/user");
+const User = require("../models/user");
 
 // register a user
 const registerUser = async (req, res) => {
@@ -50,32 +50,6 @@ const loginLocalUser = async(req, res) => {
 	}
 };
 
-// login a google user
-// const loginGoogleUser = async (req, res) => {
-//     passport.authenticate("google", { scope: ["profile"] });
-// };
-
-// // rediret a google user
-// const redirectGoogleUser = async(req, res) => {
-//     passport.authenticate("google", { failureRedirect: "/login" }, 
-//     function(req, res) {
-//         res.redirect("/");
-//     });
-// };
-
-// // login a facebook user
-// const loginFacebookUser = async (req, res) => {
-//     passport.authenticate("facebook", { scope: ["profile  "] });
-// };
-
-// // rediret a facebook user
-// const redirectFacebookUser = async(req, res) => {
-//     passport.authenticate("facebook", { failureRedirect: "/login" }, 
-//     function(req, res) {
-//         res.redirect("/");
-//     });
-// };
-
 // logout a user
 const logoutUser = async (req, res, next) => {
     req.logout((err) => {
@@ -90,9 +64,5 @@ const logoutUser = async (req, res, next) => {
 module.exports = {
     registerUser,
     loginLocalUser,
-    // loginGoogleUser,
-    // redirectGoogleUser,
-    // loginFacebookUser,
-    // redirectFacebookUser,
     logoutUser
 };
