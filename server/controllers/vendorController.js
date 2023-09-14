@@ -78,7 +78,7 @@ const getVendor = async (req, res) => {
 
 	Vendor
 		.findById(id)
-		.populate("availableBooks") // Populate the availableBooks field
+		.populate("availablevendors") // Populate the availablevendors field
 		.then(function (vendor) {
 			res.send(vendor);
 			console.log(vendor);
@@ -126,6 +126,57 @@ const deleteVendor = async (req, res) => {
 	}
 };
 
+// update vendor
+const updateVendor = async (req, res) => {
+	try {
+		const vendorId = req.body.id;
+		const updates = req.body;
+
+		// Find the vendor by its ID
+		const vendor = await vendor.findById(vendorId);
+
+		if (!vendor) {
+			return res.status(404).json({ success: false, message: 'vendor not found' });
+		}
+
+		// Update the vendor properties with the values from req.body
+		if (updates.image) {
+			vendor.image = updates.image;
+		}
+		if (updates.name) {
+			vendor.name = updates.name;
+		}
+		if (updates.email) {
+			vendor.email = updates.email;
+		}
+		if (updates.password) {
+			vendor.password = updates.password;
+		}
+		if (updates.address) {
+			vendor.address = updates.address;
+		}
+		if (updates.phoneNumber) {
+			vendor.phoneNumber = updates.phoneNumber;
+		}
+		if (updates.brn) {
+			vendor.brn = updates.brn;
+		}
+		if (updates.description) {
+			vendor.description = updates.description;
+		}
+
+		// Save the updated vendor to the database
+		await vendor.save();
+
+		return res.status(200).json({
+			success: true,
+			updatedvendor: vendor,
+		});
+	} catch (error) {
+		return res.status(500).json({ success: false, error: error.message });
+	}
+};
+
 // export controller functions
 module.exports = {
 	registerVendor,
@@ -133,5 +184,6 @@ module.exports = {
 	searchVendors,
 	getVendor,
 	getAllVendors,
-	deleteVendor
+	deleteVendor,
+	updateVendor
 };
