@@ -134,43 +134,48 @@ const Authors = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {authorsArr.map((author) => (
           <Grid item xs={12} sm={6} md={3} key={author.id}>
-            <Card style={{ height: "100%" }}>
-              <CardMedia
-                component="img"
-                sx={{ height: "15rem" }}
-                image={author.image}
-                alt={author.name}
-              />
-              <CardContent sx={{ flex: 1 }} style={styles.content}>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  style={styles.name}
-                >
-                  {author.name.toUpperCase()}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={styles.address}
-                >
-                  {author.contactNo}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={styles.email}
-                >
-                  {author.email}
-                </Typography>
-                {/* <Link to={`/bookstore?vendor=${vendor._id}`}>
+            <Link
+              to={`/author?author=${author._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Card style={{ height: "100%" }}>
+                <CardMedia
+                  component="img"
+                  sx={{ height: "15rem" }}
+                  image={author.image}
+                  alt={author.name}
+                />
+                <CardContent sx={{ flex: 1 }} style={styles.content}>
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    style={styles.name}
+                  >
+                    {author.name.toUpperCase()}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={styles.address}
+                  >
+                    {author.contactNo}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={styles.email}
+                  >
+                    {author.email}
+                  </Typography>
+                  {/* <Link to={`/bookstore?vendor=${vendor._id}`}>
                   <Button variant="contained" size="small" style={styles.view}>
                     View Books
                   </Button>
                 </Link> */}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>
