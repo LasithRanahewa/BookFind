@@ -60,7 +60,7 @@ function Router() {
       element: <Login instance={instance} />,
     },
     {
-      path: "/signup",
+      path: "/register",
       element: <Signup instance={instance} />,
     },
     {
