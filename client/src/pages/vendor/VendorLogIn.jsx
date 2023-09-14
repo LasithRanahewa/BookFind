@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import loginImage from "../../assets/loginpage.png";
+import { useNavigate } from "react-router-dom";
+
 import {
   TextField,
   Button,
@@ -13,28 +15,57 @@ import {
 } from "@mui/material";
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#00909E", 
-      },
+  palette: {
+    primary: {
+      main: "#00909E",
     },
-  });
+  },
+});
 
 const VendorLogIn = () => {
   const [shouldRememberUser, setShouldRememberUser] = useState(false);
+  const [formData, setFormData] = useState({
+    userEmail: "",
+    userPassword: "",
+  });
+  const navigate = useNavigate();
 
   const handleRememberMeChange = (event) => {
     setShouldRememberUser(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // TODO: Add form validation and submit logic
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("Form data:", formData);
+
+
+    try {
+      const response = await axios.post("/api/auth/login", { //change this*
+        email: formData.userEmail,
+        password: formData.userPassword,
+      });
+
+      if (response.status === 200) {
+        navigate("/vendor-dashboard");
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
   const styles = {
-    container:{
+    container: {
       display: "flex",
-      height:"100vh",
+      height: "100vh",
       alignItems: "center",
     },
     root: {
@@ -102,7 +133,6 @@ const VendorLogIn = () => {
   };
 
   return (
-    
     <Grid container spacing={2} style={styles.container}>
       <Grid
         container
@@ -130,7 +160,7 @@ const VendorLogIn = () => {
         />
       </Grid>
 
-      <Grid item xs={12} md={6} >
+      <Grid item xs={12} md={6}>
         <div>
           <form onSubmit={handleSubmit} style={styles.root}>
             <FormControl style={styles.formControl}>
@@ -143,7 +173,9 @@ const VendorLogIn = () => {
                 label="Email"
                 variant="outlined"
                 type="email"
+                name="userEmail" 
                 required
+                onChange={onChange} 
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -170,7 +202,9 @@ const VendorLogIn = () => {
                 label="Password"
                 variant="outlined"
                 type="password"
+                name="userPassword"
                 required
+                onChange={onChange} 
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -199,7 +233,7 @@ const VendorLogIn = () => {
                     onChange={handleRememberMeChange}
                     name="rememberMe"
                     style={styles.rememberMe}
-                    
+
                     // sx={{
                     //   "&$checked": {
                     //     color: "#18B1C8",
@@ -225,7 +259,7 @@ const VendorLogIn = () => {
               {/* Sign up link */}
               <Typography variant="body1" gutterBottom style={styles.signUp}>
                 No account?{" "}
-                <Link href="/signup" style={styles.signUpLink}>
+                <Link href="/vendor-signup" style={styles.signUpLink}>
                   Sign up here
                 </Link>
               </Typography>
@@ -234,7 +268,6 @@ const VendorLogIn = () => {
         </div>
       </Grid>
     </Grid>
-
   );
 };
 

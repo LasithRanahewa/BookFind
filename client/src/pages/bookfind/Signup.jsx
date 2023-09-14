@@ -2,11 +2,39 @@ import React from "react";
 import { Grid } from "@mui/material";
 import loginImage from "../../assets/loginpage.png";
 import { TextField, Button, FormControl, Typography } from "@mui/material";
+import { useState } from "react";
+
 
 const Signup = () => {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your submit logic here
+    console.log("Form data:", formData);
+    //
+  };
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleChange = (e) => {
+    // 
+    // console.log(e.target.name, e.target.value);
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const styles = {
@@ -114,6 +142,9 @@ const Signup = () => {
                 variant="outlined"
                 type="text"
                 required
+                name="name"
+                value={formData.name}
+                onChange={onChange}
                 style={styles.input}
               />
               <TextField
@@ -121,6 +152,9 @@ const Signup = () => {
                 variant="outlined"
                 type="email"
                 required
+                name="email"
+                value={formData.email}
+                onChange={onChange}
                 style={styles.input}
               />
               <TextField
@@ -128,6 +162,9 @@ const Signup = () => {
                 variant="outlined"
                 type="password"
                 required
+                name="password"
+                value={formData.password}
+                onChange={onChange}
                 style={styles.input}
               />
               <TextField
@@ -135,6 +172,9 @@ const Signup = () => {
                 variant="outlined"
                 type="password"
                 required
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={onChange}
                 style={styles.input}
               />
               <Button
@@ -147,7 +187,7 @@ const Signup = () => {
               </Button>
               <Typography variant="body1" gutterBottom style={styles.signUp}>
                 Already have an account?{" "}
-                <a href="/Login" style={styles.signUpLink}>
+                <a href="/login" style={styles.signUpLink}>
                   Sign in here
                 </a>
               </Typography>
