@@ -7,7 +7,8 @@ const {
 	getBook,
 	getAllBooks,
 	trendingBooks,
-	deleteBooks
+	deleteBooks,
+	updateBook
 } = require("../controllers/bookController");
 
 router.post("/new", (req, res) => newBook(req, res));
@@ -21,5 +22,7 @@ router.get("/all", (req, res) => getAllBooks(req, res));
 router.get("/trending", (req, res) => trendingBooks(req, res));
 
 router.post("/delete", (req, res) => deleteBooks(req, res));
+
+router.post("/update/:id", (req, res) => updateBook(req, res));
 
 module.exports = router;

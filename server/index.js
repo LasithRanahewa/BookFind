@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 
 // import routes
 const authRouter = require("./routes/authRouter");
+const auhtorRouter = require("./routes/authorRouter");
 const bookRouter = require("./routes/bookRouter");
 const bookstoreRouter = require("./routes/bookstoreRouter");
 // const copyRouter = require("./routes/copyRouter");
@@ -95,6 +96,7 @@ initializePassport(passport);
 
 // routes for REST API
 app.use("/api/auth", authRouter);
+app.use("/api/author", authRouter);
 app.use("/api/book", bookRouter);
 app.use("/api/bookstore", bookstoreRouter);
 // app.use("/api/copy", copyRouter);
