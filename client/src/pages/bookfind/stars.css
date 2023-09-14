@@ -1,0 +1,38 @@
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 3px;
+      background: radial-gradient(circle, #fff 0%, #fff 30%, transparent 40%);
+      border-radius: 50%;
+      animation: twinkle 4s infinite;
+      animation-delay: calc(2s * random());
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.5;
+      }
+    }
+
+    .swing {
+      animation: swing 20s ease-in-out infinite;
+      transform-origin: top center;
+    }
+    
+    @keyframes swing {
+      0% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(15deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
