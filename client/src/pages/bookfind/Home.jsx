@@ -63,7 +63,9 @@ const Home = ({ instance }) => {
       justifyContent: "center",
       // height: "100vh",
     },
+    
   };
+  
 
   return (
     <>
@@ -87,7 +89,7 @@ const Home = ({ instance }) => {
               <Typography variant="h4" align="left" sx={{ color: "#DAE1E7" }}>
                 <span className="firstLine">Explore | Discover | Acquire</span>
                 <br />
-                <span className="secondLine">
+                <span class="secondLine">
                   IT'S NOT JUST A <br />
                   BOOKSTORE.
                   <br />
@@ -205,7 +207,7 @@ const Home = ({ instance }) => {
         {/* </Grid> */}
 
         <div style={{ padding: "3rem 0", backgroundColor: "#00909E" }}>
-          <Typography variant="h4" style={styles.heading} align="center">
+          <Typography variant="h4" class="h-trending heading" align="center">
             Trending Books
           </Typography>
 
@@ -269,7 +271,7 @@ const Home = ({ instance }) => {
         </Grid> */}
 
         <div style={{ padding: "2rem 0" }}>
-          <Typography variant="h4" style={styles.heading} align="center" py={2}>
+          <Typography variant="h4" class="h-featured heading" align="center" py={2}>
             Featured Book
           </Typography>
 
@@ -286,18 +288,18 @@ const Home = ({ instance }) => {
               container
               item
               xs={12}
-              md={6}
+              md={5}
               justifyContent="center"
               alignContent="center"
             >
-              <img src={featureImg} alt="Book Cover" width="50%" />
+              <img src={featureImg} alt="Book Cover" width="60%" />
             </Grid>
 
             <Grid
               container
               item
               xs={12}
-              md={6}
+              md={7}
               justifyContent="center"
               alignContent="center"
               px={6}
@@ -311,7 +313,7 @@ const Home = ({ instance }) => {
                   // position: "relative",
                   // left: "0",
                   color: "#DAE1E7",
-                  fontSize: "1.2rem",
+                  fontSize: "1.4rem",
                 }}
                 align="justify"
               >
@@ -325,7 +327,7 @@ const Home = ({ instance }) => {
                 For Harry, this is that story at last.
                 <br />
                 <br />
-                <L href="/featuredbook">Learn more...</L>
+                <L class="learnmore" href="/featuredbook">Learn more...</L>
               </Typography>
 
               <Typography
