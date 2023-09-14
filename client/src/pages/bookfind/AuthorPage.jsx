@@ -94,7 +94,7 @@ const AuthorPage = ({ instance }) => {
           {/* Content for the left side */}
           <img
             src={authorData.image}
-            alt="Book Cover"
+            alt="Author Image"
             style={styles.image}
           />
         </Grid>
