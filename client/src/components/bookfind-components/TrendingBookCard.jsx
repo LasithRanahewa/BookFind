@@ -28,7 +28,7 @@ const TrendingBookCard = ({ book }) => {
       <CardMedia
         component="img"
         height="200"
-        image="https://via.placeholder.com/200x300"
+        image={book.image}
         alt="Book cover"
       />
       <CardContent style={styles.content}>
