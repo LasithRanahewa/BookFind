@@ -1,9 +1,11 @@
 import { Typography } from "@mui/material";
 import { React, useState, useEffect } from "react";
-import { Button, TextField } from "@mui/material";
-import { Card, CardContent, CardMedia, Grid } from "@mui/material";
+import { Button, TextField, Avatar } from "@mui/material";
+import { Card, CardContent, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
+
+
 
 const Authors = ({ instance }) => {
   const styles = {
@@ -37,6 +39,26 @@ const Authors = ({ instance }) => {
     },
     content: {
       backgroundColor: "#EEEEEE",
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+    },
+    card: {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+      borderRadius: "0.5rem",
+      overflow: "hidden",
+    },
+    avatar: {
+      width: "5rem",
+      height: "5rem",
+      margin: "0 auto",
+      marginTop: "1rem",
+      marginBottom: "1rem",
     },
   };
 
@@ -71,7 +93,6 @@ const Authors = ({ instance }) => {
       <Typography variant="h4" style={styles.heading}>
         AUTHORS
       </Typography>
-      {/* <Typography variant="h4">Vendors</Typography> */}
       <Grid
         sx={{
           display: "flex",
@@ -117,7 +138,6 @@ const Authors = ({ instance }) => {
             handleSearch();
           }}
           style={{
-            // alignSelf: "center",
             backgroundColor: "#00909E",
             "&:hover": {
               backgroundColor: "#00909E",
@@ -130,22 +150,20 @@ const Authors = ({ instance }) => {
         </Button>
       </Grid>
 
-      {/* Bookstores */}
       <Grid container spacing={2} padding={5}>
         {authorsArr.map((author) => (
           <Grid item xs={12} sm={6} md={3} key={author.id}>
-            <Link
+            {/* <Link
               to={`/author?author=${author._id}`}
               style={{ textDecoration: "none" }}
-            >
-              <Card style={{ height: "100%" }}>
-                <CardMedia
-                  component="img"
-                  sx={{ height: "15rem" }}
-                  image={author.image}
-                  alt={author.name}
-                />
-                <CardContent sx={{ flex: 1 }} style={styles.content}>
+            > */}
+              <Card style={styles.card}>
+                <CardContent style={styles.content}>
+                  <Avatar
+                    alt={author.name}
+                    src={author.avatarUrl}
+                    style={styles.avatar}
+                  />
                   <Typography
                     gutterBottom
                     variant="h5"
@@ -168,14 +186,9 @@ const Authors = ({ instance }) => {
                   >
                     {author.email}
                   </Typography>
-                  {/* <Link to={`/bookstore?vendor=${vendor._id}`}>
-                  <Button variant="contained" size="small" style={styles.view}>
-                    View Books
-                  </Button>
-                </Link> */}
                 </CardContent>
               </Card>
-            </Link>
+            {/* </Link> */}
           </Grid>
         ))}
       </Grid>
