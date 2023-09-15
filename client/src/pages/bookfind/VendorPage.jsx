@@ -73,7 +73,7 @@ const VendorPage = ({ instance }) => {
         // console.log(obj.data.availableBooks);
       })
       .catch(() => {
-        setVendorsArr([
+        setVendorArr([
           {
             error: "Fetch error",
           },
