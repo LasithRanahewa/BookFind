@@ -108,7 +108,7 @@ function Router() {
       element: <Authors instance={instance} />,
     },
     {
-      path: "/authorpage",
+      path: "/author",
       element: <AuthorPage instance={instance} />,
     },
 
