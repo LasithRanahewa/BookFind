@@ -43,11 +43,9 @@ const vendorsArr = [
   },
 ];
 
-
-
 const Vendors = ({ instance }) => {
-  const styles={
-    heading:{
+  const styles = {
+    heading: {
       textShadow: "0.07rem 0.07rem 0.5rem #176B87",
       paddingTop: "3rem",
       color: "#DAE1E7",
@@ -56,30 +54,31 @@ const Vendors = ({ instance }) => {
       letterSpacing: "0.12rem",
       fontWeight: "bold",
     },
-    name:{
+    name: {
       fontSize: "1.57rem",
       textShadow: "0.02rem 0.02rem 0.13rem #176B87",
       color: "#053B50",
       fontWeight: "bold",
     },
-    address:{
+    address: {
+      paddingTop: "1rem",
       color: "#176B87",
     },
-    email:{
+    email: {
       color: "#176B87",
       paddingBottom: "1rem",
+      paddingTop: "1rem",
     },
-    view:{
+    view: {
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
       },
     },
-    content:{
+    content: {
       backgroundColor: "#EEEEEE",
     },
   };
-
 
   const [inputText, setInputText] = useState("");
   const [vendorsArr, setVendorsArr] = useState([]);
@@ -109,7 +108,9 @@ const Vendors = ({ instance }) => {
   return (
     <>
       <Navbar />
-      <Typography variant="h4" style={styles.heading}>VENDORS</Typography>
+      <Typography variant="h4" style={styles.heading}>
+        VENDORS
+      </Typography>
       {/* <Typography variant="h4">Vendors</Typography> */}
       <Grid
         sx={{
@@ -173,28 +174,41 @@ const Vendors = ({ instance }) => {
       <Grid container spacing={2} padding={5}>
         {vendorsArr.map((vendor) => (
           <Grid item xs={12} sm={6} md={3} key={vendor.id}>
-
-            <Card style={{height:'100%'}}>
-
-
-              <CardMedia
-                component="img"
-                sx={{ height: "15rem" }}
-                image={vendor.image}
-                alt={vendor.name}
-              />
-              <CardContent sx={{ flex: 1 }} style={styles.content}>
-                <Typography gutterBottom variant="h5" component="div" style={styles.name}>
+            <Card>
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  style={styles.name}
+                >
                   {vendor.name.toUpperCase()}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" style={styles.address}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={styles.address}
+                >
                   {vendor.location}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" style={styles.email}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={styles.email}
+                >
                   {vendor.email}
                 </Typography>
                 <Link to={`/bookstore?vendor=${vendor._id}`}>
-                  <Button variant="contained" size="small" style={styles.view}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={styles.view}
+                    sx={{
+                      display: "block",
+                      margin: "auto",
+                      marginLeft: "auto",
+                    }}
+                  >
                     View Available Books
                   </Button>
                 </Link>
