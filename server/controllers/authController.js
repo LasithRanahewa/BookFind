@@ -51,6 +51,37 @@ const loginLocalUser = async (req, res, next) => {
 	}
 };
 
+// login admin
+const loginAdminUser = async (req, res, next) => {
+	try {
+		const user = await User.findOne({ email: req.body.email });
+
+		if (!user) {
+			return res.status(404).json({ success: false, message: "User not found" });
+		}
+
+		const match = await bcrypt.compare(req.body.password, user.password)
+		if (!match) {
+			console.log("password error");
+			return (res.status(401).json({ success: false, message: "Password incorrect" }));
+		}
+		if(!user.isAdmin) {
+			console.log("Not the Admin");
+			return (res.status(401).json({ success: false, message: "Permission Denied" }));
+		}
+		console.log(req.body, match);
+
+		req.login(user, (err) => {
+			if (err) {
+				return res.status(500).json({ success: false, err });
+			}
+			return res.status(200).json({ success: true, user });
+		});
+	} catch (err) {
+		return res.status(500).json({ success: false, err });
+	}
+};
+
 // logout a user
 const logoutUser = async (req, res, next) => {
 	req.logout((err) => {
@@ -65,5 +96,6 @@ const logoutUser = async (req, res, next) => {
 module.exports = {
 	registerUser,
 	loginLocalUser,
+	loginAdminUser,
 	logoutUser
 };
