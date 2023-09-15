@@ -198,7 +198,7 @@ const Vendors = ({ instance }) => {
                 >
                   {vendor.email}
                 </Typography>
-                <Link to={`/bookstore?vendor=${vendor._id}`}>
+                <Link style={{textDecoration: 'none'}} to={`/bookstore?vendor=${vendor._id}`}>
                   <Button
                     variant="contained"
                     size="small"
