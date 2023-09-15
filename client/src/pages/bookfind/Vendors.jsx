@@ -4,44 +4,52 @@ import { Button, TextField } from "@mui/material";
 import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import Navbar from "../../components/bookfind-components/Navbar";
 import { Link } from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
-const vendorsArr = [
-  {
-    id: 1,
-    name: "Bookstore 1",
-    address: "Address 1",
-    contact: "Contact 1",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 2,
-    name: "Bookstore 2",
-    address: "Address 2",
-    contact: "Contact 2",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 3,
-    name: "Bookstore 3",
-    address: "Address 3",
-    contact: "Contact 3",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 4,
-    name: "Bookstore 4",
-    address: "Address 4",
-    contact: "Contact 4",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-  {
-    id: 5,
-    name: "Bookstore 5",
-    address: "Address 5",
-    contact: "Contact 5",
-    coverUrl: "https://via.placeholder.com/200x300",
-  },
-];
+// const vendorsArr = [
+//   {
+//     id: 1,
+//     name: "Bookstore 1",
+//     address: "Address 1",
+//     contact: "Contact 1",
+//     coverUrl: "https://via.placeholder.com/200x300",
+//     avatarUrl: "https://via.placeholder.com/100x100",
+//   },
+//   {
+//     id: 2,
+//     name: "Bookstore 2",
+//     address: "Address 2",
+//     contact: "Contact 2",
+//     coverUrl: "https://via.placeholder.com/200x300",
+//     avatarUrl: "https://via.placeholder.com/100x100",
+//   },
+//   {
+//     id: 3,
+//     name: "Bookstore 3",
+//     address: "Address 3",
+//     contact: "Contact 3",
+//     coverUrl: "https://via.placeholder.com/200x300",
+//     avatarUrl: "https://via.placeholder.com/100x100",
+//   },
+//   {
+//     id: 4,
+//     name: "Bookstore 4",
+//     address: "Address 4",
+//     contact: "Contact 4",
+//     coverUrl: "https://via.placeholder.com/200x300",
+//     avatarUrl: "https://via.placeholder.com/100x100",
+//   },
+//   {
+//     id: 5,
+//     name: "Bookstore 5",
+//     address: "Address 5",
+//     contact: "Contact 5",
+//     coverUrl: "https://via.placeholder.com/200x300",
+//     // avatarUrl: "https://via.placeholder.com/100x100",
+//     avatarUrl: "https://cdn-icons-png.flaticon.com/512/117/117305.png",
+//   },
+// ];
 
 const Vendors = ({ instance }) => {
   const styles = {
@@ -70,14 +78,21 @@ const Vendors = ({ instance }) => {
       paddingTop: "1rem",
     },
     view: {
+      textDecoration: "none",
       backgroundColor: "#00909E",
       "&:hover": {
         backgroundColor: "#00909E",
-      },
+      }
     },
     content: {
       backgroundColor: "#EEEEEE",
     },
+    avatar: {
+      width: '100px',
+      height: '100px',
+      margin: 'auto',
+      marginBottom: '1rem',
+    }
   };
 
   const [inputText, setInputText] = useState("");
@@ -176,6 +191,7 @@ const Vendors = ({ instance }) => {
           <Grid item xs={12} sm={6} md={3} key={vendor.id}>
             <Card>
               <CardContent>
+                <Avatar alt={vendor.name} src={AddBusinessIcon} style={styles.avatar} />
                 <Typography
                   gutterBottom
                   variant="h5"
