@@ -6,6 +6,7 @@ const router = express.Router();
 const {
     registerUser,
     loginLocalUser,
+    loginAdminUser,
     logoutUser
 } = require("../controllers/authController");
 
@@ -15,6 +16,10 @@ router.post("/register", (req, res) => registerUser(req, res));
 // router.post("/register", registerUser);
 
 router.get("/login", (req, res) => res.render("/login"));
+
+router.get("/loginAdmin", (req, res) => res.render("/login"));
+
+router.post("/loginAdmin", loginAdminUser);
 
 // router.post("/login", (req, res, next) => loginLocalUser(req, res, next));
 router.post("/login", loginLocalUser);
