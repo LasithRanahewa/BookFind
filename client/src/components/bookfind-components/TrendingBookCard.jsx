@@ -27,7 +27,7 @@ const TrendingBookCard = ({ book }) => {
     <Card style={{height: '100%'}}>
       <CardMedia
         component="img"
-        height="400"
+        height="auto"
         image={book.image}
         alt="Book cover"
       />
