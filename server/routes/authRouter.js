@@ -17,7 +17,7 @@ router.post("/register", (req, res) => registerUser(req, res));
 
 router.get("/login", (req, res) => res.render("/login"));
 
-router.get("/loginAdmin", (req, res) => res.render("/login"));
+router.get("/loginAdmin", (req, res) => res.render("/loginAdmin"));
 
 router.post("/loginAdmin", loginAdminUser);
 
